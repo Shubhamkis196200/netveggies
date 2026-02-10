@@ -21,7 +21,7 @@ export default function Home() {
     <div>
       {/* Hero */}
       <section className="relative bg-cream">
-        <div className="max-w-6xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-8 items-center">
+        <div className="max-w-7xl mx-auto px-4 py-16 md:py-24 grid md:grid-cols-2 gap-8 items-center">
           <div>
             <span className="inline-block bg-primary/10 text-primary text-sm font-semibold px-4 py-1 rounded-full mb-4">Plant-Based Made Simple</span>
             <h1 className="font-heading text-4xl md:text-6xl font-bold text-dark leading-tight mb-4">Delicious Vegan Recipes for <span className="text-primary">Real Life</span></h1>
@@ -51,7 +51,7 @@ export default function Home() {
       </section>
 
       {/* Categories */}
-      <section className="max-w-6xl mx-auto px-4 py-16">
+      <section className="max-w-7xl mx-auto px-4 py-16">
         <h2 className="font-heading text-3xl font-bold text-center mb-10">Browse by Category</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {categories.map(cat => (
@@ -65,7 +65,7 @@ export default function Home() {
       </section>
 
       {/* Latest Recipes */}
-      <section className="max-w-6xl mx-auto px-4 py-16">
+      <section className="max-w-7xl mx-auto px-4 py-16">
         <div className="flex items-center justify-between mb-10">
           <h2 className="font-heading text-3xl font-bold">Latest Recipes</h2>
           <Link to="/search" className="text-primary font-semibold text-sm hover:underline flex items-center gap-1">
@@ -79,7 +79,7 @@ export default function Home() {
 
       {/* Free Tools */}
       <section className="bg-cream">
-        <div className="max-w-6xl mx-auto px-4 py-16">
+        <div className="max-w-7xl mx-auto px-4 py-16">
           <div className="flex items-center justify-between mb-10">
             <div>
               <h2 className="font-heading text-3xl font-bold">Free Cooking & Nutrition Tools</h2>
@@ -108,7 +108,7 @@ export default function Home() {
 
       {/* About Section */}
       <section className="bg-cream">
-        <div className="max-w-6xl mx-auto px-4 py-16 text-center">
+        <div className="max-w-7xl mx-auto px-4 py-16 text-center">
           <h2 className="font-heading text-3xl font-bold mb-4">About the Kitchen 🌿</h2>
           <p className="text-muted max-w-2xl mx-auto text-lg mb-6">
             NetVeggies is on a mission to make plant-based eating easy, affordable, and absolutely delicious.
@@ -119,7 +119,7 @@ export default function Home() {
       </section>
 
       {/* Newsletter */}
-      <section className="max-w-6xl mx-auto px-4 py-16">
+      <section className="max-w-7xl mx-auto px-4 py-16">
         <NewsletterSignup />
       </section>
     </div>

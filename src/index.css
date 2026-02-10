@@ -35,6 +35,36 @@ h1, h2, h3, h4, h5, h6 {
   line-height: 1.2;
 }
 
+/* Global form styles */
+input[type="text"], input[type="number"], input[type="email"], select, textarea {
+  @apply w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-base transition-all focus:border-green-500 focus:ring-4 focus:ring-green-100 focus:outline-none bg-white shadow-sm;
+}
+
+/* Global button upgrade */
+button[type="submit"], .btn-primary {
+  @apply bg-green-600 text-white px-6 py-3 rounded-xl font-semibold hover:bg-green-700 transition-all shadow-md hover:shadow-lg active:scale-[0.98];
+}
+
+/* Table styling */
+table {
+  @apply w-full text-sm;
+}
+table thead tr {
+  @apply bg-green-50 border-b-2 border-green-200;
+}
+table thead th {
+  @apply text-left px-6 py-4 font-semibold text-gray-600 text-xs uppercase tracking-wider;
+}
+table tbody tr {
+  @apply border-b border-gray-100 hover:bg-green-50/50 transition-colors;
+}
+table tbody tr:nth-child(even) {
+  @apply bg-gray-50/50;
+}
+table tbody td {
+  @apply px-6 py-4;
+}
+
 @media print {
   .no-print { display: none !important; }
   .print-only { display: block !important; }

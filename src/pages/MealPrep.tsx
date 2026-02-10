@@ -4,7 +4,7 @@ import NewsletterSignup from '@/components/NewsletterSignup';
 
 export default function MealPrep() {
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12">
+    <div className="max-w-7xl mx-auto px-4 py-12">
       <div className="text-center mb-12">
         <span className="text-5xl mb-4 block">📦</span>
         <h1 className="font-heading text-4xl font-bold">Meal Prep Planner</h1>
@@ -28,22 +28,22 @@ export default function MealPrep() {
 
             {/* Schedule */}
             <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+              <table className="w-full">
                 <thead>
-                  <tr className="border-b border-border">
-                    <th className="text-left px-6 py-3 font-semibold text-muted"><Calendar className="w-4 h-4 inline mr-1" /> Day</th>
-                    <th className="text-left px-6 py-3 font-semibold text-muted">🌅 Breakfast</th>
-                    <th className="text-left px-6 py-3 font-semibold text-muted">🥗 Lunch</th>
-                    <th className="text-left px-6 py-3 font-semibold text-muted">🍽️ Dinner</th>
+                  <tr>
+                    <th><Calendar className="w-4 h-4 inline mr-1" /> Day</th>
+                    <th>🌅 Breakfast</th>
+                    <th>🥗 Lunch</th>
+                    <th>🍽️ Dinner</th>
                   </tr>
                 </thead>
                 <tbody>
                   {plan.days.map((d, di) => (
-                    <tr key={di} className="border-b border-border/50 hover:bg-cream/50 transition-colors">
-                      <td className="px-6 py-3 font-semibold">{d.day}</td>
-                      <td className="px-6 py-3">{d.breakfast}</td>
-                      <td className="px-6 py-3">{d.lunch}</td>
-                      <td className="px-6 py-3">{d.dinner}</td>
+                    <tr key={di}>
+                      <td className="font-semibold">{d.day}</td>
+                      <td>{d.breakfast}</td>
+                      <td>{d.lunch}</td>
+                      <td>{d.dinner}</td>
                     </tr>
                   ))}
                 </tbody>

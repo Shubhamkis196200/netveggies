@@ -23,32 +23,32 @@ const ToolsIndex = () => {
         url="/tools"
       />
       <div className="bg-gradient-to-br from-green-600 to-green-800 text-white py-16">
-        <div className="max-w-6xl mx-auto px-4 text-center">
+        <div className="max-w-7xl mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">Free Nutrition & Cooking Tools</h1>
           <p className="text-lg text-green-100 max-w-2xl mx-auto mb-8">
             25 free tools for meal planning, nutrition tracking, and cooking. No signup required.
           </p>
-          <div className="max-w-md mx-auto relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-green-300" size={20} />
+          <div className="max-w-lg mx-auto relative">
+            <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-green-300" size={22} />
             <input
               type="text"
               placeholder="Search tools..."
               value={search}
               onChange={e => { setSearch(e.target.value); setActiveCategory(null); }}
-              className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/10 backdrop-blur border border-white/20 text-white placeholder-green-200 focus:outline-none focus:ring-2 focus:ring-white/30"
+              className="w-full pl-12 pr-4 py-4 rounded-2xl bg-white/10 backdrop-blur border border-white/20 text-white placeholder-green-200 focus:outline-none focus:ring-2 focus:ring-white/30 text-lg"
             />
           </div>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <div className="max-w-7xl mx-auto px-4 py-8">
         <Breadcrumbs items={[{ label: 'Tools' }]} />
 
         {/* Category filter pills */}
-        <div className="flex flex-wrap gap-2 mb-8">
+        <div className="flex flex-wrap gap-3 mb-10">
           <button
             onClick={() => { setActiveCategory(null); setSearch(''); }}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${!activeCategory && !search ? 'bg-primary text-white' : 'bg-gray-100 text-dark hover:bg-gray-200'}`}
+            className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-sm ${!activeCategory && !search ? 'bg-primary text-white shadow-md' : 'bg-white text-dark hover:bg-gray-50 border border-gray-200'}`}
           >
             All ({tools.length})
           </button>
@@ -56,7 +56,7 @@ const ToolsIndex = () => {
             <button
               key={cat.name}
               onClick={() => { setActiveCategory(cat.name); setSearch(''); }}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${activeCategory === cat.name ? 'bg-primary text-white' : 'bg-gray-100 text-dark hover:bg-gray-200'}`}
+              className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-sm ${activeCategory === cat.name ? 'bg-primary text-white shadow-md' : 'bg-white text-dark hover:bg-gray-50 border border-gray-200'}`}
             >
               {cat.icon} {cat.name} ({getToolsByCategory(cat.name).length})
             </button>
@@ -94,16 +94,17 @@ const ToolsIndex = () => {
 const ToolCard = ({ tool }: { tool: typeof tools[0] }) => (
   <Link
     to={`/tools/${tool.slug}`}
-    className="group block p-5 rounded-xl border border-border hover:border-primary hover:shadow-lg transition-all duration-200 bg-white"
+    className="group block rounded-2xl border border-gray-100 shadow-md hover:shadow-xl hover:border-primary transition-all duration-200 bg-white overflow-hidden"
   >
-    <div className="flex items-start gap-3">
-      <span className={`text-3xl flex-shrink-0 w-12 h-12 ${tool.color} rounded-lg flex items-center justify-center text-white shadow-sm group-hover:scale-110 transition-transform`}>
+    <div className={`${tool.color} p-5 flex items-center justify-center`}>
+      <span className="text-4xl w-16 h-16 bg-white/20 backdrop-blur rounded-2xl flex items-center justify-center text-white group-hover:scale-110 transition-transform shadow-sm">
         {tool.icon}
       </span>
-      <div>
-        <h3 className="font-semibold text-dark group-hover:text-primary transition-colors">{tool.name}</h3>
-        <p className="text-sm text-muted mt-1 line-clamp-2">{tool.description}</p>
-      </div>
+    </div>
+    <div className="p-5">
+      <span className="inline-block text-[10px] font-bold uppercase tracking-wider text-primary bg-green-50 px-2 py-0.5 rounded-full mb-2">{tool.category}</span>
+      <h3 className="font-semibold text-dark text-lg group-hover:text-primary transition-colors">{tool.name}</h3>
+      <p className="text-sm text-muted mt-1 line-clamp-2">{tool.description}</p>
     </div>
   </Link>
 );

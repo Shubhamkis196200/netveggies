@@ -18,7 +18,7 @@ export default function Layout() {
     <div className="min-h-screen flex flex-col bg-white">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white/95 backdrop-blur border-b border-border no-print">
-        <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
             <Leaf className="w-7 h-7 text-primary" />
             <span className="font-heading text-2xl font-bold text-dark">Net<span className="text-primary">Veggies</span></span>
@@ -60,7 +60,7 @@ export default function Layout() {
 
       {/* Footer */}
       <footer className="bg-dark text-white no-print">
-        <div className="max-w-6xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <div className="flex items-center gap-2 mb-4">
               <Leaf className="w-6 h-6 text-primary" />
