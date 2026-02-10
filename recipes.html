@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vegan Recipes — Easy Plant-Based Meals | NetVeggies</title>
+  <meta name="description" content="Browse our collection of delicious vegan recipes. From quick dinners to meal prep guides, find plant-based meals you'll love.">
+  <link rel="canonical" href="https://netveggies.com/recipes.html">
+  <meta property="og:title" content="Vegan Recipes — NetVeggies">
+  <meta property="og:description" content="Easy, delicious plant-based recipes for every meal.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://netveggies.com/recipes.html">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1200&h=630&fit=crop">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .hero { background: linear-gradient(135deg, var(--terracotta) 0%, var(--sage-dark) 100%); color: white; padding: 64px 20px; text-align: center; }
+    .hero h1 { color: white; margin-bottom: 16px; }
+    .hero p { max-width: 700px; margin: 0 auto; font-size: 1.1rem; opacity: 0.95; }
+    .filter-bar { max-width: 1200px; margin: 30px auto; padding: 0 20px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+    .filter-btn { padding: 10px 20px; border-radius: 24px; border: 2px solid var(--border); background: white; cursor: pointer; font-weight: 600; transition: all var(--transition); }
+    .filter-btn:hover, .filter-btn.active { background: var(--sage); color: white; border-color: var(--sage); }
+    .recipes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+    .recipe-card { background: white; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); transition: all var(--transition); border: 1px solid var(--border); }
+    .recipe-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .recipe-img { width: 100%; height: 220px; object-fit: cover; background: linear-gradient(135deg, var(--sage-light), var(--cream)); }
+    .recipe-card-content { padding: 20px; }
+    .recipe-card h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .recipe-card p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 12px; line-height: 1.6; }
+    .recipe-meta { display: flex; gap: 16px; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; flex-wrap: wrap; }
+    .recipe-card a { color: var(--sage); font-weight: 600; }
+    .recipe-card a:hover { color: var(--terracotta); }
+    .category-badge { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; font-weight: 600; background: var(--terracotta-light); color: var(--terracotta); margin-bottom: 12px; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="index.html" class="logo">Net<span>Veggies</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="recipes.html" class="active">Recipes</a></li>
+          <li><a href="tools/index.html">Tools</a></li>
+          <li><a href="vegan-meal-prep-guide.html">Meal Prep</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <h1>🥘 Vegan Recipes</h1>
+      <p>Delicious, plant-based recipes for every meal. Easy, affordable, and made with real ingredients.</p>
+    </section>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" data-category="all" onclick="filterRecipes('all')">All</button>
+      <button class="filter-btn" data-category="breakfast" onclick="filterRecipes('breakfast')">Breakfast</button>
+      <button class="filter-btn" data-category="lunch" onclick="filterRecipes('lunch')">Lunch</button>
+      <button class="filter-btn" data-category="dinner" onclick="filterRecipes('dinner')">Dinner</button>
+      <button class="filter-btn" data-category="soup" onclick="filterRecipes('soup')">Soups</button>
+      <button class="filter-btn" data-category="snack" onclick="filterRecipes('snack')">Snacks</button>
+      <button class="filter-btn" data-category="dessert" onclick="filterRecipes('dessert')">Desserts</button>
+    </div>
+
+    <div class="recipes-grid" id="recipesGrid">
+      <!-- Existing recipes -->
+      <div class="recipe-card" data-category="dinner">
+        <img src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&h=500&fit=crop" alt="Chickpea Curry" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Dinner</span>
+          <h3>Easy Chickpea Curry</h3>
+          <p>One-pot creamy curry ready in 30 minutes. Budget-friendly at $1.80/serving.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="easy-chickpea-curry.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="dessert">
+        <img src="https://images.unsplash.com/photo-1603532648955-039310d9ed75?w=800&h=500&fit=crop" alt="Banana Bread" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Dessert</span>
+          <h3>Vegan Banana Bread</h3>
+          <p>Moist, perfectly spiced banana bread that's naturally sweetened.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 65 min</span>
+            <span>🍽️ 10 slices</span>
+          </div>
+          <a href="vegan-banana-bread.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="dinner">
+        <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800&h=500&fit=crop" alt="Creamy Pasta" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Dinner</span>
+          <h3>Creamy Vegan Pasta</h3>
+          <p>Rich and creamy pasta without any dairy. Comfort food perfection.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 25 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="creamy-vegan-pasta.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="breakfast">
+        <img src="https://images.unsplash.com/photo-1590301157890-4810ed352733?w=800&h=500&fit=crop" alt="Overnight Oats" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Breakfast</span>
+          <h3>Vegan Overnight Oats</h3>
+          <p>Prep the night before for a quick, nutritious breakfast.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 5 min</span>
+            <span>🍽️ 1 serving</span>
+          </div>
+          <a href="vegan-overnight-oats.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="dinner">
+        <img src="https://images.unsplash.com/photo-1565299585323-38d6b0865b47?w=800&h=500&fit=crop" alt="Black Bean Tacos" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Dinner</span>
+          <h3>Black Bean Tacos</h3>
+          <p>Quick, flavorful tacos loaded with seasoned black beans.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 20 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-black-bean-tacos.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="soup">
+        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&h=500&fit=crop" alt="Lentil Soup" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Soup</span>
+          <h3>Vegan Lentil Soup</h3>
+          <p>Hearty, protein-packed soup that's perfect for meal prep.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 40 min</span>
+            <span>🍽️ 6 servings</span>
+          </div>
+          <a href="vegan-lentil-soup.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <!-- NEW RECIPES -->
+      <div class="recipe-card" data-category="dinner">
+        <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?w=800&h=500&fit=crop" alt="Thai Peanut Noodles" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Dinner</span>
+          <h3>Thai Peanut Noodles</h3>
+          <p>Quick and creamy Thai-inspired noodles ready in 15 minutes!</p>
+          <div class="recipe-meta">
+            <span>⏱️ 15 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-thai-peanut-noodles.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="dinner">
+        <img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=800&h=500&fit=crop" alt="Mushroom Stroganoff" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Dinner</span>
+          <h3>Creamy Mushroom Stroganoff</h3>
+          <p>Rich and creamy mushroom stroganoff over pasta. Comfort food at its finest.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-mushroom-stroganoff.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="lunch">
+        <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=800&h=500&fit=crop" alt="Buddha Bowl" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Lunch</span>
+          <h3>Customizable Buddha Bowl</h3>
+          <p>Build your perfect bowl with grains, veggies, and protein.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-buddha-bowl.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="lunch">
+        <img src="https://images.unsplash.com/photo-1626700051175-6818013e1d4f?w=800&h=500&fit=crop" alt="Mediterranean Wrap" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Lunch</span>
+          <h3>Mediterranean Hummus Wrap</h3>
+          <p>Fresh and flavorful wrap packed with Mediterranean goodness.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-mediterranean-wrap.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="lunch">
+        <img src="https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=800&h=500&fit=crop" alt="Quinoa Salad" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Lunch</span>
+          <h3>Lemon Herb Quinoa Salad</h3>
+          <p>Light and refreshing quinoa salad with herbs and lemon.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-quinoa-salad.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="lunch">
+        <img src="https://images.unsplash.com/photo-1546793665-c74683f339c1?w=800&h=500&fit=crop" alt="Caesar Salad" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Lunch</span>
+          <h3>Vegan Caesar Salad</h3>
+          <p>Classic Caesar with crispy chickpea croutons and creamy dressing.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-caesar-salad.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="breakfast">
+        <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?w=800&h=500&fit=crop" alt="Tofu Scramble" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Breakfast</span>
+          <h3>Savory Tofu Scramble</h3>
+          <p>Protein-packed breakfast scramble with turmeric and veggies.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-tofu-scramble.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="breakfast">
+        <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=800&h=500&fit=crop" alt="Pancakes" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Breakfast</span>
+          <h3>Fluffy Vegan Pancakes</h3>
+          <p>Perfect weekend pancakes that are fluffy and delicious.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-pancakes.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="breakfast">
+        <img src="https://images.unsplash.com/photo-1590301157890-4810ed352733?w=800&h=500&fit=crop" alt="Smoothie Bowl" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Breakfast</span>
+          <h3>Berry Smoothie Bowl</h3>
+          <p>Vibrant smoothie bowl topped with fresh fruit and granola.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-smoothie-bowl.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="soup">
+        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&h=500&fit=crop" alt="Minestrone" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Soup</span>
+          <h3>Classic Minestrone Soup</h3>
+          <p>Italian vegetable soup loaded with beans and pasta.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-minestrone-soup.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="soup">
+        <img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=800&h=500&fit=crop" alt="Thai Coconut Soup" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Soup</span>
+          <h3>Thai Coconut Soup (Tom Kha)</h3>
+          <p>Aromatic Thai soup with coconut milk and mushrooms.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-thai-coconut-soup.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="soup">
+        <img src="https://images.unsplash.com/photo-1547592166-23ac45744acd?w=800&h=500&fit=crop" alt="Tomato Basil Soup" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Soup</span>
+          <h3>Creamy Tomato Basil Soup</h3>
+          <p>Classic tomato soup that's creamy without any dairy.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-tomato-basil-soup.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="snack">
+        <img src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?w=800&h=500&fit=crop" alt="Hummus" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Snack</span>
+          <h3>Creamy Homemade Hummus</h3>
+          <p>Better than store-bought hummus in just 5 minutes.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-hummus.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="snack">
+        <img src="https://images.unsplash.com/photo-1606312619070-d48b4cda8bf6?w=800&h=500&fit=crop" alt="Energy Balls" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Snack</span>
+          <h3>No-Bake Energy Balls (5 Ways)</h3>
+          <p>Healthy snack balls in 5 delicious flavor combinations.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-energy-balls.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="snack">
+        <img src="https://images.unsplash.com/photo-1587735243615-c03f25aaff15?w=800&h=500&fit=crop" alt="Roasted Chickpeas" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Snack</span>
+          <h3>Crispy Roasted Chickpeas</h3>
+          <p>Crunchy, addictive roasted chickpeas with endless flavor options.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-roasted-chickpeas.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="dessert">
+        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800&h=500&fit=crop" alt="Chocolate Mousse" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Dessert</span>
+          <h3>Avocado Chocolate Mousse</h3>
+          <p>Silky chocolate mousse made with secret ingredient: avocado!</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-chocolate-mousse.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="dessert">
+        <img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800&h=500&fit=crop" alt="Nice Cream" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Dessert</span>
+          <h3>Banana Nice Cream (4 Flavors)</h3>
+          <p>One-ingredient ice cream made from frozen bananas.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-nice-cream.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="dessert">
+        <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=800&h=500&fit=crop" alt="Cookies" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Dessert</span>
+          <h3>Chewy Chocolate Chip Cookies</h3>
+          <p>Classic chocolate chip cookies that are perfectly chewy.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-chocolate-chip-cookies.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="dessert">
+        <img src="https://images.unsplash.com/photo-1607920591413-4ec007814c25?w=800&h=500&fit=crop" alt="Brownies" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Dessert</span>
+          <h3>Fudgy Vegan Brownies</h3>
+          <p>Ultra fudgy brownies with crackly tops and gooey centers.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-brownies.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="dinner">
+        <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800&h=500&fit=crop" alt="Stuffed Peppers" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Dinner</span>
+          <h3>Quinoa Stuffed Bell Peppers</h3>
+          <p>Colorful peppers stuffed with quinoa, beans, and veggies.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-stuffed-peppers.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="dinner">
+        <img src="https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&h=500&fit=crop" alt="Stir Fry" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Dinner</span>
+          <h3>Quick Veggie Stir Fry</h3>
+          <p>Fast and flavorful stir fry with whatever veggies you have.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-stir-fry.html">View Recipe →</a>
+        </div>
+      </div>
+
+      <div class="recipe-card" data-category="dinner">
+        <img src="https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=800&h=500&fit=crop" alt="Chili" class="recipe-img">
+        <div class="recipe-card-content">
+          <span class="category-badge">Dinner</span>
+          <h3>Hearty Three-Bean Chili</h3>
+          <p>Warming chili packed with three types of beans and spices.</p>
+          <div class="recipe-meta">
+            <span>⏱️ 30 min</span>
+            <span>🍽️ 4 servings</span>
+          </div>
+          <a href="vegan-chili.html">View Recipe →</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <h4>NetVeggies</h4>
+        <p style="font-size:0.88rem;">Plant-based recipes and tools for real life.</p>
+      </div>
+      <div>
+        <h4>Recipes</h4>
+        <ul>
+          <li><a href="recipes.html">All Recipes</a></li>
+          <li><a href="vegan-recipes-for-beginners.html">Beginners</a></li>
+          <li><a href="vegan-meal-prep-guide.html">Meal Prep</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="tools/vegan-protein-calculator.html">Protein Calculator</a></li>
+          <li><a href="tools/recipe-scaler.html">Recipe Scaler</a></li>
+          <li><a href="tools/unit-converter.html">Unit Converter</a></li>
+          <li><a href="tools/index.html">All Tools →</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 NetVeggies. Made with 🌱 for a kinder plate.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.main-nav').classList.toggle('open');
+      this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+    });
+
+    function filterRecipes(category) {
+      const cards = document.querySelectorAll('.recipe-card');
+      const buttons = document.querySelectorAll('.filter-btn');
+      
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+      
+      cards.forEach(card => {
+        if (category === 'all' || card.dataset.category === category) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+  </script>
+</body>
+</html>

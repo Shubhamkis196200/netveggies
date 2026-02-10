@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grocery List Generator — Organize Your Shopping | NetVeggies</title>
+  <meta name="description" content="Create organized grocery lists by category. Check off items as you shop. Auto-saves to your browser.">
+  <link rel="canonical" href="https://netveggies.com/tools/grocery-list-generator.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}
+    .tool-container{max-width:700px;margin:0 auto;padding:40px 20px}
+    .add-item{background:white;padding:20px;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:24px}
+    .add-item input{flex:1;padding:12px;border:1px solid var(--border);border-radius:8px}
+    .add-item select{padding:12px;border:1px solid var(--border);border-radius:8px;margin:0 12px}
+    .add-row{display:flex;gap:12px;margin-bottom:12px}
+    .category-section{background:white;padding:20px;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:16px}
+    .category-section h3{color:var(--terracotta);margin-bottom:12px;border-bottom:2px solid var(--terracotta);padding-bottom:8px}
+    .item-row{display:flex;align-items:center;padding:10px;background:var(--sage-light);border-radius:8px;margin-bottom:8px}
+    .item-row input[type=checkbox]{width:20px;height:20px;margin-right:12px;cursor:pointer}
+    .item-row.checked{opacity:0.5;text-decoration:line-through}
+    .item-row button{margin-left:auto;background:transparent;border:none;cursor:pointer;font-size:1.2rem}
+  </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Grocery List Generator","url":"https://netveggies.com/tools/grocery-list-generator.html","description":"Organize shopping lists by category with auto-save.","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Net<span>Veggies</span></a>
+      <button class="nav-toggle"><span></span><span></span><span></span></button>
+      <nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../about.html">About</a></li></ul></nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="tool-hero">
+      <h1>🛒 Grocery List Generator</h1>
+      <p>Organize your shopping by category. Check off as you go. Auto-saves to your browser.</p>
+    </section>
+    <div class="tool-container">
+      <div class="add-item">
+        <div class="add-row">
+          <input type="text" id="itemName" placeholder="Item name" onkeypress="if(event.key==='Enter')addItem()">
+          <select id="itemCategory">
+            <option value="Produce">Produce</option>
+            <option value="Grains">Grains</option>
+            <option value="Protein">Protein</option>
+            <option value="Dairy Alt">Dairy Alt</option>
+            <option value="Pantry">Pantry</option>
+            <option value="Frozen">Frozen</option>
+            <option value="Snacks">Snacks</option>
+            <option value="Other">Other</option>
+          </select>
+          <button class="btn btn-primary" onclick="addItem()">Add</button>
+        </div>
+        <button class="btn btn-outline" onclick="clearCompleted()" style="margin-right:8px">Clear Checked</button>
+        <button class="btn btn-outline" onclick="clearAll()">Clear All</button>
+      </div>
+      <div id="listContainer"></div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-grid"><div><h4>NetVeggies</h4></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools</a></li></ul></div></div>
+    <div class="footer-bottom"><p>© 2026 NetVeggies</p></div>
+  </footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    let items = JSON.parse(localStorage.getItem('groceryList')) || [];
+    function addItem() {
+      const name = document.getElementById('itemName').value.trim();
+      const category = document.getElementById('itemCategory').value;
+      if (!name) return;
+      items.push({id: Date.now(), name, category, checked: false});
+      document.getElementById('itemName').value = '';
+      save();
+      render();
+    }
+    function toggleItem(id) {
+      const item = items.find(i => i.id === id);
+      if (item) item.checked = !item.checked;
+      save();
+      render();
+    }
+    function deleteItem(id) {
+      items = items.filter(i => i.id !== id);
+      save();
+      render();
+    }
+    function clearCompleted() {
+      items = items.filter(i => !i.checked);
+      save();
+      render();
+    }
+    function clearAll() {
+      if (confirm('Clear entire list?')) {
+        items = [];
+        save();
+        render();
+      }
+    }
+    function save() {
+      localStorage.setItem('groceryList', JSON.stringify(items));
+    }
+    function render() {
+      const categories = [...new Set(items.map(i => i.category))];
+      const html = categories.map(cat => {
+        const catItems = items.filter(i => i.category === cat);
+        if (!catItems.length) return '';
+        return `
+          <div class="category-section">
+            <h3>${cat} (${catItems.length})</h3>
+            ${catItems.map(item => `
+              <div class="item-row ${item.checked?'checked':''}">
+                <input type="checkbox" ${item.checked?'checked':''} onchange="toggleItem(${item.id})">
+                <span>${item.name}</span>
+                <button onclick="deleteItem(${item.id})">🗑️</button>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }).join('');
+      document.getElementById('listContainer').innerHTML = html || '<p style="text-align:center;color:var(--text-muted);padding:40px">No items yet. Add your first item above!</p>';
+    }
+    render();
+  </script>
+</body>
+</html>

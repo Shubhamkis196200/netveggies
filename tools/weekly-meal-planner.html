@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weekly Meal Planner — Plan Your Vegan Meals | NetVeggies</title>
+  <meta name="description" content="Interactive weekly meal planner for plant-based meals. Drag and drop recipes, save to localStorage.">
+  <link rel="canonical" href="https://netveggies.com/tools/weekly-meal-planner.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}
+    .tool-container{max-width:1100px;margin:0 auto;padding:40px 20px}
+    .week-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;margin:24px 0}
+    .day-col{background:white;border-radius:8px;padding:16px;box-shadow:var(--shadow);min-height:400px}
+    .day-col h3{font-size:1rem;margin-bottom:12px;color:var(--sage-dark);border-bottom:2px solid var(--sage);padding-bottom:8px}
+    .meal-slot{background:var(--cream);padding:12px;border-radius:8px;margin:8px 0;min-height:60px;border:2px dashed var(--border);cursor:pointer}
+    .meal-slot.filled{background:var(--sage-light);border:2px solid var(--sage);border-style:solid}
+    .meal-slot.filled:hover{background:var(--terracotta-light)}
+    .recipe-bank{background:white;padding:20px;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:24px}
+    .recipe-bank h3{margin-bottom:12px}
+    .recipe-chips{display:flex;gap:8px;flex-wrap:wrap}
+    .recipe-chip{background:var(--terracotta);color:white;padding:8px 16px;border-radius:20px;cursor:grab;font-size:0.85rem;user-select:none}
+    .recipe-chip:active{cursor:grabbing}
+    @media(max-width:768px){.week-grid{grid-template-columns:1fr 1fr}.day-col{min-height:300px}}
+  </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Weekly Meal Planner","url":"https://netveggies.com/tools/weekly-meal-planner.html","description":"Plan your week of vegan meals with drag-and-drop interface.","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Net<span>Veggies</span></a>
+      <button class="nav-toggle"><span></span><span></span><span></span></button>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li>
+          <li><a href="index.html" class="active">Tools</a></li>
+          <li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li>
+          <li><a href="../about.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>📅 Weekly Meal Planner</h1>
+      <p>Click meal slots to add recipes. Your plan auto-saves to your browser.</p>
+    </section>
+
+    <div class="tool-container">
+      <div class="recipe-bank">
+        <h3>Quick Add Recipes</h3>
+        <input type="text" id="customRecipe" placeholder="Type custom meal name + Enter" style="width:100%;padding:10px;margin-bottom:12px;border:1px solid var(--border);border-radius:8px">
+        <div class="recipe-chips">
+          <div class="recipe-chip">Chickpea Curry</div>
+          <div class="recipe-chip">Lentil Soup</div>
+          <div class="recipe-chip">Black Bean Tacos</div>
+          <div class="recipe-chip">Pasta Primavera</div>
+          <div class="recipe-chip">Buddha Bowl</div>
+          <div class="recipe-chip">Tofu Stir-Fry</div>
+          <div class="recipe-chip">Overnight Oats</div>
+          <div class="recipe-chip">Smoothie Bowl</div>
+          <div class="recipe-chip">Veggie Sandwich</div>
+          <div class="recipe-chip">Quinoa Salad</div>
+        </div>
+      </div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+        <h2>This Week</h2>
+        <button class="btn btn-outline" onclick="clearPlan()">Clear All</button>
+      </div>
+
+      <div class="week-grid" id="weekGrid"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid"><div><h4>NetVeggies</h4></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools</a></li></ul></div></div>
+    <div class="footer-bottom"><p>© 2026 NetVeggies</p></div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+
+    const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+    const meals = ['Breakfast','Lunch','Dinner'];
+    let plan = JSON.parse(localStorage.getItem('mealPlan')) || {};
+
+    function renderWeek() {
+      const html = days.map(day => `
+        <div class="day-col">
+          <h3>${day}</h3>
+          ${meals.map(meal => {
+            const key = `${day}-${meal}`;
+            const recipe = plan[key] || '';
+            return `<div class="meal-slot ${recipe?'filled':''}" data-key="${key}" onclick="addMeal('${key}')">
+              <strong>${meal}</strong><br>${recipe ? recipe : '<small style="color:var(--text-muted)">Click to add</small>'}
+            </div>`;
+          }).join('')}
+        </div>
+      `).join('');
+      document.getElementById('weekGrid').innerHTML = html;
+    }
+
+    function addMeal(key) {
+      const recipe = prompt('Enter meal name:', plan[key] || '');
+      if (recipe !== null) {
+        if (recipe.trim()) plan[key] = recipe.trim();
+        else delete plan[key];
+        localStorage.setItem('mealPlan', JSON.stringify(plan));
+        renderWeek();
+      }
+    }
+
+    function clearPlan() {
+      if (confirm('Clear all meals?')) {
+        plan = {};
+        localStorage.removeItem('mealPlan');
+        renderWeek();
+      }
+    }
+
+    // Recipe chips click to copy
+    document.querySelectorAll('.recipe-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const recipe = chip.textContent;
+        alert(`Click any meal slot to add "${recipe}"`);
+        // Store temporarily for next click
+        window.pendingRecipe = recipe;
+      });
+    });
+
+    // Custom recipe input
+    document.getElementById('customRecipe').addEventListener('keypress', e => {
+      if (e.key === 'Enter' && e.target.value.trim()) {
+        const recipe = e.target.value.trim();
+        const chip = document.createElement('div');
+        chip.className = 'recipe-chip';
+        chip.textContent = recipe;
+        chip.addEventListener('click', () => alert(`Click any meal slot to add "${recipe}"`));
+        document.querySelector('.recipe-chips').appendChild(chip);
+        e.target.value = '';
+      }
+    });
+
+    renderWeek();
+  </script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Multi Cooking Timer — Beans, Grains, Pasta & More | NetVeggies</title>
+  <meta name="description" content="Multiple cooking timers with presets for beans, rice, pasta, quinoa and more. Track multiple dishes at once.">
+  <link rel="canonical" href="https://netveggies.com/tools/cooking-timer.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}
+    .tool-container{max-width:800px;margin:0 auto;padding:40px 20px}
+    .preset-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:24px}
+    .preset-btn{background:var(--sage);color:white;border:none;padding:16px;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:600;transition:all 0.2s}
+    .preset-btn:hover{background:var(--sage-dark);transform:translateY(-2px)}
+    .timer-list{display:grid;gap:16px}
+    .timer-card{background:white;padding:24px;border-radius:var(--radius);box-shadow:var(--shadow);border-left:4px solid var(--terracotta)}
+    .timer-card.active{border-left-color:var(--sage)}
+    .timer-display{font-size:3rem;font-weight:700;color:var(--terracotta);font-family:'Playfair Display',serif;text-align:center;margin:16px 0}
+    .timer-controls{display:flex;gap:12px;justify-content:center}
+    .timer-controls button{padding:10px 20px;border:none;border-radius:8px;cursor:pointer;font-weight:600;transition:all 0.2s}
+    .btn-start{background:var(--sage);color:white}
+    .btn-pause{background:var(--terracotta);color:white}
+    .btn-delete{background:#ccc;color:#333}
+    .add-timer{background:white;padding:20px;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:24px}
+    .add-timer input{width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;margin-bottom:12px}
+  </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Cooking Timer","url":"https://netveggies.com/tools/cooking-timer.html","description":"Multiple cooking timers with presets for common vegan ingredients.","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Net<span>Veggies</span></a>
+      <button class="nav-toggle"><span></span><span></span><span></span></button>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li>
+          <li><a href="index.html" class="active">Tools</a></li>
+          <li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li>
+          <li><a href="../about.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>⏱️ Multi Cooking Timer</h1>
+      <p>Track multiple dishes with presets for beans, rice, pasta, and more.</p>
+    </section>
+
+    <div class="tool-container">
+      <h3>Quick Presets</h3>
+      <div class="preset-grid">
+        <button class="preset-btn" onclick="addTimer('Pasta',10)">Pasta (10m)</button>
+        <button class="preset-btn" onclick="addTimer('Rice',18)">Rice (18m)</button>
+        <button class="preset-btn" onclick="addTimer('Quinoa',15)">Quinoa (15m)</button>
+        <button class="preset-btn" onclick="addTimer('Lentils',20)">Lentils (20m)</button>
+        <button class="preset-btn" onclick="addTimer('Chickpeas',90)">Chickpeas (1.5h)</button>
+        <button class="preset-btn" onclick="addTimer('Black Beans',60)">Black Beans (1h)</button>
+        <button class="preset-btn" onclick="addTimer('Tofu Press',30)">Tofu Press (30m)</button>
+        <button class="preset-btn" onclick="addTimer('Vegetables',12)">Veggies (12m)</button>
+      </div>
+
+      <div class="add-timer">
+        <input type="text" id="customName" placeholder="Timer name">
+        <input type="number" id="customMins" placeholder="Minutes" min="1">
+        <button class="btn btn-primary" onclick="addCustomTimer()">Add Custom Timer</button>
+      </div>
+
+      <div class="timer-list" id="timers"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div><h4>NetVeggies</h4></div>
+      <div><h4>Tools</h4><ul><li><a href="index.html">All Tools</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 NetVeggies</p></div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+
+    let timers = [];
+    let timerIntervals = {};
+
+    function addTimer(name, minutes) {
+      const id = Date.now();
+      timers.push({id, name, totalSeconds: minutes * 60, remainingSeconds: minutes * 60, running: false});
+      renderTimers();
+    }
+
+    function addCustomTimer() {
+      const name = document.getElementById('customName').value;
+      const mins = parseInt(document.getElementById('customMins').value);
+      if (name && mins > 0) {
+        addTimer(name, mins);
+        document.getElementById('customName').value = '';
+        document.getElementById('customMins').value = '';
+      }
+    }
+
+    function startTimer(id) {
+      const timer = timers.find(t => t.id === id);
+      if (!timer) return;
+      timer.running = true;
+      timerIntervals[id] = setInterval(() => {
+        timer.remainingSeconds--;
+        if (timer.remainingSeconds <= 0) {
+          clearInterval(timerIntervals[id]);
+          timer.running = false;
+          alert(`⏰ ${timer.name} is done!`);
+          if ('Notification' in window && Notification.permission === 'granted') {
+            new Notification('Timer Complete!', {body: `${timer.name} is ready!`});
+          }
+        }
+        renderTimers();
+      }, 1000);
+      renderTimers();
+    }
+
+    function pauseTimer(id) {
+      const timer = timers.find(t => t.id === id);
+      if (!timer) return;
+      clearInterval(timerIntervals[id]);
+      timer.running = false;
+      renderTimers();
+    }
+
+    function deleteTimer(id) {
+      clearInterval(timerIntervals[id]);
+      timers = timers.filter(t => t.id !== id);
+      renderTimers();
+    }
+
+    function formatTime(seconds) {
+      const h = Math.floor(seconds / 3600);
+      const m = Math.floor((seconds % 3600) / 60);
+      const s = seconds % 60;
+      if (h > 0) return `${h}:${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+      return `${m}:${s.toString().padStart(2,'0')}`;
+    }
+
+    function renderTimers() {
+      const html = timers.map(t => `
+        <div class="timer-card ${t.running ? 'active' : ''}">
+          <h3>${t.name}</h3>
+          <div class="timer-display">${formatTime(t.remainingSeconds)}</div>
+          <div class="timer-controls">
+            ${!t.running ? 
+              `<button class="btn-start" onclick="startTimer(${t.id})">Start</button>` :
+              `<button class="btn-pause" onclick="pauseTimer(${t.id})">Pause</button>`
+            }
+            <button class="btn-delete" onclick="deleteTimer(${t.id})">Delete</button>
+          </div>
+        </div>
+      `).join('');
+      document.getElementById('timers').innerHTML = html || '<p style="text-align:center;color:var(--text-muted)">No timers yet. Add one above!</p>';
+    }
+
+    // Request notification permission
+    if ('Notification' in window && Notification.permission === 'default') {
+      Notification.requestPermission();
+    }
+
+    renderTimers();
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ingredient Price Comparison | NetVeggies</title>
+  <meta name="description" content="Compare per-unit costs of ingredients to find the best deals. Know whether bulk buying actually saves money.">
+  <link rel="canonical" href="https://netveggies.com/tools/price-comparison.html">
+  <meta property="og:title" content="Ingredient Price Comparison — NetVeggies">
+  <meta property="og:description" content="Compare per-unit costs of ingredients to find the best deals. Know whether bulk buying actually saves money.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}.form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;background:var(--white)}.form-row input:focus,.form-row select:focus{outline:none;border-color:var(--sage)}.result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:var(--radius);padding:24px;margin-top:24px;display:none}.result-box h3{color:var(--sage-dark);margin-bottom:12px}.result-number{font-size:3rem;font-weight:700;font-family:'Playfair Display',serif}.tip-box{background:var(--terracotta-light);border-radius:8px;padding:16px;margin-top:16px;font-size:.9rem}.tip-box strong{color:var(--terracotta)}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Ingredient Price Comparison","url":"https://netveggies.com/tools/price-comparison.html","description":"Compare per-unit costs of ingredients to find the best deals. Know whether bulk buying actually saves money.","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul></nav></div></header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>🏷️ Ingredient Price Comparison</h1>
+      <p>Compare per-unit costs of ingredients to find the best deals. Know whether bulk buying actually saves money.</p>
+    </section>
+    <div class="tool-container">
+      <div class="tool-card">
+<h2>Price Comparison Tool</h2>
+<div id="options"><div class="opt-row" style="border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:12px"><h3 style="font-size:.95rem;margin-bottom:12px">Option A</h3><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px"><input placeholder="Store/Brand" class="oname" style="padding:8px;border:1px solid var(--border);border-radius:8px"><input placeholder="Price ($)" type="number" step="0.01" class="oprice" style="padding:8px;border:1px solid var(--border);border-radius:8px"><div style="display:flex;gap:4px"><input placeholder="Amount" type="number" class="oamt" style="padding:8px;border:1px solid var(--border);border-radius:8px;width:60%"><select class="ounit" style="padding:8px;border:1px solid var(--border);border-radius:8px;width:40%"><option>oz</option><option>lbs</option><option>g</option><option>kg</option><option>ml</option><option>L</option><option>count</option></select></div></div></div></div>
+<button onclick="addOpt()" class="btn" style="background:var(--sage-light);margin-bottom:16px">+ Add Option</button>
+<button onclick="compare()" class="btn btn-primary" style="width:100%">Compare</button>
+<div class="result-box" id="result" style="display:none"><h3>Results</h3><div id="compResults"></div></div></div>
+<script>
+let optCount=1;function addOpt(){optCount++;const d=document.getElementById("options");const div=document.createElement("div");div.className="opt-row";div.style.cssText="border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:12px";div.innerHTML='<h3 style="font-size:.95rem;margin-bottom:12px">Option '+String.fromCharCode(64+optCount)+'</h3><div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px"><input placeholder="Store/Brand" class="oname" style="padding:8px;border:1px solid var(--border);border-radius:8px"><input placeholder="Price ($)" type="number" step="0.01" class="oprice" style="padding:8px;border:1px solid var(--border);border-radius:8px"><div style="display:flex;gap:4px"><input placeholder="Amount" type="number" class="oamt" style="padding:8px;border:1px solid var(--border);border-radius:8px;width:60%"><select class="ounit" style="padding:8px;border:1px solid var(--border);border-radius:8px;width:40%"><option>oz</option><option>lbs</option><option>g</option><option>kg</option><option>ml</option><option>L</option><option>count</option></select></div></div>';d.appendChild(div)}
+const toG={oz:28.35,lbs:453.6,g:1,kg:1000,ml:1,L:1000,count:1};
+function compare(){const rows=document.querySelectorAll(".opt-row");const items=[];rows.forEach(r=>{const name=r.querySelector(".oname").value||"?";const price=parseFloat(r.querySelector(".oprice").value);const amt=parseFloat(r.querySelector(".oamt").value);const unit=r.querySelector(".ounit").value;if(price&&amt){const grams=amt*toG[unit];items.push({name,price,amt,unit,grams,perUnit:price/grams})}});
+if(items.length<2){alert("Add at least 2 options!");return}items.sort((a,b)=>a.perUnit-b.perUnit);const best=items[0].perUnit;
+document.getElementById("compResults").innerHTML=items.map((item,i)=>"<div style='display:flex;justify-content:space-between;align-items:center;padding:12px;margin:4px 0;background:"+(i===0?"var(--sage-light)":"var(--white)")+";border-radius:8px;border:1px solid var(--border)'><div>"+(i===0?"🏆 ":"")+"<strong>"+item.name+"</strong><br><small>$"+item.price.toFixed(2)+" / "+item.amt+" "+item.unit+"</small></div><div style='text-align:right'><strong>$"+(item.perUnit*100).toFixed(2)+"</strong><small>/100"+item.unit+"</small>"+(i>0?"<br><span style='color:var(--terracotta);font-size:.8rem'>"+Math.round((item.perUnit/best-1)*100)+"% more</span>":"")+"</div></div>").join("");
+document.getElementById("result").style.display="block"}
+</script>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-grid"><div><h3>NetVeggies</h3><p>Making plant-based cooking simple, affordable, and delicious.</p></div><div><h4>Recipes</h4><ul><li><a href="../easy-vegan-dinner-ideas.html">Dinner Ideas</a></li><li><a href="../vegan-recipes-for-beginners.html">Beginner Recipes</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li></ul></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools</a></li><li><a href="vegan-protein-calculator.html">Protein Calculator</a></li><li><a href="substitution-finder.html">Substitution Finder</a></li></ul></div><div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../privacy.html">Privacy Policy</a></li></ul></div></div><p style="text-align:center;margin-top:32px;color:var(--text-muted);font-size:.85rem">&copy; 2025 NetVeggies. All rights reserved.</p></div></footer>
+  <script>document.querySelector(".nav-toggle").addEventListener("click",function(){const n=document.querySelector(".main-nav");const open=n.classList.toggle("open");this.setAttribute("aria-expanded",open)});</script>
+</body>
+</html>

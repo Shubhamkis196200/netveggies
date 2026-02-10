@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vegan Wine & Beer Checker | NetVeggies</title>
+  <meta name="description" content="Check if common wines and beers are vegan. Learn about fining agents and what to look for on labels.">
+  <link rel="canonical" href="https://netveggies.com/tools/vegan-wine-checker.html">
+  <meta property="og:title" content="Vegan Wine & Beer Checker — NetVeggies">
+  <meta property="og:description" content="Check if common wines and beers are vegan. Learn about fining agents and what to look for on labels.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}.form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;background:var(--white)}.form-row input:focus,.form-row select:focus{outline:none;border-color:var(--sage)}.result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:var(--radius);padding:24px;margin-top:24px;display:none}.result-box h3{color:var(--sage-dark);margin-bottom:12px}.result-number{font-size:3rem;font-weight:700;font-family:'Playfair Display',serif}.tip-box{background:var(--terracotta-light);border-radius:8px;padding:16px;margin-top:16px;font-size:.9rem}.tip-box strong{color:var(--terracotta)}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Vegan Wine & Beer Checker","url":"https://netveggies.com/tools/vegan-wine-checker.html","description":"Check if common wines and beers are vegan. Learn about fining agents and what to look for on labels.","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul></nav></div></header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>🍷 Vegan Wine & Beer Checker</h1>
+      <p>Check if common wines and beers are vegan. Learn about fining agents and what to look for on labels.</p>
+    </section>
+    <div class="tool-container">
+      <div class="tool-card">
+<h2>Is My Drink Vegan?</h2>
+<div class="form-row"><label for="search">Search a brand or type</label><input type="text" id="search" placeholder="e.g., Guinness, Prosecco..." oninput="search()"></div>
+<div id="results"></div>
+<div class="result-box" style="display:block;margin-top:20px"><h3>Common Non-Vegan Fining Agents</h3>
+<div style="font-size:.9rem">
+<div style="padding:8px 0;border-bottom:1px solid var(--border)"><strong>Isinglass</strong> — fish bladder protein. Common in British ales and stouts.</div>
+<div style="padding:8px 0;border-bottom:1px solid var(--border)"><strong>Gelatin</strong> — derived from animal bones. Used in some wines and ciders.</div>
+<div style="padding:8px 0;border-bottom:1px solid var(--border)"><strong>Casein</strong> — milk protein. Used in some white wines.</div>
+<div style="padding:8px 0;border-bottom:1px solid var(--border)"><strong>Egg whites (albumin)</strong> — used in some red wines.</div>
+<div style="padding:8px 0"><strong>Carmine</strong> — crushed beetles. Used for red color in some drinks.</div></div>
+<div class="tip-box" style="margin-top:16px"><strong>💡 Vegan alternatives for fining:</strong> Bentonite clay, activated charcoal, silica gel, and pea protein are all vegan-friendly fining agents used by many producers.</div>
+<h3 style="margin-top:20px">Generally Vegan-Friendly</h3>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin:8px 0"><span style="padding:6px 12px;background:var(--sage-light);border-radius:20px;font-size:.85rem">Most German/Austrian wines</span><span style="padding:6px 12px;background:var(--sage-light);border-radius:20px;font-size:.85rem">Italian wines (many)</span><span style="padding:6px 12px;background:var(--sage-light);border-radius:20px;font-size:.85rem">German beer (Reinheitsgebot)</span><span style="padding:6px 12px;background:var(--sage-light);border-radius:20px;font-size:.85rem">Most spirits (plain)</span><span style="padding:6px 12px;background:var(--sage-light);border-radius:20px;font-size:.85rem">Most hard ciders</span></div></div></div>
+<script>
+const drinks=[{name:"Guinness Draught",type:"Beer",vegan:true,note:"Vegan since 2018! Switched from isinglass."},{name:"Budweiser",type:"Beer",vegan:true,note:"Vegan-friendly, no animal fining agents."},{name:"Corona",type:"Beer",vegan:true,note:"Vegan-friendly."},{name:"Heineken",type:"Beer",vegan:true,note:"Vegan-friendly."},{name:"Stella Artois",type:"Beer",vegan:true,note:"Vegan-friendly."},{name:"Newcastle Brown Ale",type:"Beer",vegan:false,note:"May use isinglass."},{name:"Barefoot Wine",type:"Wine",vegan:false,note:"Uses animal-derived fining agents."},{name:"Yellow Tail",type:"Wine",vegan:true,note:"Most varieties are vegan-friendly."},{name:"Prosecco",type:"Wine",vegan:true,note:"Most Prosecco is vegan (uses bentonite clay)."},{name:"Champagne",type:"Wine",vegan:false,note:"Many use egg whites or casein. Check individual brands."},{name:"Honey Mead",type:"Other",vegan:false,note:"Contains honey."},{name:"Baileys",type:"Liqueur",vegan:false,note:"Contains dairy. Try Baileys Almande for vegan version."},{name:"Kahlua",type:"Liqueur",vegan:true,note:"Vegan-friendly."}];
+function search(){const q=document.getElementById("search").value.toLowerCase().trim();if(!q){document.getElementById("results").innerHTML="";return}
+const matches=drinks.filter(d=>d.name.toLowerCase().includes(q)||d.type.toLowerCase().includes(q));
+document.getElementById("results").innerHTML=matches.length?matches.map(d=>"<div style='display:flex;justify-content:space-between;align-items:center;padding:12px;margin:4px 0;background:"+(d.vegan?"var(--sage-light)":"var(--terracotta-light)")+";border-radius:8px'><div><strong>"+d.name+"</strong> ("+d.type+")<br><small>"+d.note+"</small></div><span style='font-size:1.5rem'>"+(d.vegan?"✅":"❌")+"</span></div>").join(""):"<p style='padding:12px;color:var(--text-muted)'>No matches found. Check <a href='https://www.barnivore.com' target='_blank' rel='noopener'>Barnivore.com</a> for a comprehensive database.</p>"}
+</script>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-grid"><div><h3>NetVeggies</h3><p>Making plant-based cooking simple, affordable, and delicious.</p></div><div><h4>Recipes</h4><ul><li><a href="../easy-vegan-dinner-ideas.html">Dinner Ideas</a></li><li><a href="../vegan-recipes-for-beginners.html">Beginner Recipes</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li></ul></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools</a></li><li><a href="vegan-protein-calculator.html">Protein Calculator</a></li><li><a href="substitution-finder.html">Substitution Finder</a></li></ul></div><div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../privacy.html">Privacy Policy</a></li></ul></div></div><p style="text-align:center;margin-top:32px;color:var(--text-muted);font-size:.85rem">&copy; 2025 NetVeggies. All rights reserved.</p></div></footer>
+  <script>document.querySelector(".nav-toggle").addEventListener("click",function(){const n=document.querySelector(".main-nav");const open=n.classList.toggle("open");this.setAttribute("aria-expanded",open)});</script>
+</body>
+</html>

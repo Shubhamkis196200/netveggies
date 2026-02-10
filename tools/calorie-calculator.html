@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vegan Calorie Calculator — TDEE for Plant-Based Diet | NetVeggies</title>
+  <meta name="description" content="Calculate your Total Daily Energy Expenditure (TDEE) and calorie needs for a plant-based diet. Includes BMR calculation and activity adjustments.">
+  <link rel="canonical" href="https://netveggies.com/tools/calorie-calculator.html">
+  <meta property="og:title" content="Vegan Calorie Calculator — NetVeggies">
+  <meta property="og:description" content="Calculate your TDEE and calorie needs for a plant-based diet.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://netveggies.com/tools/calorie-calculator.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}.form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;background:var(--white)}.form-row input:focus,.form-row select:focus{outline:none;border-color:var(--sage)}.form-row .hint{font-size:.82rem;color:var(--text-muted);margin-top:4px}.radio-group{display:flex;gap:12px;flex-wrap:wrap}.radio-group label{display:flex;align-items:center;gap:6px;font-weight:400;cursor:pointer;padding:8px 16px;border:1px solid var(--border);border-radius:8px;transition:all var(--transition)}.radio-group label:has(input:checked){border-color:var(--sage);background:var(--sage-light)}.radio-group input{width:auto;margin:0}.result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:var(--radius);padding:24px;margin-top:24px;display:none}.result-box h3{color:var(--sage-dark);margin-bottom:12px}.result-number{font-size:2.5rem;font-weight:700;color:var(--terracotta);font-family:'Playfair Display',serif}.result-unit{font-size:1rem;color:var(--text-light)}.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}.result-item{text-align:center;background:var(--white);padding:16px;border-radius:8px}.result-item .num{font-size:1.5rem;font-weight:700;color:var(--sage-dark)}.result-item .lbl{font-size:.78rem;color:var(--text-muted)}.tip-box{background:var(--terracotta-light);border-radius:8px;padding:16px;margin-top:16px;font-size:.9rem}.tip-box strong{color:var(--terracotta)}@media(max-width:480px){.result-grid{grid-template-columns:1fr}}
+  </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Vegan Calorie Calculator","url":"https://netveggies.com/tools/calorie-calculator.html","description":"Calculate TDEE and calorie needs for a plant-based diet.","applicationCategory":"HealthApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul></nav></div></header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>🔥 Calorie Calculator</h1>
+      <p>Calculate your Total Daily Energy Expenditure (TDEE) using the Mifflin-St Jeor equation — the gold standard for estimating calorie needs.</p>
+    </section>
+
+    <div class="tool-container">
+      <div class="tool-card">
+        <form id="calorieForm" onsubmit="calculate(event)">
+          <div class="form-row">
+            <label>Sex</label>
+            <div class="radio-group">
+              <label><input type="radio" name="sex" value="male" checked> Male</label>
+              <label><input type="radio" name="sex" value="female"> Female</label>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="age">Age</label>
+            <input type="number" id="age" min="13" max="100" required placeholder="30">
+          </div>
+          <div class="form-row">
+            <label for="weight">Weight</label>
+            <div style="display:flex;gap:12px;">
+              <input type="number" id="weight" min="30" max="300" step="0.1" required placeholder="70">
+              <select id="weightUnit" style="max-width:100px"><option value="kg">kg</option><option value="lbs">lbs</option></select>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="height">Height</label>
+            <div style="display:flex;gap:12px;">
+              <input type="number" id="height" min="100" max="250" step="0.1" required placeholder="170">
+              <select id="heightUnit" style="max-width:100px"><option value="cm">cm</option><option value="in">inches</option></select>
+            </div>
+          </div>
+          <div class="form-row">
+            <label>Activity Level</label>
+            <select id="activity">
+              <option value="1.2">Sedentary (desk job, little exercise)</option>
+              <option value="1.375">Lightly Active (1-3 days/week)</option>
+              <option value="1.55" selected>Moderately Active (3-5 days/week)</option>
+              <option value="1.725">Very Active (6-7 days/week)</option>
+              <option value="1.9">Extra Active (athlete / physical job)</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>Goal</label>
+            <div class="radio-group">
+              <label><input type="radio" name="goal" value="-500"> Lose Weight</label>
+              <label><input type="radio" name="goal" value="0" checked> Maintain</label>
+              <label><input type="radio" name="goal" value="300"> Gain Muscle</label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">Calculate Calories</button>
+        </form>
+
+        <div class="result-box" id="result">
+          <h3>Your Daily Calorie Needs</h3>
+          <div style="text-align:center;margin:16px 0">
+            <span class="result-number" id="tdeeResult">—</span>
+            <span class="result-unit">calories/day</span>
+          </div>
+          <div class="result-grid">
+            <div class="result-item"><div class="num" id="bmrVal">—</div><div class="lbl">BMR (Basal)</div></div>
+            <div class="result-item"><div class="num" id="tdeeVal">—</div><div class="lbl">TDEE (Maintenance)</div></div>
+            <div class="result-item"><div class="num" id="goalVal">—</div><div class="lbl">Your Goal</div></div>
+          </div>
+          <p id="resultExplain" style="font-size:.9rem;color:var(--text-light)"></p>
+          <div class="tip-box">
+            <strong>🌱 Plant-Based Tip:</strong> Whole food vegan diets are naturally lower in calorie density. You may need to eat larger volumes to hit your calorie target. Nuts, seeds, avocados, and whole grains are calorie-dense plant foods that help.
+          </div>
+
+          <h3 style="margin-top:20px">Suggested Macro Split</h3>
+          <div class="result-grid" id="macros"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools for real life.</p></div><div><h4>Recipes</h4><ul><li><a href="../easy-vegan-dinner-ideas.html">Dinners</a></li><li><a href="../vegan-recipes-for-beginners.html">Beginners</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li></ul></div><div><h4>Tools</h4><ul><li><a href="vegan-protein-calculator.html">Protein Calculator</a></li><li><a href="calorie-calculator.html">Calorie Calculator</a></li><li><a href="bmi-calculator.html">BMI Calculator</a></li><li><a href="index.html">All Tools →</a></li></ul></div><div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../privacy.html">Privacy</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱 for a kinder plate.</p></div></footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open');this.setAttribute('aria-expanded',this.getAttribute('aria-expanded')==='true'?'false':'true')});
+
+    function calculate(e) {
+      e.preventDefault();
+      const sex = document.querySelector('input[name="sex"]:checked').value;
+      const age = parseInt(document.getElementById('age').value);
+      let weight = parseFloat(document.getElementById('weight').value);
+      let height = parseFloat(document.getElementById('height').value);
+      const activity = parseFloat(document.getElementById('activity').value);
+      const goal = parseInt(document.querySelector('input[name="goal"]:checked').value);
+
+      if (document.getElementById('weightUnit').value === 'lbs') weight *= 0.4536;
+      if (document.getElementById('heightUnit').value === 'in') height *= 2.54;
+
+      // Mifflin-St Jeor
+      let bmr;
+      if (sex === 'male') {
+        bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+      } else {
+        bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+      }
+
+      const tdee = Math.round(bmr * activity);
+      const goalCal = Math.round(tdee + goal);
+
+      document.getElementById('bmrVal').textContent = Math.round(bmr);
+      document.getElementById('tdeeVal').textContent = tdee;
+      document.getElementById('goalVal').textContent = goalCal;
+      document.getElementById('tdeeResult').textContent = goalCal;
+
+      let goalText = goal < 0 ? 'a 500 calorie deficit for ~0.45kg/1lb loss per week' : goal > 0 ? 'a 300 calorie surplus for lean muscle gain' : 'maintenance calories';
+      document.getElementById('resultExplain').textContent = `Your BMR is ${Math.round(bmr)} cal. With your activity level, your TDEE is ${tdee} cal. Your target of ${goalCal} cal reflects ${goalText}.`;
+
+      // Macros: 25% protein, 30% fat, 45% carbs (balanced vegan)
+      const protein = Math.round((goalCal * 0.25) / 4);
+      const fat = Math.round((goalCal * 0.30) / 9);
+      const carbs = Math.round((goalCal * 0.45) / 4);
+      document.getElementById('macros').innerHTML = `
+        <div class="result-item"><div class="num">${protein}g</div><div class="lbl">Protein (25%)</div></div>
+        <div class="result-item"><div class="num">${fat}g</div><div class="lbl">Fat (30%)</div></div>
+        <div class="result-item"><div class="num">${carbs}g</div><div class="lbl">Carbs (45%)</div></div>
+      `;
+
+      document.getElementById('result').style.display = 'block';
+      document.getElementById('result').scrollIntoView({behavior:'smooth',block:'start'});
+    }
+  </script>
+</body>
+</html>

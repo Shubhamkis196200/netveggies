@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vitamin B12 Calculator for Vegans — Daily Intake Tracker | NetVeggies</title>
+  <meta name="description" content="Track your vitamin B12 intake from supplements and fortified foods. Essential tool for vegans to ensure adequate B12 levels.">
+  <link rel="canonical" href="https://netveggies.com/tools/vitamin-b12-calculator.html">
+  <meta property="og:title" content="Vitamin B12 Calculator for Vegans — NetVeggies">
+  <meta property="og:description" content="Track your B12 intake from supplements and fortified vegan foods.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}.form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;background:var(--white)}.form-row input:focus,.form-row select:focus{outline:none;border-color:var(--sage)}.form-row .hint{font-size:.82rem;color:var(--text-muted);margin-top:4px}.result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:var(--radius);padding:24px;margin-top:24px;display:none}.result-box h3{color:var(--sage-dark);margin-bottom:12px}.result-number{font-size:2.5rem;font-weight:700;color:var(--terracotta);font-family:'Playfair Display',serif}.result-unit{font-size:1rem;color:var(--text-light)}.food-item{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--border)}.food-item label{font-weight:400;flex:1}.food-item input{width:60px;text-align:center;padding:6px;border:1px solid var(--border);border-radius:6px}.food-mcg{min-width:70px;text-align:right;font-size:.85rem;color:var(--text-muted)}.progress-bar{background:var(--border);border-radius:8px;height:24px;overflow:hidden;margin:16px 0}.progress-fill{height:100%;border-radius:8px;transition:width .5s}.tip-box{background:var(--terracotta-light);border-radius:8px;padding:16px;margin-top:16px;font-size:.9rem}.tip-box strong{color:var(--terracotta)}.status-good{color:var(--sage-dark);font-weight:600}.status-low{color:var(--terracotta);font-weight:600}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Vitamin B12 Calculator for Vegans","url":"https://netveggies.com/tools/vitamin-b12-calculator.html","description":"Track your B12 intake from supplements and fortified vegan foods.","applicationCategory":"HealthApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul></nav></div></header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>💊 Vitamin B12 Calculator</h1>
+      <p>B12 is the one nutrient vegans must supplement. Track your daily intake from supplements and fortified foods to make sure you're covered.</p>
+    </section>
+    <div class="tool-container">
+      <div class="tool-card">
+        <div class="form-row">
+          <label>Your Age Group</label>
+          <select id="ageGroup" onchange="recalc()">
+            <option value="2.4">Adult (14+) — RDA: 2.4 mcg/day</option>
+            <option value="2.6">Pregnant — RDA: 2.6 mcg/day</option>
+            <option value="2.8">Breastfeeding — RDA: 2.8 mcg/day</option>
+            <option value="1.8">Child (9-13) — RDA: 1.8 mcg/day</option>
+          </select>
+          <div class="hint">The RDA is the minimum. Many experts recommend vegans get 250+ mcg/day from supplements due to absorption rates.</div>
+        </div>
+
+        <h3 style="margin:24px 0 12px;font-family:'Playfair Display',serif;color:var(--sage-dark)">Supplement</h3>
+        <div class="food-item">
+          <label for="supplement">Daily B12 supplement (mcg)</label>
+          <input type="number" id="supplement" value="0" min="0" max="5000" onchange="recalc()">
+          <span class="food-mcg">mcg</span>
+        </div>
+        <div class="hint" style="margin:4px 0 16px">Common doses: 25mcg (daily), 250mcg (daily), 1000mcg (daily), 2500mcg (weekly)</div>
+
+        <h3 style="margin:24px 0 12px;font-family:'Playfair Display',serif;color:var(--sage-dark)">Fortified Foods (servings today)</h3>
+        <div id="foodList"></div>
+
+        <div class="result-box" id="result" style="display:block">
+          <h3>Your Daily B12 Intake</h3>
+          <div style="text-align:center;margin:12px 0">
+            <span class="result-number" id="totalB12">0</span>
+            <span class="result-unit">mcg</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" id="progressBar" style="width:0%;background:var(--terracotta)"></div></div>
+          <p id="statusText" class="status-low">You're not meeting your B12 needs. Please add a supplement!</p>
+
+          <div class="tip-box">
+            <strong>⚠️ Important:</strong> B12 deficiency can take years to develop but causes irreversible nerve damage. There are NO reliable plant sources of B12. All vegans should supplement. The body absorbs only ~1.5mcg per sitting from food, but ~1% from high-dose supplements (so 1000mcg supplement → ~10mcg absorbed).
+          </div>
+
+          <h3 style="margin-top:20px">Recommended B12 Strategy</h3>
+          <div id="strategy" style="font-size:.9rem;line-height:1.7"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools for real life.</p></div><div><h4>Tools</h4><ul><li><a href="vegan-protein-calculator.html">Protein Calculator</a></li><li><a href="calorie-calculator.html">Calorie Calculator</a></li><li><a href="index.html">All Tools →</a></li></ul></div><div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../privacy.html">Privacy</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱 for a kinder plate.</p></div></footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open');this.setAttribute('aria-expanded',this.getAttribute('aria-expanded')==='true'?'false':'true')});
+
+    const foods=[
+      {name:'Fortified plant milk (1 cup)',mcg:1.2},
+      {name:'Fortified cereal (1 serving)',mcg:2.4},
+      {name:'Nutritional yeast, fortified (1 tbsp)',mcg:2.4},
+      {name:'Fortified vegan yogurt (150g)',mcg:0.8},
+      {name:'Fortified meat alternative (1 serving)',mcg:1.5},
+      {name:'Fortified energy bar',mcg:1.0},
+      {name:'Marmite/Vegemite (1 tsp)',mcg:0.5},
+    ];
+
+    const listEl=document.getElementById('foodList');
+    foods.forEach((f,i)=>{
+      listEl.innerHTML+=`<div class="food-item"><label for="food${i}">${f.name}</label><input type="number" id="food${i}" value="0" min="0" max="10" step="0.5" onchange="recalc()"><span class="food-mcg">${f.mcg} mcg/srv</span></div>`;
+    });
+
+    function recalc(){
+      const rda=parseFloat(document.getElementById('ageGroup').value);
+      let total=parseFloat(document.getElementById('supplement').value)||0;
+      // For supplements >5mcg, apply absorption curve (body absorbs ~1.5mcg per meal from food, ~1% from pills)
+      let absorbedFromSupp=0;
+      const suppDose=total;
+      if(suppDose<=5) absorbedFromSupp=suppDose*0.6; // ~60% absorption at low doses
+      else if(suppDose<=50) absorbedFromSupp=suppDose*0.1+2;
+      else absorbedFromSupp=suppDose*0.01+6; // ~1% at high doses + passive
+
+      let foodTotal=0;
+      foods.forEach((f,i)=>{
+        const srv=parseFloat(document.getElementById('food'+i).value)||0;
+        foodTotal+=srv*f.mcg;
+      });
+      // Food B12 absorbs at ~50%
+      const absorbedFromFood=Math.min(foodTotal*0.5,3); // max ~3mcg absorbed from food per day
+
+      const effectiveTotal=absorbedFromSupp+absorbedFromFood;
+      const displayTotal=(suppDose+foodTotal).toFixed(1);
+
+      document.getElementById('totalB12').textContent=displayTotal;
+      const pct=Math.min(100,(effectiveTotal/rda)*100);
+      const bar=document.getElementById('progressBar');
+      bar.style.width=pct+'%';
+      bar.style.background=pct>=100?'var(--sage)':'var(--terracotta)';
+
+      const st=document.getElementById('statusText');
+      if(effectiveTotal>=rda){
+        st.className='status-good';
+        st.textContent=`✅ You're meeting your B12 needs! Estimated absorption: ~${effectiveTotal.toFixed(1)} mcg/day (from ${displayTotal} mcg intake).`;
+      } else {
+        st.className='status-low';
+        st.textContent=`⚠️ You're only absorbing ~${effectiveTotal.toFixed(1)} mcg/day (from ${displayTotal} mcg intake). RDA is ${rda} mcg. Add a supplement!`;
+      }
+
+      // Strategy
+      const strat=document.getElementById('strategy');
+      strat.innerHTML=`
+        <p><strong>Option A (easiest):</strong> Take a daily supplement of 250 mcg cyanocobalamin. This provides ~2.5+ mcg absorbed.</p>
+        <p><strong>Option B:</strong> Take 2,500 mcg once per week. Equally effective and cheaper.</p>
+        <p><strong>Option C:</strong> Eat 2-3 servings of fortified foods per day, spaced out (each serving provides 1-2.4 mcg). Less reliable as sole source.</p>
+        <p style="color:var(--text-muted);font-size:.85rem;margin-top:8px">Cyanocobalamin is the most studied form. Methylcobalamin is also fine but less stable. Get your B12 levels tested annually.</p>
+      `;
+    }
+    recalc();
+  </script>
+</body>
+</html>

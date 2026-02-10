@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vegan Reading List Generator | NetVeggies</title>
+  <meta name="description" content="Get personalized book, documentary, and podcast recommendations for your plant-based journey.">
+  <link rel="canonical" href="https://netveggies.com/tools/reading-list-generator.html">
+  <meta property="og:title" content="Vegan Reading List Generator — NetVeggies">
+  <meta property="og:description" content="Get personalized book, documentary, and podcast recommendations for your plant-based journey.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}.form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;background:var(--white)}.form-row input:focus,.form-row select:focus{outline:none;border-color:var(--sage)}.result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:var(--radius);padding:24px;margin-top:24px;display:none}.result-box h3{color:var(--sage-dark);margin-bottom:12px}.result-number{font-size:3rem;font-weight:700;font-family:'Playfair Display',serif}.tip-box{background:var(--terracotta-light);border-radius:8px;padding:16px;margin-top:16px;font-size:.9rem}.tip-box strong{color:var(--terracotta)}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Vegan Reading List Generator","url":"https://netveggies.com/tools/reading-list-generator.html","description":"Get personalized book, documentary, and podcast recommendations for your plant-based journey.","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul></nav></div></header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>📚 Vegan Reading List Generator</h1>
+      <p>Get personalized book, documentary, and podcast recommendations for your plant-based journey.</p>
+    </section>
+    <div class="tool-container">
+      <div class="tool-card">
+<h2>What interests you?</h2>
+<p style="color:var(--text-muted);margin-bottom:16px">Select your interests to get personalized recommendations:</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px" id="interests"></div>
+<button onclick="recommend()" class="btn btn-primary" style="width:100%">Get Recommendations</button>
+<div class="result-box" id="result" style="display:none"><div id="recs"></div></div></div>
+<script>
+const tags=["Health","Environment","Ethics","Cooking","Nutrition","Fitness","Beginner","Science"];
+const d=document.getElementById("interests");tags.forEach(t=>{d.innerHTML+='<button onclick="this.classList.toggle('active');this.style.background=this.classList.contains('active')?'var(--sage-light)':'var(--white)';this.style.borderColor=this.classList.contains('active')?'var(--sage)':'var(--border)'" class="" style="padding:8px 16px;border:1px solid var(--border);border-radius:20px;cursor:pointer;background:var(--white);font-size:.9rem">'+t+'</button>'});
+const items=[{title:"How Not to Die",author:"Dr. Michael Greger",type:"📖 Book",tags:["Health","Nutrition","Science"],desc:"Evidence-based guide on how diet prevents disease."},{title:"The China Study",author:"T. Colin Campbell",type:"📖 Book",tags:["Health","Science","Nutrition"],desc:"Landmark study on plant-based diets and health."},{title:"Eating Animals",author:"Jonathan Safran Foer",type:"📖 Book",tags:["Ethics","Environment","Beginner"],desc:"Powerful exploration of the ethics of eating animals."},{title:"Thug Kitchen",author:"Thug Kitchen",type:"📖 Cookbook",tags:["Cooking","Beginner"],desc:"Hilarious, no-nonsense vegan cookbook."},{title:"Veganomicon",author:"Isa Chandra Moskowitz",type:"📖 Cookbook",tags:["Cooking"],desc:"The ultimate vegan cookbook with 250+ recipes."},{title:"Game Changers",author:"—",type:"🎬 Documentary",tags:["Fitness","Health","Science"],desc:"Elite athletes thriving on plant-based diets."},{title:"Cowspiracy",author:"—",type:"🎬 Documentary",tags:["Environment","Beginner"],desc:"The environmental impact of animal agriculture."},{title:"What the Health",author:"—",type:"🎬 Documentary",tags:["Health","Beginner"],desc:"How diet affects health and pharma industry connections."},{title:"Dominion",author:"—",type:"🎬 Documentary",tags:["Ethics"],desc:"An unflinching look at animal agriculture practices."},{title:"Forks Over Knives",author:"—",type:"🎬 Documentary",tags:["Health","Nutrition","Beginner"],desc:"How a whole-food plant-based diet prevents disease."},{title:"Rich Roll Podcast",author:"Rich Roll",type:"🎙️ Podcast",tags:["Fitness","Health"],desc:"Conversations with plant-based athletes and thinkers."},{title:"No Meat Athlete",author:"Matt Frazier",type:"📖 Book",tags:["Fitness","Health"],desc:"Guide to plant-based athletic performance."},{title:"Proteinaholic",author:"Dr. Garth Davis",type:"📖 Book",tags:["Nutrition","Science","Health"],desc:"Debunking the protein obsession myth."}];
+function recommend(){const sel=Array.from(document.querySelectorAll("#interests .active")).map(b=>b.textContent);if(!sel.length){alert("Select at least one interest!");return}
+const scored=items.map(i=>({...i,score:i.tags.filter(t=>sel.includes(t)).length})).filter(i=>i.score>0).sort((a,b)=>b.score-a.score);
+document.getElementById("recs").innerHTML=scored.length?scored.map(i=>"<div style='padding:16px;margin:8px 0;border:1px solid var(--border);border-radius:8px'><div style='display:flex;justify-content:space-between'><strong>"+i.type+" "+i.title+"</strong></div>"+(i.author!=="—"?"<div style='color:var(--text-muted);font-size:.9rem'>by "+i.author+"</div>":"")+"<p style='font-size:.9rem;margin-top:4px'>"+i.desc+"</p><div style='display:flex;gap:4px;margin-top:8px'>"+i.tags.map(t=>"<span style='padding:2px 8px;background:var(--sage-light);border-radius:12px;font-size:.75rem'>"+t+"</span>").join("")+"</div></div>").join(""):"<p>No matches. Try selecting different interests.</p>";
+document.getElementById("result").style.display="block"}
+</script>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-grid"><div><h3>NetVeggies</h3><p>Making plant-based cooking simple, affordable, and delicious.</p></div><div><h4>Recipes</h4><ul><li><a href="../easy-vegan-dinner-ideas.html">Dinner Ideas</a></li><li><a href="../vegan-recipes-for-beginners.html">Beginner Recipes</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li></ul></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools</a></li><li><a href="vegan-protein-calculator.html">Protein Calculator</a></li><li><a href="substitution-finder.html">Substitution Finder</a></li></ul></div><div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../privacy.html">Privacy Policy</a></li></ul></div></div><p style="text-align:center;margin-top:32px;color:var(--text-muted);font-size:.85rem">&copy; 2025 NetVeggies. All rights reserved.</p></div></footer>
+  <script>document.querySelector(".nav-toggle").addEventListener("click",function(){const n=document.querySelector(".main-nav");const open=n.classList.toggle("open");this.setAttribute("aria-expanded",open)});</script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BMI Calculator with Vegan Health Tips | NetVeggies</title>
+  <meta name="description" content="Calculate your Body Mass Index (BMI) and get personalized vegan health tips. Understand what your BMI means for a plant-based lifestyle.">
+  <link rel="canonical" href="https://netveggies.com/tools/bmi-calculator.html">
+  <meta property="og:title" content="BMI Calculator — NetVeggies">
+  <meta property="og:description" content="Calculate your BMI and get vegan health tips.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}.form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;background:var(--white)}.form-row input:focus,.form-row select:focus{outline:none;border-color:var(--sage)}.result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:var(--radius);padding:24px;margin-top:24px;display:none}.result-box h3{color:var(--sage-dark);margin-bottom:12px}.result-number{font-size:3rem;font-weight:700;font-family:'Playfair Display',serif}.result-unit{font-size:1rem;color:var(--text-light)}.bmi-scale{display:flex;height:24px;border-radius:12px;overflow:hidden;margin:20px 0 8px}.bmi-scale div{flex:1}.bmi-labels{display:flex;font-size:.75rem;color:var(--text-muted)}.bmi-labels span{flex:1;text-align:center}.bmi-marker{position:relative;height:0}.bmi-marker .arrow{position:absolute;top:-32px;transform:translateX(-50%);font-size:1.2rem}.tip-box{background:var(--terracotta-light);border-radius:8px;padding:16px;margin-top:16px;font-size:.9rem}.tip-box strong{color:var(--terracotta)}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"BMI Calculator","url":"https://netveggies.com/tools/bmi-calculator.html","description":"Calculate your BMI with vegan health tips.","applicationCategory":"HealthApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul></nav></div></header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>⚖️ BMI Calculator</h1>
+      <p>Calculate your Body Mass Index and get personalized plant-based health insights.</p>
+    </section>
+    <div class="tool-container">
+      <div class="tool-card">
+        <form id="bmiForm" onsubmit="calc(event)">
+          <div class="form-row">
+            <label for="weight">Weight</label>
+            <div style="display:flex;gap:12px">
+              <input type="number" id="weight" min="20" max="300" step="0.1" required placeholder="70">
+              <select id="wu" style="max-width:100px"><option value="kg">kg</option><option value="lbs">lbs</option></select>
+            </div>
+          </div>
+          <div class="form-row">
+            <label for="height">Height</label>
+            <div style="display:flex;gap:12px">
+              <input type="number" id="height" min="50" max="250" step="0.1" required placeholder="170">
+              <select id="hu" style="max-width:100px"><option value="cm">cm</option><option value="in">inches</option></select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">Calculate BMI</button>
+        </form>
+        <div class="result-box" id="result">
+          <h3>Your BMI</h3>
+          <div style="text-align:center;margin:16px 0">
+            <span class="result-number" id="bmiVal">—</span>
+            <span class="result-unit" id="bmiCat"></span>
+          </div>
+          <div class="bmi-scale">
+            <div style="background:#5b9bd5"></div>
+            <div style="background:#70ad47"></div>
+            <div style="background:#ffc000"></div>
+            <div style="background:#ed7d31"></div>
+            <div style="background:#ff4444"></div>
+          </div>
+          <div class="bmi-marker" id="marker"></div>
+          <div class="bmi-labels"><span>Under<br>(&lt;18.5)</span><span>Normal<br>(18.5–24.9)</span><span>Over<br>(25–29.9)</span><span>Obese I<br>(30–34.9)</span><span>Obese II<br>(35+)</span></div>
+          <p id="explain" style="margin-top:16px;font-size:.9rem;color:var(--text-light)"></p>
+          <div class="tip-box" id="tips"></div>
+          <div class="tip-box" style="background:var(--sage-light);margin-top:12px">
+            <strong>📊 Note:</strong> BMI is a screening tool, not a diagnostic one. It doesn't account for muscle mass, bone density, age, sex, or ethnicity. Athletes and muscular individuals may have a high BMI despite healthy body composition. Consult a healthcare professional for a complete assessment.
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools for real life.</p></div><div><h4>Recipes</h4><ul><li><a href="../easy-vegan-dinner-ideas.html">Dinners</a></li><li><a href="../vegan-recipes-for-beginners.html">Beginners</a></li></ul></div><div><h4>Tools</h4><ul><li><a href="vegan-protein-calculator.html">Protein Calculator</a></li><li><a href="calorie-calculator.html">Calorie Calculator</a></li><li><a href="index.html">All Tools →</a></li></ul></div><div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../privacy.html">Privacy</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱 for a kinder plate.</p></div></footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open');this.setAttribute('aria-expanded',this.getAttribute('aria-expanded')==='true'?'false':'true')});
+    function calc(e){
+      e.preventDefault();
+      let w=parseFloat(document.getElementById('weight').value);
+      let h=parseFloat(document.getElementById('height').value);
+      if(document.getElementById('wu').value==='lbs')w*=0.4536;
+      if(document.getElementById('hu').value==='in')h*=2.54;
+      const hm=h/100;
+      const bmi=w/(hm*hm);
+      const b=bmi.toFixed(1);
+      document.getElementById('bmiVal').textContent=b;
+      let cat,color,tips;
+      if(bmi<18.5){cat='Underweight';color='#5b9bd5';tips='<strong>🌱 Vegan Tip:</strong> Focus on calorie-dense plant foods: nut butters, avocados, coconut cream, dried fruits, tahini, and smoothies. Consider eating more frequent meals and adding healthy fats to every dish.';}
+      else if(bmi<25){cat='Normal Weight';color='#70ad47';tips='<strong>🌱 Vegan Tip:</strong> Great range! A balanced plant-based diet with varied protein sources, plenty of whole grains, fruits, and vegetables will help maintain your healthy weight.';}
+      else if(bmi<30){cat='Overweight';color='#ffc000';tips='<strong>🌱 Vegan Tip:</strong> Whole food plant-based diets are naturally lower in calorie density. Focus on vegetables, legumes, and whole grains. Reduce oil and processed vegan foods. Studies show WFPB diets are effective for weight management.';}
+      else if(bmi<35){cat='Obese (Class I)';color='#ed7d31';tips='<strong>🌱 Vegan Tip:</strong> Research shows plant-based diets can help with weight loss. Focus on high-fiber foods (beans, lentils, vegetables) that promote satiety. Consider consulting a plant-based dietitian.';}
+      else{cat='Obese (Class II+)';color='#ff4444';tips='<strong>🌱 Vegan Tip:</strong> A whole food plant-based diet has been shown in studies to be one of the most effective dietary patterns for significant weight loss. Work with a healthcare provider and consider a registered dietitian specializing in plant-based nutrition.';}
+      document.getElementById('bmiCat').textContent=' — '+cat;
+      document.getElementById('bmiVal').style.color=color;
+      document.getElementById('tips').innerHTML=tips;
+      // marker position: BMI 15-40 mapped to 0-100%
+      const pct=Math.min(100,Math.max(0,(bmi-15)/25*100));
+      document.getElementById('marker').innerHTML=`<div class="arrow" style="left:${pct}%">▼</div>`;
+      const idealLow=(18.5*hm*hm).toFixed(1);
+      const idealHigh=(24.9*hm*hm).toFixed(1);
+      document.getElementById('explain').textContent=`A BMI of ${b} is classified as "${cat}". For your height (${h.toFixed(0)}cm), a normal BMI range corresponds to ${idealLow}–${idealHigh} kg.`;
+      document.getElementById('result').style.display='block';
+      document.getElementById('result').scrollIntoView({behavior:'smooth'});
+    }
+  </script>
+</body>
+</html>

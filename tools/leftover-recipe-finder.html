@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leftover Recipe Finder | NetVeggies</title>
+  <meta name="description" content="Tell us what ingredients you have and get vegan recipe ideas! No more food waste.">
+  <link rel="canonical" href="https://netveggies.com/tools/leftover-recipe-finder.html">
+  <meta property="og:title" content="Leftover Recipe Finder — NetVeggies">
+  <meta property="og:description" content="Tell us what ingredients you have and get vegan recipe ideas! No more food waste.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}.form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;background:var(--white)}.form-row input:focus,.form-row select:focus{outline:none;border-color:var(--sage)}.result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:var(--radius);padding:24px;margin-top:24px;display:none}.result-box h3{color:var(--sage-dark);margin-bottom:12px}.result-number{font-size:3rem;font-weight:700;font-family:'Playfair Display',serif}.tip-box{background:var(--terracotta-light);border-radius:8px;padding:16px;margin-top:16px;font-size:.9rem}.tip-box strong{color:var(--terracotta)}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Leftover Recipe Finder","url":"https://netveggies.com/tools/leftover-recipe-finder.html","description":"Tell us what ingredients you have and get vegan recipe ideas! No more food waste.","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul></nav></div></header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>🥕 Leftover Recipe Finder</h1>
+      <p>Tell us what ingredients you have and get vegan recipe ideas! No more food waste.</p>
+    </section>
+    <div class="tool-container">
+      <div class="tool-card">
+<h2>What's in Your Kitchen?</h2>
+<p style="color:var(--text-muted);margin-bottom:16px">Select ingredients you have on hand:</p>
+<div id="cats"></div>
+<button onclick="findRecipes()" class="btn btn-primary" style="width:100%;margin-top:16px">Find Recipes</button>
+<div class="result-box" id="result" style="display:none"><h3>Recipe Ideas</h3><div id="recipes"></div></div></div>
+<script>
+const cats={Produce:["Onion","Garlic","Tomato","Potato","Carrot","Bell Pepper","Spinach","Broccoli","Mushroom","Avocado","Sweet Potato","Zucchini"],Protein:["Tofu","Chickpeas","Black Beans","Lentils","Tempeh","Edamame","Kidney Beans"],Grains:["Rice","Pasta","Bread","Quinoa","Tortillas","Oats"],Pantry:["Coconut Milk","Soy Sauce","Olive Oil","Vegetable Broth","Tomato Paste","Peanut Butter","Nutritional Yeast","Flour"]};
+const d=document.getElementById("cats");Object.entries(cats).forEach(([cat,items])=>{d.innerHTML+="<h3 style='font-size:.95rem;margin:12px 0 6px'>"+cat+"</h3><div style='display:flex;flex-wrap:wrap;gap:6px'>"+items.map(i=>"<label style='padding:6px 12px;border:1px solid var(--border);border-radius:20px;cursor:pointer;font-size:.85rem;display:flex;align-items:center;gap:4px'><input type='checkbox' value='"+i+"' class='ing' style='display:none'><span>"+i+"</span></label>").join("")+"</div>"});
+document.querySelectorAll("#cats label").forEach(l=>{l.addEventListener("click",function(){const cb=this.querySelector("input");setTimeout(()=>{this.style.background=cb.checked?"var(--sage-light)":"";this.style.borderColor=cb.checked?"var(--sage)":"var(--border)"},0)})});
+const recipes=[{name:"Stir-Fry",need:["Rice","Soy Sauce"],bonus:["Tofu","Broccoli","Carrot","Bell Pepper","Mushroom","Garlic","Onion"],desc:"Quick veggie stir-fry with soy sauce over rice"},{name:"Chickpea Curry",need:["Chickpeas","Onion"],bonus:["Coconut Milk","Tomato","Garlic","Spinach","Potato","Sweet Potato"],desc:"One-pot chickpea curry"},{name:"Pasta Primavera",need:["Pasta","Olive Oil"],bonus:["Garlic","Tomato","Zucchini","Bell Pepper","Mushroom","Broccoli","Spinach"],desc:"Loaded veggie pasta"},{name:"Bean Tacos",need:["Tortillas","Black Beans"],bonus:["Avocado","Tomato","Onion","Bell Pepper"],desc:"Quick bean tacos with toppings"},{name:"Lentil Soup",need:["Lentils","Onion"],bonus:["Carrot","Potato","Tomato Paste","Garlic","Vegetable Broth","Spinach"],desc:"Hearty lentil soup"},{name:"Buddha Bowl",need:["Rice","Chickpeas"],bonus:["Sweet Potato","Avocado","Spinach","Carrot","Edamame"],desc:"Nourishing grain bowl"},{name:"Peanut Noodles",need:["Pasta","Peanut Butter","Soy Sauce"],bonus:["Carrot","Bell Pepper","Edamame","Tofu"],desc:"Thai-inspired peanut noodles"},{name:"Overnight Oats",need:["Oats"],bonus:["Coconut Milk","Peanut Butter"],desc:"Creamy overnight oats"},{name:"Stuffed Peppers",need:["Bell Pepper","Rice"],bonus:["Black Beans","Onion","Tomato","Tomato Paste"],desc:"Rice & bean stuffed peppers"},{name:"Mushroom Stroganoff",need:["Pasta","Mushroom"],bonus:["Onion","Garlic","Vegetable Broth","Coconut Milk"],desc:"Creamy mushroom stroganoff"}];
+function findRecipes(){const sel=Array.from(document.querySelectorAll(".ing:checked")).map(c=>c.value);if(!sel.length){alert("Select some ingredients!");return}
+const results=recipes.map(r=>{const hasAll=r.need.every(n=>sel.includes(n));const bonusCount=r.bonus.filter(b=>sel.includes(b)).length;return{...r,hasAll,score:hasAll?bonusCount+10:bonusCount}}).filter(r=>r.score>0).sort((a,b)=>b.score-a.score);
+document.getElementById("recipes").innerHTML=results.length?results.map(r=>"<div style='padding:12px;margin:8px 0;background:"+(r.hasAll?"var(--sage-light)":"#fff")+";border-radius:8px;border:1px solid var(--border)'><strong>"+(r.hasAll?"✅":"🔶")+" "+r.name+"</strong><br><span style='color:var(--text-muted);font-size:.9rem'>"+r.desc+"</span>"+(r.hasAll?"":" <em style='font-size:.85rem'>(need: "+r.need.filter(n=>!sel.includes(n)).join(", ")+")</em>")+"</div>").join(""):"<p>No matching recipes. Try selecting more ingredients!</p>";
+document.getElementById("result").style.display="block"}
+</script>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-grid"><div><h3>NetVeggies</h3><p>Making plant-based cooking simple, affordable, and delicious.</p></div><div><h4>Recipes</h4><ul><li><a href="../easy-vegan-dinner-ideas.html">Dinner Ideas</a></li><li><a href="../vegan-recipes-for-beginners.html">Beginner Recipes</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li></ul></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools</a></li><li><a href="vegan-protein-calculator.html">Protein Calculator</a></li><li><a href="substitution-finder.html">Substitution Finder</a></li></ul></div><div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../privacy.html">Privacy Policy</a></li></ul></div></div><p style="text-align:center;margin-top:32px;color:var(--text-muted);font-size:.85rem">&copy; 2025 NetVeggies. All rights reserved.</p></div></footer>
+  <script>document.querySelector(".nav-toggle").addEventListener("click",function(){const n=document.querySelector(".main-nav");const open=n.classList.toggle("open");this.setAttribute("aria-expanded",open)});</script>
+</body>
+</html>

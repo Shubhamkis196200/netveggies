@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meal Prep Calculator — Portions & Containers | NetVeggies</title>
+  <meta name="description" content="Calculate how many containers you need for weekly meal prep. Plan portions and servings.">
+  <link rel="canonical" href="https://netveggies.com/tools/meal-prep-calculator.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>.tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600}.form-row input{width:100%;padding:12px;border:1px solid var(--border);border-radius:8px}.result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:8px;padding:24px;margin-top:24px;display:none}.result-number{font-size:2.5rem;font-weight:700;color:var(--terracotta);font-family:'Playfair Display',serif}</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Meal Prep Calculator","url":"https://netveggies.com/tools/meal-prep-calculator.html","description":"Calculate containers needed for meal prep.","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="index.html" class="active">Tools</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero"><h1>📦 Meal Prep Calculator</h1><p>Calculate how many containers and portions you need for the week.</p></section>
+    <div class="tool-container">
+      <div style="background:white;padding:32px;border-radius:8px;box-shadow:var(--shadow)">
+        <div class="form-row"><label>Meals per day</label><input type="number" id="mealsPerDay" value="2" min="1" max="5"></div>
+        <div class="form-row"><label>Days to prep</label><input type="number" id="days" value="5" min="1" max="7"></div>
+        <div class="form-row"><label>Recipe makes (servings)</label><input type="number" id="recipeServings" value="6" min="1"></div>
+        <button class="btn btn-primary" style="width:100%" onclick="calculate()">Calculate</button>
+        <div class="result-box" id="result">
+          <h3>You Need:</h3>
+          <div style="text-align:center;margin:16px 0"><span class="result-number" id="containers">—</span> <span style="font-size:1.2rem">containers</span></div>
+          <p id="details" style="font-size:0.9rem;color:var(--text-light)"></p>
+          <div style="background:var(--terracotta-light);padding:16px;border-radius:8px;margin-top:16px"><strong>💡 Tip:</strong> Use glass containers for reheating. Label with dates and meal names.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4></div></div><div class="footer-bottom"><p>© 2026 NetVeggies</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    function calculate(){
+      const mealsPerDay=parseInt(document.getElementById('mealsPerDay').value);
+      const days=parseInt(document.getElementById('days').value);
+      const recipeServings=parseInt(document.getElementById('recipeServings').value);
+      const totalMeals=mealsPerDay*days;
+      const batches=Math.ceil(totalMeals/recipeServings);
+      document.getElementById('containers').textContent=totalMeals;
+      document.getElementById('details').textContent=`${totalMeals} total meals (${mealsPerDay} meals/day × ${days} days). You'll need to cook ${batches} batch${batches>1?'es':''} of your recipe (makes ${recipeServings} servings each).`;
+      document.getElementById('result').style.display='block';
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iron Absorption Calculator for Vegans — Plant-Based Iron Needs | NetVeggies</title>
+  <meta name="description" content="Calculate your iron needs as a vegan. Learn about non-heme iron absorption boosters (vitamin C) and inhibitors (phytates, tannins).">
+  <link rel="canonical" href="https://netveggies.com/tools/iron-absorption-calculator.html">
+  <meta property="og:title" content="Iron Absorption Calculator — NetVeggies">
+  <meta property="og:description" content="Calculate iron needs with plant-based absorption factors.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}.form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;background:var(--white)}.form-row input:focus,.form-row select:focus{outline:none;border-color:var(--sage)}.form-row .hint{font-size:.82rem;color:var(--text-muted);margin-top:4px}.radio-group{display:flex;gap:12px;flex-wrap:wrap}.radio-group label{display:flex;align-items:center;gap:6px;font-weight:400;cursor:pointer;padding:8px 16px;border:1px solid var(--border);border-radius:8px;transition:all var(--transition)}.radio-group label:has(input:checked){border-color:var(--sage);background:var(--sage-light)}.radio-group input{width:auto;margin:0}.result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:var(--radius);padding:24px;margin-top:24px;display:none}.result-box h3{color:var(--sage-dark);margin-bottom:12px}.result-number{font-size:2.5rem;font-weight:700;color:var(--terracotta);font-family:'Playfair Display',serif}.result-unit{font-size:1rem;color:var(--text-light)}.sources-table{width:100%;border-collapse:collapse;margin-top:16px}.sources-table th,.sources-table td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border);font-size:.9rem}.sources-table th{background:var(--sage);color:white;font-weight:600}.sources-table tr:nth-child(even){background:var(--cream)}.tip-box{background:var(--terracotta-light);border-radius:8px;padding:16px;margin-top:16px;font-size:.9rem}.tip-box strong{color:var(--terracotta)}.boost-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:16px 0}.boost-card{padding:16px;border-radius:8px;font-size:.9rem}.boost-card h4{margin-bottom:8px;font-family:'Inter',sans-serif;font-size:.95rem}.boost-card ul{padding-left:16px;margin:0}.boost-card li{margin-bottom:4px}@media(max-width:480px){.boost-grid{grid-template-columns:1fr}}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Iron Absorption Calculator","url":"https://netveggies.com/tools/iron-absorption-calculator.html","description":"Calculate iron needs with plant-based absorption factors.","applicationCategory":"HealthApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul></nav></div></header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>🩸 Iron Absorption Calculator</h1>
+      <p>Plant-based iron (non-heme) absorbs differently than heme iron. Calculate your actual iron needs and learn how to maximize absorption.</p>
+    </section>
+    <div class="tool-container">
+      <div class="tool-card">
+        <form onsubmit="calc(event)">
+          <div class="form-row">
+            <label>Sex</label>
+            <div class="radio-group">
+              <label><input type="radio" name="sex" value="male" checked> Male</label>
+              <label><input type="radio" name="sex" value="female"> Female (pre-menopause)</label>
+              <label><input type="radio" name="sex" value="femalepost"> Female (post-menopause)</label>
+              <label><input type="radio" name="sex" value="pregnant"> Pregnant</label>
+            </div>
+          </div>
+          <div class="form-row">
+            <label>Do you regularly pair iron-rich foods with vitamin C?</label>
+            <div class="radio-group">
+              <label><input type="radio" name="vitc" value="yes" checked> Yes, most meals</label>
+              <label><input type="radio" name="vitc" value="sometimes"> Sometimes</label>
+              <label><input type="radio" name="vitc" value="no"> Rarely</label>
+            </div>
+            <div class="hint">Vitamin C can increase non-heme iron absorption by 3-6x.</div>
+          </div>
+          <div class="form-row">
+            <label>Do you drink tea/coffee with meals?</label>
+            <div class="radio-group">
+              <label><input type="radio" name="tannin" value="no" checked> No / between meals</label>
+              <label><input type="radio" name="tannin" value="yes"> Yes, with meals</label>
+            </div>
+            <div class="hint">Tannins in tea/coffee reduce iron absorption by 50-60%.</div>
+          </div>
+          <div class="form-row">
+            <label>Do you eat calcium-rich foods at the same time as iron-rich foods?</label>
+            <div class="radio-group">
+              <label><input type="radio" name="calcium" value="no" checked> Usually separate</label>
+              <label><input type="radio" name="calcium" value="yes"> Often together</label>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">Calculate Iron Needs</button>
+        </form>
+
+        <div class="result-box" id="result">
+          <h3>Your Recommended Daily Iron Intake</h3>
+          <div style="text-align:center;margin:16px 0">
+            <span class="result-number" id="ironResult">—</span>
+            <span class="result-unit">mg/day</span>
+          </div>
+          <p id="explain" style="font-size:.9rem;color:var(--text-light)"></p>
+
+          <div class="boost-grid">
+            <div class="boost-card" style="background:#e8f5e9">
+              <h4>✅ Absorption Boosters</h4>
+              <ul>
+                <li>Vitamin C (citrus, peppers, broccoli)</li>
+                <li>Alliums (garlic, onion)</li>
+                <li>Soaking/sprouting beans & grains</li>
+                <li>Fermented foods (tempeh, miso)</li>
+                <li>Cooking in cast iron</li>
+              </ul>
+            </div>
+            <div class="boost-card" style="background:#fce4ec">
+              <h4>❌ Absorption Inhibitors</h4>
+              <ul>
+                <li>Tannins (tea, coffee) — wait 1hr</li>
+                <li>Phytates (raw grains/legumes)</li>
+                <li>Calcium supplements with meals</li>
+                <li>High-dose zinc supplements</li>
+                <li>Oxalates (raw spinach)</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3 style="margin-top:20px">Best Vegan Iron Sources</h3>
+          <table class="sources-table">
+            <thead><tr><th>Food</th><th>Serving</th><th>Iron (mg)</th></tr></thead>
+            <tbody>
+              <tr><td>🫘 Lentils (cooked)</td><td>1 cup</td><td>6.6</td></tr>
+              <tr><td>🫘 Chickpeas (cooked)</td><td>1 cup</td><td>4.7</td></tr>
+              <tr><td>🫘 Soybeans/Edamame</td><td>1 cup</td><td>8.8</td></tr>
+              <tr><td>🥬 Spinach (cooked)</td><td>1 cup</td><td>6.4</td></tr>
+              <tr><td>🌾 Fortified cereal</td><td>1 serving</td><td>8-18</td></tr>
+              <tr><td>🫘 Tofu (firm)</td><td>½ cup</td><td>6.6</td></tr>
+              <tr><td>🥜 Pumpkin seeds</td><td>1 oz</td><td>2.5</td></tr>
+              <tr><td>🌾 Quinoa (cooked)</td><td>1 cup</td><td>2.8</td></tr>
+              <tr><td>🍫 Dark chocolate (70%+)</td><td>1 oz</td><td>3.4</td></tr>
+              <tr><td>🥜 Tahini</td><td>2 tbsp</td><td>2.7</td></tr>
+              <tr><td>🥬 Swiss chard (cooked)</td><td>1 cup</td><td>4.0</td></tr>
+              <tr><td>🫘 Tempeh</td><td>1 cup</td><td>4.5</td></tr>
+            </tbody>
+          </table>
+
+          <div class="tip-box" style="margin-top:16px">
+            <strong>🍋 Pro Tip:</strong> Squeeze lemon on your lentils, eat bell peppers with your beans, or have strawberries after a spinach salad. This simple habit can increase your iron absorption 3-6x!
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools for real life.</p></div><div><h4>Tools</h4><ul><li><a href="vegan-protein-calculator.html">Protein Calculator</a></li><li><a href="calorie-calculator.html">Calorie Calculator</a></li><li><a href="index.html">All Tools →</a></li></ul></div><div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../privacy.html">Privacy</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱 for a kinder plate.</p></div></footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open');this.setAttribute('aria-expanded',this.getAttribute('aria-expanded')==='true'?'false':'true')});
+    function calc(e){
+      e.preventDefault();
+      const sex=document.querySelector('input[name="sex"]:checked').value;
+      const vitc=document.querySelector('input[name="vitc"]:checked').value;
+      const tannin=document.querySelector('input[name="tannin"]:checked').value;
+      const calcium=document.querySelector('input[name="calcium"]:checked').value;
+
+      // Base RDA (omnivore): male 8mg, female pre-meno 18mg, post-meno 8mg, pregnant 27mg
+      const baseRDA={male:8,female:18,femalepost:8,pregnant:27};
+      let rda=baseRDA[sex];
+
+      // Vegans need 1.8x RDA due to lower non-heme absorption (IOM recommendation)
+      let multiplier=1.8;
+
+      // Adjust for absorption habits
+      if(vitc==='yes') multiplier*=0.8; // good vitamin C habits reduce the multiplier
+      else if(vitc==='no') multiplier*=1.1;
+
+      if(tannin==='yes') multiplier*=1.15;
+      if(calcium==='yes') multiplier*=1.1;
+
+      const recommended=Math.round(rda*multiplier);
+
+      document.getElementById('ironResult').textContent=recommended;
+
+      let sexLabel={male:'adult male',female:'pre-menopausal female',femalepost:'post-menopausal female',pregnant:'pregnant'}[sex];
+      document.getElementById('explain').textContent=`As a vegan ${sexLabel}, the base RDA is ${rda} mg. The Institute of Medicine recommends vegans consume 1.8× the RDA due to lower non-heme iron absorption. Adjusted for your habits, we recommend ${recommended} mg/day. This is achievable through diet alone with strategic food pairing.`;
+
+      document.getElementById('result').style.display='block';
+      document.getElementById('result').scrollIntoView({behavior:'smooth'});
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fermentation Timer | NetVeggies</title>
+  <meta name="description" content="Timer and guide for fermenting tempeh, sauerkraut, kimchi, kombucha, and more with step-by-step tracking.">
+  <link rel="canonical" href="https://netveggies.com/tools/fermentation-timer.html">
+  <meta property="og:title" content="Fermentation Timer — NetVeggies">
+  <meta property="og:description" content="Timer and guide for fermenting tempeh, sauerkraut, kimchi, kombucha, and more with step-by-step tracking.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}.form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;background:var(--white)}.form-row input:focus,.form-row select:focus{outline:none;border-color:var(--sage)}.result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:var(--radius);padding:24px;margin-top:24px;display:none}.result-box h3{color:var(--sage-dark);margin-bottom:12px}.result-number{font-size:3rem;font-weight:700;font-family:'Playfair Display',serif}.tip-box{background:var(--terracotta-light);border-radius:8px;padding:16px;margin-top:16px;font-size:.9rem}.tip-box strong{color:var(--terracotta)}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Fermentation Timer","url":"https://netveggies.com/tools/fermentation-timer.html","description":"Timer and guide for fermenting tempeh, sauerkraut, kimchi, kombucha, and more with step-by-step tracking.","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul></nav></div></header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>🫙 Fermentation Timer</h1>
+      <p>Timer and guide for fermenting tempeh, sauerkraut, kimchi, kombucha, and more with step-by-step tracking.</p>
+    </section>
+    <div class="tool-container">
+      <div class="tool-card">
+<h2>Choose a Ferment</h2>
+<div class="form-row"><select id="ferment" onchange="showFerment()"><option value="">Select...</option><option value="sauerkraut">Sauerkraut</option><option value="kimchi">Kimchi</option><option value="tempeh">Tempeh</option><option value="kombucha">Kombucha</option><option value="pickles">Quick Pickles</option><option value="yogurt">Coconut Yogurt</option></select></div>
+<div id="info" class="result-box" style="display:none"><h3 id="fName"></h3><div id="fDetails"></div>
+<div style="margin-top:16px"><label style="font-weight:600">Start Time:</label><input type="datetime-local" id="startTime" onchange="updateEnd()" style="padding:8px;border:1px solid var(--border);border-radius:8px;margin-left:8px"></div>
+<p id="endTime" style="margin-top:8px;font-weight:600"></p></div></div>
+<script>
+const ferments={sauerkraut:{name:"Sauerkraut",time:"3-10 days",temp:"65-75°F (18-24°C)",steps:["Shred cabbage finely","Massage with 2% salt by weight","Pack tightly in jar, submerge under brine","Cover loosely, keep submerged","Taste daily after day 3"],hours:72},kimchi:{name:"Kimchi",time:"1-5 days",temp:"65-75°F",steps:["Salt napa cabbage 1-2 hrs, rinse","Make paste: gochugaru, garlic, ginger, sugar","Mix cabbage + paste + scallions + radish","Pack in jar, press down","Ferment 1-5 days, burp daily"],hours:48},tempeh:{name:"Tempeh",time:"24-48 hours",temp:"85-90°F (30-32°C)",steps:["Cook soybeans until tender","Dry thoroughly — this is critical","Mix with tempeh starter (Rhizopus oligosporus)","Pack in perforated bag or container","Incubate at 85-90°F for 24-48 hrs","White mycelium should cover beans completely"],hours:36},kombucha:{name:"Kombucha (First Ferment)",time:"7-14 days",temp:"68-85°F",steps:["Brew sweet tea (1 cup sugar per gallon)","Cool to room temp","Add SCOBY + starter liquid","Cover with cloth, secure","Taste after 7 days — sweet to tangy"],hours:168},pickles:{name:"Quick Fermented Pickles",time:"3-7 days",temp:"65-75°F",steps:["Slice cucumbers","Make 3.5% saltwater brine","Submerge cucumbers + garlic + dill","Weight down, cover loosely","Taste after 3 days"],hours:72},yogurt:{name:"Coconut Yogurt",time:"12-24 hours",temp:"105-115°F (40-46°C)",steps:["Heat coconut milk to 115°F","Mix in probiotic capsules or starter","Pour into clean jar","Keep warm (oven with light on works great)","Check at 12 hrs for tanginess"],hours:16}};
+function showFerment(){const f=ferments[document.getElementById("ferment").value];if(!f)return;document.getElementById("fName").textContent=f.name+" ("+f.time+")";document.getElementById("fDetails").innerHTML="<p style='margin-bottom:8px'><strong>Ideal Temp:</strong> "+f.temp+"</p><ol style='padding-left:20px'>"+f.steps.map(s=>"<li style='padding:4px 0'>"+s+"</li>").join("")+"</ol>";document.getElementById("info").style.display="block"}
+function updateEnd(){const s=document.getElementById("startTime").value;const f=ferments[document.getElementById("ferment").value];if(!s||!f)return;const end=new Date(new Date(s).getTime()+f.hours*3600000);document.getElementById("endTime").textContent="⏰ Check at: "+end.toLocaleString()}
+</script>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-grid"><div><h3>NetVeggies</h3><p>Making plant-based cooking simple, affordable, and delicious.</p></div><div><h4>Recipes</h4><ul><li><a href="../easy-vegan-dinner-ideas.html">Dinner Ideas</a></li><li><a href="../vegan-recipes-for-beginners.html">Beginner Recipes</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li></ul></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools</a></li><li><a href="vegan-protein-calculator.html">Protein Calculator</a></li><li><a href="substitution-finder.html">Substitution Finder</a></li></ul></div><div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../privacy.html">Privacy Policy</a></li></ul></div></div><p style="text-align:center;margin-top:32px;color:var(--text-muted);font-size:.85rem">&copy; 2025 NetVeggies. All rights reserved.</p></div></footer>
+  <script>document.querySelector(".nav-toggle").addEventListener("click",function(){const n=document.querySelector(".main-nav");const open=n.classList.toggle("open");this.setAttribute("aria-expanded",open)});</script>
+</body>
+</html>

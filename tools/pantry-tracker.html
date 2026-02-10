@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pantry Tracker — Track Your Staples | NetVeggies</title>
+  <meta name="description" content="Track pantry staples and get alerts when running low. Never run out of essentials.">
+  <link rel="canonical" href="https://netveggies.com/tools/pantry-tracker.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>.tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.item-card{background:white;padding:16px;border-radius:8px;box-shadow:var(--shadow);margin-bottom:12px;display:flex;justify-content:space-between;align-items:center}.item-card.low{border-left:4px solid var(--terracotta)}.qty-control{display:flex;gap:8px;align-items:center}.qty-btn{background:var(--sage);color:white;border:none;padding:8px 12px;border-radius:4px;cursor:pointer;font-weight:700}</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Pantry Tracker","url":"https://netveggies.com/tools/pantry-tracker.html","description":"Track pantry staples and inventory.","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="index.html" class="active">Tools</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero"><h1>🏺 Pantry Tracker</h1><p>Track your pantry staples and get alerts when running low.</p></section>
+    <div class="tool-container">
+      <div style="background:white;padding:20px;border-radius:8px;box-shadow:var(--shadow);margin-bottom:24px">
+        <input type="text" id="itemName" placeholder="Item name" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;margin-bottom:12px">
+        <button class="btn btn-primary" onclick="addItem()">Add Item</button>
+      </div>
+      <div id="pantry"></div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4></div></div><div class="footer-bottom"><p>© 2026 NetVeggies</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    let items=JSON.parse(localStorage.getItem('pantry'))||[];
+    function addItem(){const name=document.getElementById('itemName').value.trim();if(!name)return;items.push({id:Date.now(),name,qty:1});save();render();document.getElementById('itemName').value='';}
+    function updateQty(id,delta){const item=items.find(i=>i.id===id);if(item){item.qty=Math.max(0,item.qty+delta);if(item.qty===0)items=items.filter(i=>i.id!==id);}save();render();}
+    function save(){localStorage.setItem('pantry',JSON.stringify(items));}
+    function render(){const html=items.map(i=>`<div class="item-card ${i.qty<=1?'low':''}"><div><strong>${i.name}</strong><br><small style="color:var(--text-muted)">${i.qty<=1?'⚠️ Running low':''}</small></div><div class="qty-control"><button class="qty-btn" onclick="updateQty(${i.id},-1)">−</button><span style="font-weight:700;width:40px;text-align:center">${i.qty}</span><button class="qty-btn" onclick="updateQty(${i.id},1)">+</button></div></div>`).join('');
+    document.getElementById('pantry').innerHTML=html||'<p style="text-align:center;color:var(--text-muted);padding:40px">No items. Add your first pantry staple!</p>';}
+    render();
+  </script>
+</body>
+</html>

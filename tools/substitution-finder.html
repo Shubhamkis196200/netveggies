@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vegan Substitution Finder — Find Plant-Based Alternatives | NetVeggies</title>
+  <meta name="description" content="Find vegan substitutes for eggs, butter, milk, cheese, honey and more. Searchable database with ratios and tips.">
+  <link rel="canonical" href="https://netveggies.com/tools/substitution-finder.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}
+    .tool-container{max-width:900px;margin:0 auto;padding:40px 20px}
+    .search-box{background:white;padding:20px;border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:24px}
+    .search-box input{width:100%;padding:16px;border:2px solid var(--sage);border-radius:8px;font-size:1.1rem}
+    .sub-grid{display:grid;gap:16px}
+    .sub-card{background:white;padding:24px;border-radius:var(--radius);box-shadow:var(--shadow);border-left:4px solid var(--terracotta)}
+    .sub-card h3{color:var(--terracotta);margin-bottom:8px}
+    .sub-option{background:var(--sage-light);padding:12px;border-radius:8px;margin:8px 0}
+    .sub-option strong{color:var(--sage-dark)}
+  </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Vegan Substitution Finder","url":"https://netveggies.com/tools/substitution-finder.html","description":"Find vegan substitutes for any ingredient.","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Net<span>Veggies</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li>
+          <li><a href="index.html" class="active">Tools</a></li>
+          <li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>🔄 Vegan Substitution Finder</h1>
+      <p>Search for any ingredient and find plant-based alternatives with conversion ratios.</p>
+    </section>
+
+    <div class="tool-container">
+      <div class="search-box">
+        <input type="text" id="search" placeholder="Search for an ingredient (egg, butter, milk, cheese...)" oninput="filterSubs()">
+      </div>
+      <div class="sub-grid" id="results"></div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div><h4>NetVeggies</h4></div>
+      <div><h4>Tools</h4><ul><li><a href="index.html">All Tools</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 NetVeggies</p></div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+
+    const subs = [
+      {name:'Eggs (binding)',options:[{sub:'Flax egg',ratio:'1 egg = 1 tbsp ground flax + 3 tbsp water (let sit 5 min)',use:'Baking, pancakes'},{sub:'Chia egg',ratio:'1 egg = 1 tbsp chia + 3 tbsp water',use:'Baking, puddings'},{sub:'Applesauce',ratio:'1 egg = ¼ cup unsweetened applesauce',use:'Muffins, cakes'},{sub:'Banana',ratio:'1 egg = ¼ cup mashed banana',use:'Breads, brownies'},{sub:'Aquafaba',ratio:'1 egg = 3 tbsp chickpea brine',use:'Meringues, mayo'}]},
+      {name:'Eggs (leavening)',options:[{sub:'Baking soda + vinegar',ratio:'1 egg = 1 tsp baking soda + 1 tbsp vinegar',use:'Cakes, quick breads'}]},
+      {name:'Butter',options:[{sub:'Vegan butter',ratio:'1:1 direct swap',use:'All recipes'},{sub:'Coconut oil',ratio:'1:1',use:'Baking, sautéing'},{sub:'Olive oil',ratio:'¾ cup oil per 1 cup butter',use:'Savory cooking'},{sub:'Avocado',ratio:'½ cup mashed per ½ cup butter',use:'Baking (adds moisture)'}]},
+      {name:'Milk',options:[{sub:'Soy milk',ratio:'1:1',use:'Best for protein & creaminess'},{sub:'Oat milk',ratio:'1:1',use:'Neutral flavor, creamy'},{sub:'Almond milk',ratio:'1:1',use:'Light, nutty (low protein)'},{sub:'Coconut milk',ratio:'1:1',use:'Rich, tropical flavor'},{sub:'Cashew milk',ratio:'1:1',use:'Creamy, neutral'}]},
+      {name:'Cream / Heavy Cream',options:[{sub:'Coconut cream',ratio:'1:1',use:'Whipping, sauces'},{sub:'Cashew cream',ratio:'1 cup cashews + ¾ cup water blended',use:'Sauces, soups'}]},
+      {name:'Buttermilk',options:[{sub:'Plant milk + acid',ratio:'1 cup plant milk + 1 tbsp lemon juice or vinegar',use:'Baking (let sit 5 min)'}]},
+      {name:'Cheese (shredded)',options:[{sub:'Store vegan cheese',ratio:'1:1',use:'Melting, pizza'},{sub:'Nutritional yeast',ratio:'For flavor only',use:'Pasta, popcorn'},{sub:'Cashew cheese',ratio:'Varies',use:'Make your own'}]},
+      {name:'Parmesan',options:[{sub:'Nut parmesan',ratio:'½ cup nuts + 2 tbsp nutritional yeast + ¼ tsp salt, blended',use:'Pasta topping'}]},
+      {name:'Honey',options:[{sub:'Maple syrup',ratio:'1:1',use:'All recipes'},{sub:'Agave nectar',ratio:'1:1 (sweeter)',use:'Baking, drinks'},{sub:'Date syrup',ratio:'1:1',use:'Rich flavor'}]},
+      {name:'Gelatin',options:[{sub:'Agar agar',ratio:'1 tsp agar powder = 1 tbsp gelatin',use:'Jello, panna cotta'}]},
+      {name:'Mayonnaise',options:[{sub:'Vegan mayo',ratio:'1:1',use:'Store-bought or aquafaba-based'}]},
+      {name:'Yogurt',options:[{sub:'Coconut yogurt',ratio:'1:1',use:'Breakfast, baking'},{sub:'Soy yogurt',ratio:'1:1',use:'High protein'},{sub:'Cashew yogurt',ratio:'1:1',use:'Tangy, creamy'}]},
+      {name:'Sour Cream',options:[{sub:'Cashew sour cream',ratio:'1 cup cashews soaked + ½ cup water + 2 tbsp lemon juice + ¼ tsp salt, blended',use:'Tacos, baked potatoes'}]},
+      {name:'Ground Beef',options:[{sub:'Lentils',ratio:'1 cup cooked',use:'Tacos, bolognese'},{sub:'Crumbled tempeh',ratio:'1:1 weight',use:'Chili, stir-fry'},{sub:'Textured vegetable protein (TVP)',ratio:'½ cup dry = 1 lb cooked',use:'Rehydrate in broth'}]},
+      {name:'Chicken',options:[{sub:'Tofu (pressed)',ratio:'1:1 weight',use:'Stir-fry, curry'},{sub:'Chickpeas',ratio:'1 can',use:'Salads, wraps'},{sub:'Seitan',ratio:'1:1 weight',use:'High protein, chewy'}]},
+      {name:'Fish',options:[{sub:'Tofu (marinated)',ratio:'Varies',use:'Fish tacos, sushi'},{sub:'Banana blossom',ratio:'Shredded',use:'Vegan fish'},{sub:'Hearts of palm',ratio:'Shredded',use:'Crab cakes, fish sticks'}]},
+      {name:'Worcestershire Sauce',options:[{sub:'Vegan Worcestershire',ratio:'1:1',use:'Check label (anchovy-free)'},{sub:'Soy sauce + tamarind',ratio:'Mix to taste',use:'DIY version'}]},
+    ];
+
+    function filterSubs() {
+      const query = document.getElementById('search').value.toLowerCase();
+      const filtered = query ? subs.filter(s => s.name.toLowerCase().includes(query)) : subs;
+      const html = filtered.map(s => `
+        <div class="sub-card">
+          <h3>${s.name}</h3>
+          ${s.options.map(o => `
+            <div class="sub-option">
+              <strong>${o.sub}:</strong> ${o.ratio}<br>
+              <small style="color:var(--text-muted)">Use: ${o.use}</small>
+            </div>
+          `).join('')}
+        </div>
+      `).join('');
+      document.getElementById('results').innerHTML = html || '<p style="text-align:center;color:var(--text-muted)">No results found. Try "egg", "butter", "milk"...</p>';
+    }
+    filterSubs();
+  </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Waste Tracker | NetVeggies</title>
+  <meta name="description" content="Track food waste to identify patterns and reduce it. Log wasted items and see your weekly trends.">
+  <link rel="canonical" href="https://netveggies.com/tools/food-waste-tracker.html">
+  <meta property="og:title" content="Food Waste Tracker — NetVeggies">
+  <meta property="og:description" content="Track food waste to identify patterns and reduce it. Log wasted items and see your weekly trends.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}.form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;background:var(--white)}.form-row input:focus,.form-row select:focus{outline:none;border-color:var(--sage)}.result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:var(--radius);padding:24px;margin-top:24px;display:none}.result-box h3{color:var(--sage-dark);margin-bottom:12px}.result-number{font-size:3rem;font-weight:700;font-family:'Playfair Display',serif}.tip-box{background:var(--terracotta-light);border-radius:8px;padding:16px;margin-top:16px;font-size:.9rem}.tip-box strong{color:var(--terracotta)}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Food Waste Tracker","url":"https://netveggies.com/tools/food-waste-tracker.html","description":"Track food waste to identify patterns and reduce it. Log wasted items and see your weekly trends.","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul></nav></div></header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>♻️ Food Waste Tracker</h1>
+      <p>Track food waste to identify patterns and reduce it. Log wasted items and see your weekly trends.</p>
+    </section>
+    <div class="tool-container">
+      <div class="tool-card">
+<h2>Log Wasted Food</h2>
+<div style="display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;margin-bottom:16px"><input id="wname" placeholder="Item" style="padding:10px;border:1px solid var(--border);border-radius:8px"><select id="wreason" style="padding:10px;border:1px solid var(--border);border-radius:8px"><option>Expired</option><option>Leftover</option><option>Spoiled</option><option>Overcooked</option><option>Other</option></select><input id="wcost" placeholder="Est. cost $" type="number" step="0.5" style="padding:10px;border:1px solid var(--border);border-radius:8px"></div>
+<button onclick="logWaste()" class="btn btn-primary" style="width:100%">Log Item</button>
+<div class="result-box" style="display:block;margin-top:20px"><h3>This Week's Waste</h3><div id="stats" style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;text-align:center;margin:16px 0"></div><div id="wasteLog"></div></div>
+<button onclick="if(confirm('Clear all?')){localStorage.removeItem('nv_waste');renderW()}" class="btn" style="background:var(--terracotta-light);margin-top:8px;width:100%">Clear History</button></div>
+<script>
+function getW(){return JSON.parse(localStorage.getItem("nv_waste")||"[]")}function saveW(d){localStorage.setItem("nv_waste",JSON.stringify(d))}
+function logWaste(){const n=document.getElementById("wname").value.trim();if(!n)return;const items=getW();items.push({name:n,reason:document.getElementById("wreason").value,cost:parseFloat(document.getElementById("wcost").value)||0,date:new Date().toISOString()});saveW(items);document.getElementById("wname").value="";document.getElementById("wcost").value="";renderW()}
+function renderW(){const items=getW();const week=items.filter(i=>Date.now()-new Date(i.date)<7*86400000);const totalCost=week.reduce((s,i)=>s+i.cost,0);const reasons={};week.forEach(i=>{reasons[i.reason]=(reasons[i.reason]||0)+1});const topReason=Object.entries(reasons).sort((a,b)=>b[1]-a[1])[0];
+document.getElementById("stats").innerHTML='<div style="padding:12px;background:var(--sage-light);border-radius:8px"><div style="font-size:.8rem">Items</div><div style="font-size:1.5rem;font-weight:700">'+week.length+'</div></div><div style="padding:12px;background:var(--terracotta-light);border-radius:8px"><div style="font-size:.8rem">Cost</div><div style="font-size:1.5rem;font-weight:700">$'+totalCost.toFixed(2)+'</div></div><div style="padding:12px;background:#fff3cd;border-radius:8px"><div style="font-size:.8rem">Top Reason</div><div style="font-size:1rem;font-weight:700">'+(topReason?topReason[0]:"—")+'</div></div>';
+document.getElementById("wasteLog").innerHTML=week.length?week.reverse().slice(0,10).map(i=>"<div style='display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--border)'><span>"+i.name+" <small style='color:var(--text-muted)'>("+i.reason+")</small></span><span>$"+i.cost.toFixed(2)+"</span></div>").join(""):"<p style='text-align:center;color:var(--text-muted);padding:16px'>No waste logged this week. Great job! 🎉</p>"}
+renderW();
+</script>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-grid"><div><h3>NetVeggies</h3><p>Making plant-based cooking simple, affordable, and delicious.</p></div><div><h4>Recipes</h4><ul><li><a href="../easy-vegan-dinner-ideas.html">Dinner Ideas</a></li><li><a href="../vegan-recipes-for-beginners.html">Beginner Recipes</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li></ul></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools</a></li><li><a href="vegan-protein-calculator.html">Protein Calculator</a></li><li><a href="substitution-finder.html">Substitution Finder</a></li></ul></div><div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../privacy.html">Privacy Policy</a></li></ul></div></div><p style="text-align:center;margin-top:32px;color:var(--text-muted);font-size:.85rem">&copy; 2025 NetVeggies. All rights reserved.</p></div></footer>
+  <script>document.querySelector(".nav-toggle").addEventListener("click",function(){const n=document.querySelector(".main-nav");const open=n.classList.toggle("open");this.setAttribute("aria-expanded",open)});</script>
+</body>
+</html>

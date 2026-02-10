@@ -3,87 +3,94 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us — NetVeggies</title>
-  <meta name="description" content="Get in touch with NetVeggies. Have a recipe request, question, or business inquiry? We'd love to hear from you.">
+  <title>Contact NetVeggies — Get in Touch</title>
+  <meta name="description" content="Have a question, recipe request, or feedback? Get in touch with the NetVeggies team.">
   <link rel="canonical" href="https://netveggies.com/contact.html">
-  <meta property="og:title" content="Contact NetVeggies">
-  <meta property="og:type" content="website">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <meta property="og:image" content="https://netveggies.com/images/og-default.jpg">
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
-  <header class="site-header">
-    <div class="header-inner">
-      <a href="index.html" class="logo">Net<span>Veggies</span></a>
-      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
-      <nav class="main-nav" aria-label="Main navigation">
-        <ul>
-          <li><a href="index.html">Home</a></li>
-          <li><a href="easy-vegan-dinner-ideas.html">Dinners</a></li>
-          <li><a href="vegan-meal-prep-guide.html">Meal Prep</a></li>
-          <li><a href="vegan-recipes-for-beginners.html">Beginners</a></li>
-          <li><a href="about.html">About</a></li>
-          <li><a href="contact.html" class="active">Contact</a></li>
-        </ul>
-      </nav>
+  <header class="site-header"><div class="header-inner"><a href="index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="index.html">Home</a></li><li><a href="easy-vegan-dinner-ideas.html">Dinners</a></li><li><a href="vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="vegan-recipes-for-beginners.html">Beginners</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></nav></div></header>
+
+  <div class="page-hero">
+    <div class="container">
+      <h1>Get in Touch</h1>
+      <p>We'd love to hear from you!</p>
     </div>
-  </header>
+  </div>
 
-  <main id="main">
-    <section class="pillar-hero">
-      <h1>Contact Us</h1>
-      <p>Have a recipe request, question, or just want to say hi? We'd love to hear from you!</p>
-    </section>
+  <div class="page-content">
+    <div class="container content-width">
+      <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 2em;">Have a question about a recipe? A suggestion for what we should make next? Want to share a photo of your cooking success (or disaster)? We're all ears! Fill out the form below and we'll get back to you as soon as possible.</p>
 
-    <section class="article-content">
-      <div class="contact-form">
-        <form action="#" method="POST">
-          <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email" required>
-          </div>
-          <div class="form-group">
-            <label for="subject">Subject</label>
-            <select id="subject" name="subject">
-              <option>Recipe Request</option>
-              <option>Question About a Recipe</option>
-              <option>Business Inquiry / Sponsorship</option>
-              <option>Bug Report</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="message">Message</label>
-            <textarea id="message" name="message" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Send Message</button>
-        </form>
+      <form class="contact-form" action="#" method="POST">
+        <div class="form-group">
+          <label for="name">Your Name *</label>
+          <input type="text" id="name" name="name" required placeholder="Jane Smith">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Your Email *</label>
+          <input type="email" id="email" name="email" required placeholder="jane@example.com">
+        </div>
+
+        <div class="form-group">
+          <label for="subject">Subject *</label>
+          <select id="subject" name="subject" required>
+            <option value="">Choose a topic...</option>
+            <option value="recipe-question">Recipe Question</option>
+            <option value="recipe-request">Recipe Request</option>
+            <option value="substitution">Ingredient Substitution Help</option>
+            <option value="feedback">Feedback or Suggestion</option>
+            <option value="partnership">Business/Partnership Inquiry</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="message">Your Message *</label>
+          <textarea id="message" name="message" required placeholder="Tell us what's on your mind..."></textarea>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Send Message</button>
+      </form>
+
+      <div style="margin-top: 4em; padding-top: 3em; border-top: 1px solid var(--border);">
+        <h2>Frequently Asked Questions</h2>
+        
+        <h3 style="margin-top: 2em;">Can you create a custom recipe for me?</h3>
+        <p>While we can't create custom recipes for individuals, we absolutely take requests into consideration for future content! If there's a dish you'd love to see veganized or a specific cooking challenge you're facing, let us know and we'll add it to our recipe development queue.</p>
+
+        <h3>I made one of your recipes and it didn't turn out. What went wrong?</h3>
+        <p>We're so sorry to hear that! Every oven, stove, and kitchen is different, so sometimes adjustments are needed. Please reach out with details about what happened (was it too thick? Too thin? Didn't cook through?) and we'll troubleshoot with you. We want you to succeed!</p>
+
+        <h3>Can I share your recipes on my blog or social media?</h3>
+        <p>We love when you share our recipes! You're welcome to share a photo and a brief description with a link back to the original recipe on our site. Please don't copy and paste the entire recipe text — instead, link to us so your readers can find all the details and tips here. Thank you for respecting our work!</p>
+
+        <h3>Do you accept sponsored content or brand partnerships?</h3>
+        <p>We're selective about partnerships, but we're open to working with brands that align with our values of accessible, affordable, plant-based cooking. If you represent a brand and would like to discuss a collaboration, please use the contact form above and select "Business/Partnership Inquiry."</p>
+
+        <h3>I found a typo or error on your site.</h3>
+        <p>Thank you for letting us know! We strive for accuracy but we're human. Please send us the details and we'll fix it right away.</p>
+
+        <h3>How do I sign up for your newsletter?</h3>
+        <p>You'll find newsletter signup forms throughout the site, or you can scroll to the bottom of this page to sign up. We send one email per week with new recipes, meal planning tips, and exclusive content for subscribers.</p>
       </div>
 
-      <div style="text-align:center;margin-top:48px;">
-        <h2>Other Ways to Reach Us</h2>
-        <p>📧 hello@netveggies.com</p>
-        <p>Follow us on Pinterest, Instagram, and YouTube for daily recipe inspiration!</p>
+      <div style="background: var(--cream-dark); padding: 2em; border-radius: var(--radius); margin: 3em 0; text-align: center;">
+        <h3 style="margin-top: 0;">Prefer Email?</h3>
+        <p>You can also reach us directly at: <strong>hello@netveggies.com</strong></p>
+        <p style="font-size: 0.9rem; color: var(--text-light); margin: 0;">We typically respond within 24-48 hours during business days.</p>
       </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-grid">
-      <div><h4>NetVeggies</h4><p style="font-size:0.9rem;">Easy, budget-friendly vegan & vegetarian recipes for real life. 🌱</p></div>
-      <div><h4>Recipes</h4><ul><li><a href="easy-vegan-dinner-ideas.html">Dinner Ideas</a></li><li><a href="easy-chickpea-curry.html">Chickpea Curry</a></li><li><a href="creamy-vegan-pasta.html">Vegan Pasta</a></li></ul></div>
-      <div><h4>Explore</h4><ul><li><a href="vegan-meal-prep-guide.html">Meal Prep Guide</a></li><li><a href="vegan-recipes-for-beginners.html">Beginner's Guide</a></li></ul></div>
-      <div><h4>Info</h4><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="privacy.html">Privacy Policy</a></li></ul></div>
     </div>
-    <div class="footer-bottom"><p>&copy; 2026 NetVeggies.com — All rights reserved.</p></div>
-  </footer>
+  </div>
+
+  <section class="newsletter"><div class="container"><h2>Get a Free Weekly Meal Plan</h2><p>Easy recipes and a printable meal plan every week.</p><form class="newsletter-form" action="#"><input type="email" placeholder="Your email address" required aria-label="Email"><button type="submit" class="btn btn-primary">Get Free Plan</button></form></div></section>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:0.9rem">Plant-Based Made Simple 🌱</p></div><div><h4>Recipes</h4><ul><li><a href="easy-chickpea-curry.html">Chickpea Curry</a></li><li><a href="creamy-vegan-pasta.html">Vegan Pasta</a></li><li><a href="vegan-banana-bread.html">Banana Bread</a></li></ul></div><div><h4>Explore</h4><ul><li><a href="vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="vegan-recipes-for-beginners.html">Beginners</a></li></ul></div><div><h4>Info</h4><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li><li><a href="privacy.html">Privacy</a></li></ul></div></div><div class="footer-bottom"><p>&copy; 2026 NetVeggies.com</p></div></footer>
   <script src="js/main.js"></script>
 </body>
 </html>

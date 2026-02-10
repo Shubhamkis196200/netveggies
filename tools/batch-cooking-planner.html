@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Batch Cooking Planner — Plan Your Cook Sessions | NetVeggies</title>
+  <meta name="description" content="Plan batch cooking sessions. List recipes, calculate shopping, and organize your cook day.">
+  <link rel="canonical" href="https://netveggies.com/tools/batch-cooking-planner.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>.tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-container{max-width:800px;margin:0 auto;padding:40px 20px}.recipe-card{background:white;padding:20px;border-radius:8px;box-shadow:var(--shadow);margin-bottom:16px;border-left:4px solid var(--terracotta)}.recipe-card h4{margin-bottom:8px}.timeline{background:var(--sage-light);padding:20px;border-radius:8px;margin-top:24px}</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Batch Cooking Planner","url":"https://netveggies.com/tools/batch-cooking-planner.html","description":"Plan batch cooking sessions.","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="index.html" class="active">Tools</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero"><h1>🍲 Batch Cooking Planner</h1><p>Organize your batch cooking day. Add recipes and we'll help you sequence them.</p></section>
+    <div class="tool-container">
+      <div style="background:white;padding:24px;border-radius:8px;box-shadow:var(--shadow);margin-bottom:24px">
+        <input type="text" id="recipeName" placeholder="Recipe name" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;margin-bottom:12px">
+        <input type="number" id="cookTime" placeholder="Cook time (minutes)" style="width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;margin-bottom:12px">
+        <button class="btn btn-primary" onclick="addRecipe()">Add to Batch</button>
+      </div>
+      <div id="recipes"></div>
+      <div class="timeline" id="timeline" style="display:none">
+        <h3>Suggested Timeline</h3>
+        <div id="timelineContent"></div>
+        <p style="margin-top:16px;font-size:0.85rem;color:var(--text-muted)">💡 Start with longest-cooking items first. Prep while waiting.</p>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4></div></div><div class="footer-bottom"><p>© 2026 NetVeggies</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    let recipes=JSON.parse(localStorage.getItem('batchPlan'))||[];
+    function addRecipe(){
+      const name=document.getElementById('recipeName').value.trim();
+      const time=parseInt(document.getElementById('cookTime').value);
+      if(!name||!time)return;
+      recipes.push({id:Date.now(),name,time});
+      localStorage.setItem('batchPlan',JSON.stringify(recipes));
+      document.getElementById('recipeName').value='';
+      document.getElementById('cookTime').value='';
+      render();
+    }
+    function deleteRecipe(id){recipes=recipes.filter(r=>r.id!==id);localStorage.setItem('batchPlan',JSON.stringify(recipes));render();}
+    function render(){
+      document.getElementById('recipes').innerHTML=recipes.map(r=>`<div class="recipe-card"><h4>${r.name}</h4><p style="color:var(--text-muted)">Cook time: ${r.time} min</p><button class="btn btn-outline" onclick="deleteRecipe(${r.id})">Remove</button></div>`).join('')||'<p style="text-align:center;color:var(--text-muted);padding:40px">No recipes yet!</p>';
+      if(recipes.length>0){
+        const sorted=[...recipes].sort((a,b)=>b.time-a.time);
+        let currentTime=0;
+        const timeline=sorted.map(r=>{
+          const start=currentTime;
+          currentTime+=r.time;
+          return `<div style="padding:12px;background:white;border-radius:8px;margin:8px 0"><strong>${r.name}</strong><br><small>Start at ${start} min, finish at ${currentTime} min</small></div>`;
+        }).join('');
+        document.getElementById('timelineContent').innerHTML=timeline;
+        document.getElementById('timeline').style.display='block';
+      }else{
+        document.getElementById('timeline').style.display='none';
+      }
+    }
+    render();
+  </script>
+</body>
+</html>

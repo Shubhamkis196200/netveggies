@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plant-Based Iron Calculator | NetVeggies</title>
+  <meta name="description" content="Calculate iron needs and optimize absorption from plant sources with vitamin C pairing.">
+  <link rel="canonical" href="https://netveggies.com/tools/iron-calculator.html">
+  <meta property="og:title" content="Plant-Based Iron Calculator — NetVeggies">
+  <meta property="og:description" content="Calculate iron needs and optimize absorption from plant sources with vitamin C pairing.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://netveggies.com/tools/iron-calculator.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero { background: linear-gradient(135deg, var(--sage-light) 0%, #f0e8dc 100%); padding: 48px 20px; text-align: center; }
+    .tool-hero p { max-width: 600px; margin: 8px auto 0; color: var(--text-light); }
+    .tool-container { max-width: 700px; margin: 0 auto; padding: 40px 20px; }
+    .tool-card { background: var(--white); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); border: 1px solid var(--border); }
+    .form-row { margin-bottom: 20px; }
+    .form-row label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.92rem; }
+    .form-row input, .form-row select, .form-row textarea { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; font-family: inherit; background: var(--white); }
+    .form-row input:focus, .form-row select:focus, .form-row textarea:focus { outline: none; border-color: var(--sage); }
+    .form-row .hint { font-size: 0.82rem; color: var(--text-muted); margin-top: 4px; }
+    .radio-group { display: flex; gap: 12px; flex-wrap: wrap; }
+    .radio-group label { display: flex; align-items: center; gap: 6px; font-weight: 400; cursor: pointer; padding: 8px 16px; border: 1px solid var(--border); border-radius: 8px; transition: all var(--transition); }
+    .radio-group label:has(input:checked) { border-color: var(--sage); background: var(--sage-light); }
+    .radio-group input { width: auto; margin: 0; }
+    .result-box { background: var(--sage-light); border: 2px solid var(--sage); border-radius: var(--radius); padding: 24px; margin-top: 24px; display: none; }
+    .result-box h3 { color: var(--sage-dark); margin-bottom: 12px; }
+    .tip-box { background: var(--terracotta-light); border-radius: 8px; padding: 16px; margin-top: 16px; font-size: 0.9rem; }
+    .tip-box strong { color: var(--terracotta); }
+    .sources-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .sources-table th, .sources-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .sources-table th { background: var(--sage); color: white; font-weight: 600; }
+    .sources-table tr:nth-child(even) { background: var(--cream); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Plant-Based Iron Calculator",
+    "url": "https://netveggies.com/tools/iron-calculator.html",
+    "description": "Calculate iron needs and optimize absorption from plant sources with vitamin C pairing.",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Net<span>Veggies</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../recipes.html">Recipes</a></li>
+          <li><a href="index.html" class="active">Tools</a></li>
+          <li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>🥬 Plant-Based Iron Calculator</h1>
+      <p>Calculate iron needs and optimize absorption from plant sources with vitamin C pairing.</p>
+    </section>
+
+    <div class="tool-container">
+      <div class="tool-card">
+        <form id="proteinForm" onsubmit="calculate(event); return false;">
+          
+      <div class="form-row">
+        <label for="age">Age</label>
+        <input type="number" id="age" min="1" max="100" required placeholder="30">
+      </div>
+      <div class="form-row">
+        <label>Gender</label>
+        <div class="radio-group">
+          <label><input type="radio" name="gender" value="female" checked> Female</label>
+          <label><input type="radio" name="gender" value="male"> Male</label>
+        </div>
+      </div>
+      <div class="form-row">
+        <label style="display:flex;align-items:center;gap:8px;">
+          <input type="checkbox" id="menstruating" style="width:auto;">
+          I menstruate (higher iron needs)
+        </label>
+      </div>
+    
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:12px;">Calculate</button>
+        </form>
+
+        <div class="result-box" id="result"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <h4>NetVeggies</h4>
+        <p style="font-size:0.88rem;">Plant-based recipes and tools for real life.</p>
+      </div>
+      <div>
+        <h4>Recipes</h4>
+        <ul>
+          <li><a href="../recipes.html">All Recipes</a></li>
+          <li><a href="../vegan-recipes-for-beginners.html">Beginners</a></li>
+          <li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="vegan-protein-calculator.html">Protein Calculator</a></li>
+          <li><a href="calorie-calculator.html">Calorie Calculator</a></li>
+          <li><a href="recipe-scaler.html">Recipe Scaler</a></li>
+          <li><a href="index.html">All Tools →</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="../about.html">About Us</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+          <li><a href="../privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 NetVeggies. Made with 🌱 for a kinder plate.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Nav toggle
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.main-nav').classList.toggle('open');
+      this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+    });
+
+    function calculate(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      
+      const age = parseInt(document.getElementById('age').value);
+      const gender = document.querySelector('input[name="gender"]:checked').value;
+      const menstruating = document.getElementById('menstruating')?.checked;
+      
+      let rda = gender === 'female' && age >= 19 && age <= 50 ? 18 : gender === 'female' ? 8 : 8;
+      if (menstruating) rda = 18;
+      
+      // Plant iron needs 1.8x multiplier due to non-heme absorption
+      const plantRDA = Math.round(rda * 1.8);
+      
+      document.getElementById('result').innerHTML = `
+        <h3>Your Daily Iron Target</h3>
+        <div style="text-align:center;margin:20px 0;">
+          <div style="font-size:2.5rem;font-weight:700;color:var(--terracotta);">${plantRDA}mg</div>
+          <div style="color:var(--text-light);">per day from plant sources</div>
+        </div>
+        <div class="tip-box" style="background:var(--terracotta-light);padding:16px;border-radius:8px;">
+          <strong>🍊 Absorption Tip:</strong> Plant iron (non-heme) is absorbed at ~10% vs 25% for heme iron. 
+          Eat vitamin C-rich foods (citrus, bell peppers, tomatoes) with iron sources to triple absorption!
+        </div>
+        <h4 style="margin-top:24px;">High-Iron Vegan Foods</h4>
+        <table class="sources-table" style="width:100%;border-collapse:collapse;margin-top:12px;">
+          <tr style="background:var(--sage);color:white;"><th style="padding:8px;text-align:left;">Food</th><th style="padding:8px;">Iron</th></tr>
+          <tr style="background:var(--cream);"><td style="padding:8px;">Lentils (1 cup cooked)</td><td style="padding:8px;text-align:center;">6.6mg</td></tr>
+          <tr><td style="padding:8px;">Tofu (100g)</td><td style="padding:8px;text-align:center;">5.4mg</td></tr>
+          <tr style="background:var(--cream);"><td style="padding:8px;">Spinach (1 cup cooked)</td><td style="padding:8px;text-align:center;">6.4mg</td></tr>
+          <tr><td style="padding:8px;">Quinoa (1 cup cooked)</td><td style="padding:8px;text-align:center;">2.8mg</td></tr>
+          <tr style="background:var(--cream);"><td style="padding:8px;">Pumpkin seeds (1 oz)</td><td style="padding:8px;text-align:center;">4.2mg</td></tr>
+          <tr><td style="padding:8px;">Dark chocolate (1 oz)</td><td style="padding:8px;text-align:center;">3.3mg</td></tr>
+        </table>
+        <p style="font-size:0.85rem;margin-top:12px;color:var(--text-muted);">
+          <strong>Avoid:</strong> Coffee and tea within 1 hour of iron-rich meals (tannins inhibit absorption)
+        </p>
+      `;
+      document.getElementById('result').style.display = 'block';
+    
+      return false;
+    }
+  </script>
+</body>
+</html>

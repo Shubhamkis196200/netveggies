@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bean Cooking Guide — NetVeggies</title>
+  <meta name="description" content="Interactive guide for soaking and cooking times for all dried beans.">
+  <link rel="canonical" href="https://netveggies.com/tools/bean-cooking-guide.html">
+  <meta property="og:title" content="Bean Cooking Guide — NetVeggies">
+  <meta property="og:description" content="Interactive guide for soaking and cooking times for all dried beans.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://netveggies.com/tools/bean-cooking-guide.html">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&h=630&fit=crop">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero { background: linear-gradient(135deg, var(--sage-light) 0%, #f0e8dc 100%); padding: 48px 20px; text-align: center; }
+    .tool-hero p { max-width: 600px; margin: 8px auto 0; color: var(--text-light); }
+    .tool-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+    .tool-card { background: var(--white); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); border: 1px solid var(--border); }
+    .btn { display: inline-block; padding: 12px 24px; border-radius: 8px; font-weight: 600; transition: all var(--transition); border: none; cursor: pointer; font-size: 1rem; }
+    .btn-primary { background: var(--sage); color: white; }
+    .btn-primary:hover { background: var(--sage-dark); transform: translateY(-1px); }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.92rem; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; font-family: inherit; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--sage); }
+    .result-box { background: var(--sage-light); border: 2px solid var(--sage); border-radius: var(--radius); padding: 24px; margin-top: 24px; display: none; }
+    .result-box.show { display: block; }
+    .tip-box { background: var(--terracotta-light); border-radius: 8px; padding: 16px; margin-top: 16px; font-size: 0.9rem; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Bean Cooking Guide",
+    "url": "https://netveggies.com/tools/bean-cooking-guide.html",
+    "description": "Interactive guide for soaking and cooking times for all dried beans.",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Net<span>Veggies</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../recipes.html">Recipes</a></li>
+          <li><a href="index.html" class="active">Tools</a></li>
+          <li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>🫘 Bean Cooking Guide</h1>
+      <p>Interactive guide for soaking and cooking times for all dried beans.</p>
+    </section>
+
+    <div class="tool-container">
+      <div class="tool-card">
+        
+                <div class="form-group">
+                  <label for="beanType">Select Bean Type</label>
+                  <select id="beanType" onchange="showBeanInfo()">
+                    <option value="">Choose...</option>
+                    <option value="black">Black Beans</option>
+                    <option value="pinto">Pinto Beans</option>
+                    <option value="kidney">Kidney Beans</option>
+                    <option value="chickpea">Chickpeas (Garbanzo)</option>
+                    <option value="white">White Beans (Navy)</option>
+                    <option value="lentil">Lentils (no soak needed)</option>
+                    <option value="split">Split Peas (no soak needed)</option>
+                  </select>
+                </div>
+                <div class="result-box" id="result"></div>
+            
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <h4>NetVeggies</h4>
+        <p style="font-size:0.88rem;">Plant-based recipes and tools for real life.</p>
+      </div>
+      <div>
+        <h4>Recipes</h4>
+        <ul>
+          <li><a href="../recipes.html">All Recipes</a></li>
+          <li><a href="../vegan-recipes-for-beginners.html">Beginners</a></li>
+          <li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="vegan-protein-calculator.html">Protein Calculator</a></li>
+          <li><a href="recipe-scaler.html">Recipe Scaler</a></li>
+          <li><a href="unit-converter.html">Unit Converter</a></li>
+          <li><a href="index.html">All Tools →</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="../about.html">About Us</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+          <li><a href="../privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 NetVeggies. Made with 🌱 for a kinder plate.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.main-nav').classList.toggle('open');
+      this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+    });
+    
+                const beans = {
+                  black: { soak: '8 hours', cook: '60-90 min', water: '3 cups per 1 cup beans' },
+                  pinto: { soak: '8 hours', cook: '90-120 min', water: '3 cups per 1 cup beans' },
+                  kidney: { soak: '8 hours', cook: '60-90 min', water: '3 cups per 1 cup beans' },
+                  chickpea: { soak: '8-12 hours', cook: '90-120 min', water: '4 cups per 1 cup beans' },
+                  white: { soak: '8 hours', cook: '45-60 min', water: '3 cups per 1 cup beans' },
+                  lentil: { soak: 'None', cook: '20-30 min', water: '2.5 cups per 1 cup lentils' },
+                  split: { soak: 'None', cook: '30-45 min', water: '2 cups per 1 cup peas' }
+                };
+                
+                function showBeanInfo() {
+                  const type = document.getElementById('beanType').value;
+                  if (!type) return;
+                  const info = beans[type];
+                  
+                  document.getElementById('result').innerHTML = `
+                    <h3>${document.getElementById('beanType').selectedOptions[0].text}</h3>
+                    <table style="width:100%;margin-top:16px;">
+                      <tr><td><strong>Soaking Time:</strong></td><td>${info.soak}</td></tr>
+                      <tr><td><strong>Cooking Time:</strong></td><td>${info.cook}</td></tr>
+                      <tr><td><strong>Water Ratio:</strong></td><td>${info.water}</td></tr>
+                    </table>
+                    <div class="tip-box" style="margin-top:16px;">
+                      <strong>💡 Tip:</strong> Soaking reduces cooking time and makes beans easier to digest. For quick-soak: boil 2 min, let sit 1 hour.
+                    </div>
+                  `;
+                  document.getElementById('result').classList.add('show');
+                }
+            
+  </script>
+</body>
+</html>

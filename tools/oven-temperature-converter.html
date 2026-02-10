@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Oven Temperature Converter | NetVeggies</title>
+  <meta name="description" content="Instantly convert between Fahrenheit, Celsius, and Gas Mark. Includes common baking temperature presets.">
+  <link rel="canonical" href="https://netveggies.com/tools/oven-temperature-converter.html">
+  <meta property="og:title" content="Oven Temperature Converter — NetVeggies">
+  <meta property="og:description" content="Instantly convert between Fahrenheit, Celsius, and Gas Mark. Includes common baking temperature presets.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}.form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;background:var(--white)}.form-row input:focus,.form-row select:focus{outline:none;border-color:var(--sage)}.result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:var(--radius);padding:24px;margin-top:24px;display:none}.result-box h3{color:var(--sage-dark);margin-bottom:12px}.result-number{font-size:3rem;font-weight:700;font-family:'Playfair Display',serif}.tip-box{background:var(--terracotta-light);border-radius:8px;padding:16px;margin-top:16px;font-size:.9rem}.tip-box strong{color:var(--terracotta)}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Oven Temperature Converter","url":"https://netveggies.com/tools/oven-temperature-converter.html","description":"Instantly convert between Fahrenheit, Celsius, and Gas Mark. Includes common baking temperature presets.","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul></nav></div></header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>🌡️ Oven Temperature Converter</h1>
+      <p>Instantly convert between Fahrenheit, Celsius, and Gas Mark. Includes common baking temperature presets.</p>
+    </section>
+    <div class="tool-container">
+      <div class="tool-card">
+<h2>Convert Oven Temperatures</h2>
+<div class="form-row"><label for="tempVal">Temperature</label><input type="number" id="tempVal" value="350" oninput="convert()"></div>
+<div class="form-row"><label>From</label><div style="display:flex;gap:8px"><button class="btn btn-primary" id="btnF" onclick="setFrom('F')">°F</button><button class="btn" id="btnC" onclick="setFrom('C')" style="background:var(--sage-light)">°C</button><button class="btn" id="btnG" onclick="setFrom('G')" style="background:var(--sage-light)">Gas Mark</button></div></div>
+<div class="result-box" id="result" style="display:block"><div id="conversions" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:center"></div>
+<h3 style="margin-top:20px">Common Baking Temperatures</h3>
+<table style="width:100%;border-collapse:collapse;font-size:.9rem"><tr style="border-bottom:2px solid var(--sage)"><th style="padding:8px;text-align:left">Use</th><th>°F</th><th>°C</th><th>Gas</th></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 8px">Low/Slow</td><td style="text-align:center">275</td><td style="text-align:center">135</td><td style="text-align:center">1</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 8px">Moderate</td><td style="text-align:center">350</td><td style="text-align:center">175</td><td style="text-align:center">4</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 8px">Mod. Hot</td><td style="text-align:center">375</td><td style="text-align:center">190</td><td style="text-align:center">5</td></tr>
+<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 8px">Hot</td><td style="text-align:center">425</td><td style="text-align:center">220</td><td style="text-align:center">7</td></tr>
+<tr><td style="padding:6px 8px">Very Hot</td><td style="text-align:center">475</td><td style="text-align:center">245</td><td style="text-align:center">9</td></tr>
+</table></div></div>
+<script>
+let from="F";function setFrom(f){from=f;["F","C","G"].forEach(x=>{document.getElementById("btn"+x).style.background=x===f?"":"var(--sage-light)";document.getElementById("btn"+x).className=x===f?"btn btn-primary":"btn"});convert()}
+function convert(){const v=parseFloat(document.getElementById("tempVal").value);if(isNaN(v))return;let f,c,g;if(from==="F"){f=v;c=(v-32)*5/9;g=gasFromC(c)}else if(from==="C"){c=v;f=v*9/5+32;g=gasFromC(c)}else{g=v;c=gasToC(v);f=c*9/5+32}document.getElementById("conversions").innerHTML=box("°F",Math.round(f))+box("°C",Math.round(c))+box("Gas Mark",g.toFixed(1))}
+function box(l,v){return"<div style='padding:16px;background:var(--sage-light);border-radius:8px'><div style='font-size:.8rem;color:var(--text-muted)'>"+l+"</div><div style='font-size:1.8rem;font-weight:700;font-family:Playfair Display,serif'>"+v+"</div></div>"}
+function gasFromC(c){if(c<135)return 0.5;const marks=[[135,1],[150,2],[165,3],[175,4],[190,5],[200,6],[220,7],[230,8],[245,9],[260,10]];for(let i=0;i<marks.length-1;i++){if(c<=marks[i+1][0])return marks[i][1]+(c-marks[i][0])/(marks[i+1][0]-marks[i][0])*(marks[i+1][1]-marks[i][1])}return 10}
+function gasToC(g){const marks=[[1,135],[2,150],[3,165],[4,175],[5,190],[6,200],[7,220],[8,230],[9,245],[10,260]];for(let i=0;i<marks.length-1;i++){if(g<=marks[i+1][0])return marks[i][1]+(g-marks[i][0])/(marks[i+1][0]-marks[i][0])*(marks[i+1][1]-marks[i][1])}return 260}
+convert();
+</script>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-grid"><div><h3>NetVeggies</h3><p>Making plant-based cooking simple, affordable, and delicious.</p></div><div><h4>Recipes</h4><ul><li><a href="../easy-vegan-dinner-ideas.html">Dinner Ideas</a></li><li><a href="../vegan-recipes-for-beginners.html">Beginner Recipes</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li></ul></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools</a></li><li><a href="vegan-protein-calculator.html">Protein Calculator</a></li><li><a href="substitution-finder.html">Substitution Finder</a></li></ul></div><div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../privacy.html">Privacy Policy</a></li></ul></div></div><p style="text-align:center;margin-top:32px;color:var(--text-muted);font-size:.85rem">&copy; 2025 NetVeggies. All rights reserved.</p></div></footer>
+  <script>document.querySelector(".nav-toggle").addEventListener("click",function(){const n=document.querySelector(".main-nav");const open=n.classList.toggle("open");this.setAttribute("aria-expanded",open)});</script>
+</body>
+</html>

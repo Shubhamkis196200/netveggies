@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Water Footprint Calculator | NetVeggies</title>
+  <meta name="description" content="Compare the water usage of different foods. See how plant-based choices save thousands of liters of water.">
+  <link rel="canonical" href="https://netveggies.com/tools/water-footprint-calculator.html">
+  <meta property="og:title" content="Water Footprint Calculator — NetVeggies">
+  <meta property="og:description" content="Compare the water usage of different foods. See how plant-based choices save thousands of liters of water.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}.form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;background:var(--white)}.form-row input:focus,.form-row select:focus{outline:none;border-color:var(--sage)}.result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:var(--radius);padding:24px;margin-top:24px;display:none}.result-box h3{color:var(--sage-dark);margin-bottom:12px}.result-number{font-size:3rem;font-weight:700;font-family:'Playfair Display',serif}.tip-box{background:var(--terracotta-light);border-radius:8px;padding:16px;margin-top:16px;font-size:.9rem}.tip-box strong{color:var(--terracotta)}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Water Footprint Calculator","url":"https://netveggies.com/tools/water-footprint-calculator.html","description":"Compare the water usage of different foods. See how plant-based choices save thousands of liters of water.","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul></nav></div></header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>💧 Water Footprint Calculator</h1>
+      <p>Compare the water usage of different foods. See how plant-based choices save thousands of liters of water.</p>
+    </section>
+    <div class="tool-container">
+      <div class="tool-card">
+<h2>Water Footprint Comparison</h2>
+<p style="color:var(--text-muted);margin-bottom:16px">Select foods to compare their water footprint per kg:</p>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px" id="foods"></div>
+<div class="result-box" id="result" style="display:block"><div id="chart"></div>
+<div class="tip-box" style="margin-top:16px"><strong>🌍 Did you know?</strong> A plant-based diet uses about 55% less water than an omnivore diet. That's roughly 2,000 liters saved per day!</div></div></div>
+<script>
+const foods=[{name:"Beef",liters:15400,vegan:false},{name:"Cheese",liters:5060,vegan:false},{name:"Chicken",liters:4325,vegan:false},{name:"Eggs",liters:3265,vegan:false},{name:"Pork",liters:5988,vegan:false},{name:"Milk",liters:1020,vegan:false},{name:"Rice",liters:2500,vegan:true},{name:"Tofu",liters:2523,vegan:true},{name:"Lentils",liters:1250,vegan:true},{name:"Chickpeas",liters:1200,vegan:true},{name:"Potatoes",liters:287,vegan:true},{name:"Tomatoes",liters:214,vegan:true},{name:"Broccoli",liters:285,vegan:true},{name:"Apples",liters:822,vegan:true},{name:"Bananas",liters:790,vegan:true},{name:"Oats",liters:1788,vegan:true}];
+const maxL=foods.reduce((m,f)=>Math.max(m,f.liters),0);
+const d=document.getElementById("foods");foods.forEach((f,i)=>{d.innerHTML+='<label style="display:flex;align-items:center;gap:6px;padding:6px 10px;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:.9rem;background:'+(f.vegan?"var(--sage-light)":"#fff")+'" ><input type="checkbox" checked class="fc" value="'+i+'" onchange="render()">'+f.name+(f.vegan?" 🌱":"")+'</label>'});
+function render(){const sel=Array.from(document.querySelectorAll(".fc:checked")).map(c=>foods[c.value]).sort((a,b)=>b.liters-a.liters);
+document.getElementById("chart").innerHTML=sel.map(f=>"<div style='margin:8px 0'><div style='display:flex;justify-content:space-between;font-size:.9rem;margin-bottom:4px'><span>"+(f.vegan?"🌱":"🍖")+" "+f.name+"</span><strong>"+f.liters.toLocaleString()+"L/kg</strong></div><div style='height:24px;background:var(--border);border-radius:12px;overflow:hidden'><div style='height:100%;width:"+Math.round(f.liters/maxL*100)+"%;background:"+(f.vegan?"var(--sage)":"var(--terracotta)")+";border-radius:12px;transition:width .3s'></div></div></div>").join("")}
+render();
+</script>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-grid"><div><h3>NetVeggies</h3><p>Making plant-based cooking simple, affordable, and delicious.</p></div><div><h4>Recipes</h4><ul><li><a href="../easy-vegan-dinner-ideas.html">Dinner Ideas</a></li><li><a href="../vegan-recipes-for-beginners.html">Beginner Recipes</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li></ul></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools</a></li><li><a href="vegan-protein-calculator.html">Protein Calculator</a></li><li><a href="substitution-finder.html">Substitution Finder</a></li></ul></div><div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../privacy.html">Privacy Policy</a></li></ul></div></div><p style="text-align:center;margin-top:32px;color:var(--text-muted);font-size:.85rem">&copy; 2025 NetVeggies. All rights reserved.</p></div></footer>
+  <script>document.querySelector(".nav-toggle").addEventListener("click",function(){const n=document.querySelector(".main-nav");const open=n.classList.toggle("open");this.setAttribute("aria-expanded",open)});</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Spice Blend Maker | NetVeggies</title>
+  <meta name="description" content="Create custom spice blends for any cuisine — curry powder, taco seasoning, Italian herbs, and more. Get measurements and save your recipes.">
+  <link rel="canonical" href="https://netveggies.com/tools/spice-blend-maker.html">
+  <meta property="og:title" content="Custom Spice Blend Maker — NetVeggies">
+  <meta property="og:description" content="Create custom spice blends for any cuisine — curry powder, taco seasoning, Italian herbs, and more. Get measurements and save your recipes.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}.form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;background:var(--white)}.form-row input:focus,.form-row select:focus{outline:none;border-color:var(--sage)}.result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:var(--radius);padding:24px;margin-top:24px;display:none}.result-box h3{color:var(--sage-dark);margin-bottom:12px}.result-number{font-size:3rem;font-weight:700;font-family:'Playfair Display',serif}.tip-box{background:var(--terracotta-light);border-radius:8px;padding:16px;margin-top:16px;font-size:.9rem}.tip-box strong{color:var(--terracotta)}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Custom Spice Blend Maker","url":"https://netveggies.com/tools/spice-blend-maker.html","description":"Create custom spice blends for any cuisine — curry powder, taco seasoning, Italian herbs, and more. Get measurements and save your recipes.","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul></nav></div></header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>🌶️ Custom Spice Blend Maker</h1>
+      <p>Create custom spice blends for any cuisine — curry powder, taco seasoning, Italian herbs, and more. Get measurements and save your recipes.</p>
+    </section>
+    <div class="tool-container">
+      <div class="tool-card">
+<h2>Choose a Base Blend</h2>
+<div class="form-row"><select id="blend" onchange="loadBlend()"><option value="">Select a blend...</option><option value="curry">Curry Powder</option><option value="taco">Taco Seasoning</option><option value="italian">Italian Herbs</option><option value="garam">Garam Masala</option><option value="zaatar">Za'atar</option><option value="chinese5">Chinese Five Spice</option><option value="cajun">Cajun Seasoning</option><option value="pumpkin">Pumpkin Spice</option></select></div>
+<div id="ingredients" style="margin:20px 0"></div>
+<div class="form-row"><label for="servings">Batches</label><input type="number" id="servings" value="1" min="0.5" max="10" step="0.5" onchange="loadBlend()"></div>
+<div id="result" class="result-box" style="display:none"><h3 id="rName"></h3><div id="rList"></div><div class="tip-box" id="rTip"></div></div>
+<button class="btn btn-primary" style="width:100%;margin-top:16px" onclick="copyBlend()">📋 Copy Recipe</button>
+</div>
+<script>
+const blends={curry:{name:"Curry Powder",spices:[["Turmeric","2 tsp"],["Cumin","2 tsp"],["Coriander","1.5 tsp"],["Ginger (ground)","1 tsp"],["Black Pepper","0.5 tsp"],["Cinnamon","0.5 tsp"],["Cayenne","0.25 tsp"],["Mustard Powder","0.5 tsp"]],tip:"Toast in a dry skillet for 1-2 min to bloom the flavors. Store in an airtight jar up to 6 months."},taco:{name:"Taco Seasoning",spices:[["Chili Powder","2 tbsp"],["Cumin","1.5 tsp"],["Paprika","1 tsp"],["Garlic Powder","1 tsp"],["Onion Powder","1 tsp"],["Oregano","0.5 tsp"],["Black Pepper","0.5 tsp"],["Cayenne","0.25 tsp"]],tip:"Use ~2 tbsp per pound of filling. Mix with 1/4 cup water and simmer."},italian:{name:"Italian Herb Mix",spices:[["Dried Basil","2 tsp"],["Dried Oregano","2 tsp"],["Dried Rosemary","1 tsp"],["Dried Thyme","1 tsp"],["Garlic Powder","0.5 tsp"],["Red Pepper Flakes","0.25 tsp"]],tip:"Crush between your palms before adding to dishes to release more aroma."},garam:{name:"Garam Masala",spices:[["Cumin","2 tsp"],["Coriander","2 tsp"],["Cardamom","1 tsp"],["Black Pepper","1 tsp"],["Cinnamon","0.5 tsp"],["Cloves (ground)","0.25 tsp"],["Nutmeg","0.25 tsp"]],tip:"Add at the END of cooking for best flavor. Whole spices toasted and ground fresh are even better."},zaatar:{name:"Za'atar",spices:[["Dried Thyme","2 tbsp"],["Sesame Seeds","1 tbsp"],["Sumac","1 tbsp"],["Dried Oregano","1 tsp"],["Salt","0.5 tsp"]],tip:"Mix with olive oil and spread on flatbread before baking. Classic Middle Eastern flavor!"},chinese5:{name:"Chinese Five Spice",spices:[["Star Anise (ground)","2 tsp"],["Cinnamon","1 tsp"],["Fennel Seed (ground)","1 tsp"],["Cloves (ground)","0.5 tsp"],["Sichuan Pepper","0.5 tsp"]],tip:"Very potent — a little goes a long way. Start with 0.5 tsp per dish."},cajun:{name:"Cajun Seasoning",spices:[["Paprika","2 tbsp"],["Garlic Powder","1 tsp"],["Onion Powder","1 tsp"],["Cayenne","1 tsp"],["Dried Oregano","1 tsp"],["Dried Thyme","1 tsp"],["Black Pepper","0.5 tsp"],["Salt","0.5 tsp"]],tip:"Great on roasted cauliflower, tofu, and potatoes. Adjust cayenne to your heat preference."},pumpkin:{name:"Pumpkin Spice",spices:[["Cinnamon","3 tsp"],["Ginger (ground)","1.5 tsp"],["Nutmeg","0.5 tsp"],["Allspice","0.5 tsp"],["Cloves (ground)","0.25 tsp"]],tip:"Add to oatmeal, smoothies, pancakes, and of course — pumpkin pie!"}};
+function loadBlend(){const b=blends[document.getElementById("blend").value];if(!b)return;const s=parseFloat(document.getElementById("servings").value)||1;document.getElementById("rName").textContent=b.name+(s!==1?" (×"+s+")":"");document.getElementById("rList").innerHTML="<ul style='list-style:none;padding:0'>"+b.spices.map(x=>"<li style='padding:6px 0;border-bottom:1px solid var(--border)'>"+x[0]+": <strong>"+scaleAmt(x[1],s)+"</strong></li>").join("")+"</ul>";document.getElementById("rTip").innerHTML="<strong>💡 Tip:</strong> "+b.tip;document.getElementById("result").style.display="block"}
+function scaleAmt(amt,s){const m=amt.match(/([\d.]+)\s*(.*)/);if(!m)return amt;return (parseFloat(m[1])*s).toFixed(2).replace(/\.?0+$/,"")+" "+m[2]}
+function copyBlend(){const b=blends[document.getElementById("blend").value];if(!b)return;const s=parseFloat(document.getElementById("servings").value)||1;const t=b.name+"\n"+b.spices.map(x=>x[0]+": "+scaleAmt(x[1],s)).join("\n");navigator.clipboard.writeText(t).then(()=>alert("Copied!"))}
+</script>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-grid"><div><h3>NetVeggies</h3><p>Making plant-based cooking simple, affordable, and delicious.</p></div><div><h4>Recipes</h4><ul><li><a href="../easy-vegan-dinner-ideas.html">Dinner Ideas</a></li><li><a href="../vegan-recipes-for-beginners.html">Beginner Recipes</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li></ul></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools</a></li><li><a href="vegan-protein-calculator.html">Protein Calculator</a></li><li><a href="substitution-finder.html">Substitution Finder</a></li></ul></div><div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../privacy.html">Privacy Policy</a></li></ul></div></div><p style="text-align:center;margin-top:32px;color:var(--text-muted);font-size:.85rem">&copy; 2025 NetVeggies. All rights reserved.</p></div></footer>
+  <script>document.querySelector(".nav-toggle").addEventListener("click",function(){const n=document.querySelector(".main-nav");const open=n.classList.toggle("open");this.setAttribute("aria-expanded",open)});</script>
+</body>
+</html>

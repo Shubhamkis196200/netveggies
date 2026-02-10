@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cooking Unit Converter — Cups, Grams, Ounces & More | NetVeggies</title>
+  <meta name="description" content="Convert between cups, grams, ounces, milliliters, and tablespoons for common cooking ingredients instantly.">
+  <link rel="canonical" href="https://netveggies.com/tools/unit-converter.html">
+  <meta property="og:title" content="Cooking Unit Converter — NetVeggies">
+  <meta property="og:description" content="Convert cooking measurements instantly with ingredient-specific conversions.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}
+    .tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}
+    .tool-container{max-width:700px;margin:0 auto;padding:40px 20px}
+    .tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}
+    .form-row{margin-bottom:20px}
+    .form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:0.92rem}
+    .form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;background:var(--white)}
+    .converter-row{display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:end;margin:24px 0}
+    .converter-row .swap-btn{background:var(--terracotta);color:white;border:none;padding:12px;border-radius:50%;cursor:pointer;font-size:1.2rem;width:48px;height:48px}
+    .result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:var(--radius);padding:24px;margin-top:24px;text-align:center}
+    .result-number{font-size:2.5rem;font-weight:700;color:var(--terracotta);font-family:'Playfair Display',serif}
+    .quick-refs{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:24px}
+    .ref-card{background:var(--cream);padding:12px;border-radius:8px;font-size:0.85rem}
+  </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Cooking Unit Converter","url":"https://netveggies.com/tools/unit-converter.html","description":"Convert between cups, grams, ounces, and other cooking units.","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Net<span>Veggies</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li>
+          <li><a href="index.html" class="active">Tools</a></li>
+          <li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>⚖️ Cooking Unit Converter</h1>
+      <p>Convert between cups, grams, ounces, tablespoons, and more. Ingredient-specific for accurate measurements.</p>
+    </section>
+
+    <div class="tool-container">
+      <div class="tool-card">
+        <div class="form-row">
+          <label for="ingredient">Ingredient</label>
+          <select id="ingredient" onchange="convert()">
+            <option value="120">All-Purpose Flour</option>
+            <option value="200">White Sugar</option>
+            <option value="220">Brown Sugar (packed)</option>
+            <option value="240">Rice (uncooked)</option>
+            <option value="180">Rolled Oats</option>
+            <option value="192">Chickpeas (cooked)</option>
+            <option value="172">Lentils (cooked)</option>
+            <option value="200">Quinoa (cooked)</option>
+            <option value="218">Olive Oil</option>
+            <option value="240">Water/Milk</option>
+            <option value="256">Peanut Butter</option>
+            <option value="240">Maple Syrup</option>
+            <option value="16">Nutritional Yeast</option>
+            <option value="18">Cocoa Powder</option>
+          </select>
+        </div>
+
+        <div class="converter-row">
+          <div class="form-row">
+            <label for="fromValue">From</label>
+            <input type="number" id="fromValue" value="1" min="0" step="0.01" oninput="convert()">
+            <select id="fromUnit" onchange="convert()" style="margin-top:8px">
+              <option value="cup">Cups</option>
+              <option value="g">Grams</option>
+              <option value="oz">Ounces</option>
+              <option value="ml">Milliliters</option>
+              <option value="tbsp">Tablespoons</option>
+              <option value="tsp">Teaspoons</option>
+            </select>
+          </div>
+          <button class="swap-btn" onclick="swap()">⇄</button>
+          <div class="form-row">
+            <label for="toValue">To</label>
+            <input type="number" id="toValue" readonly style="background:#f9f9f9;font-weight:700">
+            <select id="toUnit" onchange="convert()" style="margin-top:8px">
+              <option value="g">Grams</option>
+              <option value="cup">Cups</option>
+              <option value="oz">Ounces</option>
+              <option value="ml">Milliliters</option>
+              <option value="tbsp">Tablespoons</option>
+              <option value="tsp">Teaspoons</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="quick-refs">
+          <div class="ref-card"><strong>1 cup =</strong> 16 tbsp = 48 tsp</div>
+          <div class="ref-card"><strong>1 tbsp =</strong> 3 tsp = 15ml</div>
+          <div class="ref-card"><strong>1 oz =</strong> 28.35g = 2 tbsp</div>
+          <div class="ref-card"><strong>1 cup =</strong> 240ml = 8 fl oz</div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div><h4>NetVeggies</h4><p style="font-size:0.88rem;">Plant-based recipes and tools for real life.</p></div>
+      <div><h4>Recipes</h4><ul><li><a href="../easy-vegan-dinner-ideas.html">Dinners</a></li><li><a href="../vegan-recipes-for-beginners.html">Beginners</a></li></ul></div>
+      <div><h4>Tools</h4><ul><li><a href="recipe-scaler.html">Recipe Scaler</a></li><li><a href="unit-converter.html">Unit Converter</a></li><li><a href="index.html">All Tools →</a></li></ul></div>
+      <div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱 for a kinder plate.</p></div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open');this.setAttribute('aria-expanded',this.getAttribute('aria-expanded')==='true'?'false':'true')});
+
+    function convert() {
+      const gramsPerCup = parseFloat(document.getElementById('ingredient').value);
+      const fromValue = parseFloat(document.getElementById('fromValue').value) || 0;
+      const fromUnit = document.getElementById('fromUnit').value;
+      const toUnit = document.getElementById('toUnit').value;
+
+      // Convert everything to grams first
+      let grams = 0;
+      switch(fromUnit) {
+        case 'cup': grams = fromValue * gramsPerCup; break;
+        case 'g': grams = fromValue; break;
+        case 'oz': grams = fromValue * 28.35; break;
+        case 'ml': grams = fromValue * (gramsPerCup / 240); break;
+        case 'tbsp': grams = fromValue * (gramsPerCup / 16); break;
+        case 'tsp': grams = fromValue * (gramsPerCup / 48); break;
+      }
+
+      // Convert from grams to target unit
+      let result = 0;
+      switch(toUnit) {
+        case 'cup': result = grams / gramsPerCup; break;
+        case 'g': result = grams; break;
+        case 'oz': result = grams / 28.35; break;
+        case 'ml': result = grams / (gramsPerCup / 240); break;
+        case 'tbsp': result = grams / (gramsPerCup / 16); break;
+        case 'tsp': result = grams / (gramsPerCup / 48); break;
+      }
+
+      document.getElementById('toValue').value = result.toFixed(2);
+    }
+
+    function swap() {
+      const from = document.getElementById('fromUnit').value;
+      const to = document.getElementById('toUnit').value;
+      document.getElementById('fromUnit').value = to;
+      document.getElementById('toUnit').value = from;
+      document.getElementById('fromValue').value = document.getElementById('toValue').value;
+      convert();
+    }
+
+    convert();
+  </script>
+</body>
+</html>

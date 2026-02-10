@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vegan Omega-3 Calculator | NetVeggies</title>
+  <meta name="description" content="Calculate your omega-3 needs (ALA, EPA, DHA) from plant sources like flax, chia, and algae.">
+  <link rel="canonical" href="https://netveggies.com/tools/omega3-calculator.html">
+  <meta property="og:title" content="Vegan Omega-3 Calculator — NetVeggies">
+  <meta property="og:description" content="Calculate your omega-3 needs (ALA, EPA, DHA) from plant sources like flax, chia, and algae.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://netveggies.com/tools/omega3-calculator.html">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero { background: linear-gradient(135deg, var(--sage-light) 0%, #f0e8dc 100%); padding: 48px 20px; text-align: center; }
+    .tool-hero p { max-width: 600px; margin: 8px auto 0; color: var(--text-light); }
+    .tool-container { max-width: 700px; margin: 0 auto; padding: 40px 20px; }
+    .tool-card { background: var(--white); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); border: 1px solid var(--border); }
+    .form-row { margin-bottom: 20px; }
+    .form-row label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.92rem; }
+    .form-row input, .form-row select, .form-row textarea { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; font-family: inherit; background: var(--white); }
+    .form-row input:focus, .form-row select:focus, .form-row textarea:focus { outline: none; border-color: var(--sage); }
+    .form-row .hint { font-size: 0.82rem; color: var(--text-muted); margin-top: 4px; }
+    .radio-group { display: flex; gap: 12px; flex-wrap: wrap; }
+    .radio-group label { display: flex; align-items: center; gap: 6px; font-weight: 400; cursor: pointer; padding: 8px 16px; border: 1px solid var(--border); border-radius: 8px; transition: all var(--transition); }
+    .radio-group label:has(input:checked) { border-color: var(--sage); background: var(--sage-light); }
+    .radio-group input { width: auto; margin: 0; }
+    .result-box { background: var(--sage-light); border: 2px solid var(--sage); border-radius: var(--radius); padding: 24px; margin-top: 24px; display: none; }
+    .result-box h3 { color: var(--sage-dark); margin-bottom: 12px; }
+    .tip-box { background: var(--terracotta-light); border-radius: 8px; padding: 16px; margin-top: 16px; font-size: 0.9rem; }
+    .tip-box strong { color: var(--terracotta); }
+    .sources-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+    .sources-table th, .sources-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    .sources-table th { background: var(--sage); color: white; font-weight: 600; }
+    .sources-table tr:nth-child(even) { background: var(--cream); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Vegan Omega-3 Calculator",
+    "url": "https://netveggies.com/tools/omega3-calculator.html",
+    "description": "Calculate your omega-3 needs (ALA, EPA, DHA) from plant sources like flax, chia, and algae.",
+    "applicationCategory": "HealthApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Net<span>Veggies</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../recipes.html">Recipes</a></li>
+          <li><a href="index.html" class="active">Tools</a></li>
+          <li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>🌰 Vegan Omega-3 Calculator</h1>
+      <p>Calculate your omega-3 needs (ALA, EPA, DHA) from plant sources like flax, chia, and algae.</p>
+    </section>
+
+    <div class="tool-container">
+      <div class="tool-card">
+        <form id="proteinForm" onsubmit="calculate(event); return false;">
+          
+      <div class="form-row">
+        <label for="weight">Weight (kg)</label>
+        <input type="number" id="weight" min="40" max="200" required placeholder="70">
+      </div>
+      <div class="form-row">
+        <p style="font-size:0.9rem;color:var(--text-light);">
+          Omega-3s are essential fats your body can't produce. ALA is found in seeds/nuts, 
+          but EPA/DHA (critical for brain health) requires algae oil supplements on a vegan diet.
+        </p>
+      </div>
+    
+          <button type="submit" class="btn btn-primary" style="width:100%;margin-top:12px;">Calculate</button>
+        </form>
+
+        <div class="result-box" id="result"></div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <h4>NetVeggies</h4>
+        <p style="font-size:0.88rem;">Plant-based recipes and tools for real life.</p>
+      </div>
+      <div>
+        <h4>Recipes</h4>
+        <ul>
+          <li><a href="../recipes.html">All Recipes</a></li>
+          <li><a href="../vegan-recipes-for-beginners.html">Beginners</a></li>
+          <li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="vegan-protein-calculator.html">Protein Calculator</a></li>
+          <li><a href="calorie-calculator.html">Calorie Calculator</a></li>
+          <li><a href="recipe-scaler.html">Recipe Scaler</a></li>
+          <li><a href="index.html">All Tools →</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="../about.html">About Us</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+          <li><a href="../privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 NetVeggies. Made with 🌱 for a kinder plate.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Nav toggle
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.main-nav').classList.toggle('open');
+      this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+    });
+
+    function calculate(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      
+      const weight = parseFloat(document.getElementById('weight').value);
+      const ala = Math.round(weight * 0.015 * 1000); // 1.5% of calories, ~1.6g for 70kg
+      const epa_dha = 250; // WHO recommendation
+      
+      document.getElementById('result').innerHTML = `
+        <h3>Your Daily Omega-3 Targets</h3>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0;">
+          <div style="background:var(--sage-light);padding:20px;border-radius:8px;text-align:center;">
+            <div style="font-size:2rem;font-weight:700;color:var(--sage-dark);">${ala}mg</div>
+            <div style="color:var(--text-light);font-size:0.9rem;">ALA (alpha-linolenic acid)</div>
+          </div>
+          <div style="background:var(--terracotta-light);padding:20px;border-radius:8px;text-align:center;">
+            <div style="font-size:2rem;font-weight:700;color:var(--terracotta);">${epa_dha}mg</div>
+            <div style="color:var(--text-light);font-size:0.9rem;">EPA + DHA (combined)</div>
+          </div>
+        </div>
+        <div class="tip-box" style="background:var(--sage-light);padding:16px;border-radius:8px;">
+          <strong>🌱 Plant Sources:</strong><br>
+          <strong>ALA:</strong> Ground flaxseed (1 tbsp = 2400mg), chia seeds (1 tbsp = 2400mg), walnuts (7 halves = 2500mg), hemp seeds<br>
+          <strong>EPA/DHA:</strong> Algae oil supplement (250-500mg combined) — this is essential as ALA conversion is only 5-10%
+        </div>
+        <h4 style="margin-top:20px;">Daily Omega-3 Meal Plan</h4>
+        <ul style="margin:12px 0;padding-left:20px;line-height:1.8;">
+          <li>1 tbsp ground flaxseed in oatmeal (2400mg ALA) ✓</li>
+          <li>7 walnut halves as snack (2500mg ALA) ✓</li>
+          <li>1 algae oil capsule (250mg EPA+DHA) ✓</li>
+        </ul>
+        <p style="font-size:0.85rem;color:var(--text-muted);margin-top:12px;">
+          <strong>Note:</strong> Flaxseed must be ground for absorption. Store in fridge/freezer.
+        </p>
+      `;
+      document.getElementById('result').style.display = 'block';
+    
+      return false;
+    }
+  </script>
+</body>
+</html>

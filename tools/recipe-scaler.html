@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Scaler — Scale Any Recipe Up or Down | NetVeggies</title>
+  <meta name="description" content="Instantly scale any recipe to any number of servings. Automatically converts all ingredients with smart fraction handling.">
+  <link rel="canonical" href="https://netveggies.com/tools/recipe-scaler.html">
+  <meta property="og:title" content="Recipe Scaler — NetVeggies">
+  <meta property="og:description" content="Scale recipes to any serving size instantly with automatic fraction conversion.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://netveggies.com/tools/recipe-scaler.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero { background: linear-gradient(135deg, var(--sage-light) 0%, #f0e8dc 100%); padding: 48px 20px; text-align: center; }
+    .tool-hero p { max-width: 600px; margin: 8px auto 0; color: var(--text-light); }
+    .tool-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+    .tool-card { background: var(--white); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); border: 1px solid var(--border); margin-bottom: 24px; }
+    .form-row { margin-bottom: 20px; }
+    .form-row label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.92rem; }
+    .form-row input, .form-row textarea { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; font-family: inherit; background: var(--white); }
+    .form-row textarea { min-height: 150px; resize: vertical; }
+    .scale-control { display: flex; align-items: center; gap: 16px; justify-content: center; margin: 24px 0; flex-wrap: wrap; }
+    .scale-btn { background: var(--sage); color: white; border: none; padding: 12px 20px; border-radius: 8px; font-size: 1.1rem; cursor: pointer; transition: all var(--transition); }
+    .scale-btn:hover { background: var(--sage-dark); transform: scale(1.05); }
+    .serving-input { width: 100px; text-align: center; font-size: 1.5rem; font-weight: 700; border: 2px solid var(--sage); }
+    .ingredient-line { padding: 12px; background: var(--sage-light); border-radius: 8px; margin-bottom: 8px; font-family: 'Inter', sans-serif; }
+    .ingredient-line.scaled { background: var(--terracotta-light); border-left: 4px solid var(--terracotta); }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Recipe Scaler",
+    "url": "https://netveggies.com/tools/recipe-scaler.html",
+    "description": "Scale any recipe to any number of servings with automatic fraction conversion.",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Net<span>Veggies</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li>
+          <li><a href="index.html" class="active">Tools</a></li>
+          <li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>📏 Recipe Scaler</h1>
+      <p>Scale any recipe up or down instantly. Paste ingredients and adjust servings — we'll handle the math and fractions.</p>
+    </section>
+
+    <div class="tool-container">
+      <div class="tool-card">
+        <form id="scalerForm">
+          <div class="form-row">
+            <label for="originalServings">Original Recipe Serves</label>
+            <input type="number" id="originalServings" min="1" max="100" value="4" required>
+          </div>
+
+          <div class="form-row">
+            <label for="ingredients">Ingredients (one per line)</label>
+            <textarea id="ingredients" placeholder="2 cups rice&#10;1/2 cup olive oil&#10;3 cloves garlic&#10;1 tbsp soy sauce&#10;400g chickpeas" required></textarea>
+            <div style="font-size:0.82rem;color:var(--text-muted);margin-top:4px;">Paste ingredients from any recipe. Works with cups, grams, oz, tbsp, tsp, etc.</div>
+          </div>
+        </form>
+
+        <div class="scale-control">
+          <button class="scale-btn" onclick="scaleRecipe(0.5)">÷2</button>
+          <button class="scale-btn" onclick="changeServings(-1)">−</button>
+          <input type="number" id="newServings" class="serving-input" value="4" min="1" max="100" onchange="scaleRecipe()">
+          <button class="scale-btn" onclick="changeServings(1)">+</button>
+          <button class="scale-btn" onclick="scaleRecipe(2)">×2</button>
+          <button class="scale-btn" onclick="scaleRecipe(3)">×3</button>
+        </div>
+
+        <div id="results" style="display:none;">
+          <h3 style="margin-bottom:16px;">Scaled for <span id="servingCount"></span> servings:</h3>
+          <div id="scaledIngredients"></div>
+          <button class="btn btn-outline" onclick="copyResults()" style="margin-top:16px;">📋 Copy to Clipboard</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div><h4>NetVeggies</h4><p style="font-size:0.88rem;">Plant-based recipes and tools for real life.</p></div>
+      <div><h4>Recipes</h4><ul><li><a href="../easy-vegan-dinner-ideas.html">Dinners</a></li><li><a href="../vegan-recipes-for-beginners.html">Beginners</a></li></ul></div>
+      <div><h4>Tools</h4><ul><li><a href="recipe-scaler.html">Recipe Scaler</a></li><li><a href="unit-converter.html">Unit Converter</a></li><li><a href="index.html">All Tools →</a></li></ul></div>
+      <div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱 for a kinder plate.</p></div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.main-nav').classList.toggle('open');
+      this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+    });
+
+    function changeServings(delta) {
+      const input = document.getElementById('newServings');
+      input.value = Math.max(1, parseInt(input.value) + delta);
+      scaleRecipe();
+    }
+
+    function toFraction(decimal) {
+      const fractions = [[0.125, '⅛'], [0.25, '¼'], [0.333, '⅓'], [0.375, '⅜'], [0.5, '½'], [0.625, '⅝'], [0.666, '⅔'], [0.75, '¾'], [0.875, '⅞']];
+      const whole = Math.floor(decimal);
+      const frac = decimal - whole;
+      if (frac < 0.05) return whole || '';
+      for (let [val, symbol] of fractions) {
+        if (Math.abs(frac - val) < 0.05) return (whole ? whole + ' ' : '') + symbol;
+      }
+      return decimal.toFixed(2).replace(/\.?0+$/, '');
+    }
+
+    function scaleRecipe(multiplier) {
+      const originalServings = parseFloat(document.getElementById('originalServings').value);
+      let newServings = multiplier ? originalServings * multiplier : parseFloat(document.getElementById('newServings').value);
+      if (!multiplier) newServings = parseFloat(document.getElementById('newServings').value);
+      else document.getElementById('newServings').value = newServings;
+
+      const ingredients = document.getElementById('ingredients').value.trim().split('\n');
+      if (!ingredients[0]) return;
+
+      const ratio = newServings / originalServings;
+      const scaled = ingredients.map(line => {
+        const match = line.match(/^(\d+\.?\d*|\d*\/\d+|\d+\s+\d+\/\d+)\s*(.*)$/);
+        if (!match) return line;
+        
+        let amount = match[1];
+        const rest = match[2];
+        
+        // Parse fractions like "1/2" or "2 1/2"
+        if (amount.includes('/')) {
+          const parts = amount.split(/\s+/);
+          let total = 0;
+          parts.forEach(p => {
+            if (p.includes('/')) {
+              const [n, d] = p.split('/').map(Number);
+              total += n / d;
+            } else {
+              total += Number(p);
+            }
+          });
+          amount = total;
+        } else {
+          amount = parseFloat(amount);
+        }
+
+        const newAmount = amount * ratio;
+        return toFraction(newAmount) + ' ' + rest;
+      });
+
+      document.getElementById('servingCount').textContent = newServings;
+      document.getElementById('scaledIngredients').innerHTML = scaled.map(s => 
+        `<div class="ingredient-line scaled">${s}</div>`
+      ).join('');
+      document.getElementById('results').style.display = 'block';
+    }
+
+    function copyResults() {
+      const text = Array.from(document.querySelectorAll('#scaledIngredients .ingredient-line')).map(el => el.textContent).join('\n');
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✓ Ingredients copied to clipboard!');
+      });
+    }
+
+    // Auto-scale on input change
+    document.getElementById('ingredients').addEventListener('input', () => {
+      if (document.getElementById('newServings').value !== document.getElementById('originalServings').value) {
+        scaleRecipe();
+      }
+    });
+  </script>
+</body>
+</html>

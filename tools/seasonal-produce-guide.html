@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seasonal Produce Guide — What's In Season | NetVeggies</title>
+  <meta name="description" content="Interactive guide to seasonal fruits and vegetables by month. Find what's fresh and local.">
+  <link rel="canonical" href="https://netveggies.com/tools/seasonal-produce-guide.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>.tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-container{max-width:900px;margin:0 auto;padding:40px 20px}.month-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}.month-tab{padding:10px 16px;border:2px solid var(--sage);border-radius:8px;cursor:pointer;font-weight:600;transition:all 0.2s}.month-tab.active{background:var(--sage);color:white}.produce-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}.produce-card{background:white;padding:16px;border-radius:8px;box-shadow:var(--shadow);text-align:center;border:2px solid var(--sage-light)}.produce-card .icon{font-size:2.5rem;margin-bottom:8px}</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Seasonal Produce Guide","url":"https://netveggies.com/tools/seasonal-produce-guide.html","description":"Find what fruits and vegetables are in season each month.","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../about.html">About</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero"><h1>🌿 Seasonal Produce Guide</h1><p>Find what's fresh and in season each month for better flavor and lower prices.</p></section>
+    <div class="tool-container">
+      <div class="month-tabs" id="months"></div>
+      <div class="produce-grid" id="produce"></div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const produce={January:['🍊 Oranges','🍋 Lemons','🥬 Kale','🥦 Broccoli','🥕 Carrots','🍠 Sweet Potatoes'],February:['🍊 Oranges','🍋 Lemons','🥬 Kale','🥦 Broccoli','🍠 Sweet Potatoes'],March:['🥬 Spinach','🥬 Lettuce','🥕 Carrots','🥦 Broccoli','🍋 Lemons'],April:['🥬 Asparagus','🥬 Spinach','🥕 Carrots','🍓 Strawberries'],May:['🥬 Asparagus','🍓 Strawberries','🥬 Lettuce','🥒 Cucumbers','🌶️ Peppers'],June:['🍓 Strawberries','🍅 Tomatoes','🌽 Corn','🥒 Cucumbers','🫑 Bell Peppers','🥬 Zucchini'],July:['🍅 Tomatoes','🌽 Corn','🥒 Cucumbers','🫑 Bell Peppers','🥬 Zucchini','🍑 Peaches','🍉 Watermelon'],August:['🍅 Tomatoes','🌽 Corn','🍉 Watermelon','🍑 Peaches','🥬 Eggplant','🫑 Bell Peppers'],September:['🍎 Apples','🍐 Pears','🍇 Grapes','🥦 Broccoli','🥕 Carrots','🍠 Sweet Potatoes'],October:['🍎 Apples','🍐 Pears','🎃 Pumpkin','🍠 Sweet Potatoes','🥕 Carrots','🍄 Mushrooms'],November:['🥕 Carrots','🥦 Broccoli','🥬 Kale','🍠 Sweet Potatoes','🎃 Pumpkin','🍄 Mushrooms'],December:['🍊 Oranges','🍋 Lemons','🥬 Kale','🥦 Broccoli','🥕 Carrots','🍠 Sweet Potatoes']};
+    let current=new Date().getMonth();
+    function render(){
+      document.getElementById('months').innerHTML=months.map((m,i)=>`<div class="month-tab ${i===current?'active':''}" onclick="current=${i};render()">${m}</div>`).join('');
+      document.getElementById('produce').innerHTML=produce[months[current]].map(p=>`<div class="produce-card"><div class="icon">${p.split(' ')[0]}</div><strong>${p.split(' ').slice(1).join(' ')}</strong></div>`).join('');
+    }
+    render();
+  </script>
+</body>
+</html>

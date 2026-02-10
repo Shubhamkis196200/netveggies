@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Water Intake Calculator — Daily Hydration Needs | NetVeggies</title>
+  <meta name="description" content="Calculate your daily water intake needs based on weight, activity level, and climate. Includes hydrating vegan food sources.">
+  <link rel="canonical" href="https://netveggies.com/tools/water-intake-calculator.html">
+  <meta property="og:title" content="Water Intake Calculator — NetVeggies">
+  <meta property="og:description" content="Calculate daily hydration needs for optimal health.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}.form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;background:var(--white)}.form-row input:focus,.form-row select:focus{outline:none;border-color:var(--sage)}.radio-group{display:flex;gap:12px;flex-wrap:wrap}.radio-group label{display:flex;align-items:center;gap:6px;font-weight:400;cursor:pointer;padding:8px 16px;border:1px solid var(--border);border-radius:8px;transition:all var(--transition)}.radio-group label:has(input:checked){border-color:var(--sage);background:var(--sage-light)}.radio-group input{width:auto;margin:0}.result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:var(--radius);padding:24px;margin-top:24px;display:none}.result-box h3{color:var(--sage-dark);margin-bottom:12px}.result-number{font-size:2.5rem;font-weight:700;color:var(--terracotta);font-family:'Playfair Display',serif}.result-unit{font-size:1rem;color:var(--text-light)}.result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:20px 0}.result-item{text-align:center;background:var(--white);padding:16px;border-radius:8px}.result-item .num{font-size:1.3rem;font-weight:700;color:var(--sage-dark)}.result-item .lbl{font-size:.78rem;color:var(--text-muted)}.tip-box{background:var(--terracotta-light);border-radius:8px;padding:16px;margin-top:16px;font-size:.9rem}.tip-box strong{color:var(--terracotta)}.glasses{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:16px 0}.glass{font-size:1.8rem;opacity:.3;transition:opacity .3s}.glass.filled{opacity:1}@media(max-width:480px){.result-grid{grid-template-columns:1fr}}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Water Intake Calculator","url":"https://netveggies.com/tools/water-intake-calculator.html","description":"Calculate daily hydration needs.","applicationCategory":"HealthApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul></nav></div></header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>💧 Water Intake Calculator</h1>
+      <p>Find out how much water you need daily based on your body, activity level, and environment.</p>
+    </section>
+    <div class="tool-container">
+      <div class="tool-card">
+        <form onsubmit="calc(event)">
+          <div class="form-row">
+            <label for="weight">Weight</label>
+            <div style="display:flex;gap:12px">
+              <input type="number" id="weight" min="20" max="300" step="0.1" required placeholder="70">
+              <select id="wu" style="max-width:100px"><option value="kg">kg</option><option value="lbs">lbs</option></select>
+            </div>
+          </div>
+          <div class="form-row">
+            <label>Activity Level</label>
+            <div class="radio-group">
+              <label><input type="radio" name="activity" value="0" checked> Sedentary</label>
+              <label><input type="radio" name="activity" value="0.35"> Light Exercise</label>
+              <label><input type="radio" name="activity" value="0.7"> Moderate Exercise</label>
+              <label><input type="radio" name="activity" value="1.0"> Intense Exercise</label>
+            </div>
+          </div>
+          <div class="form-row">
+            <label>Climate</label>
+            <div class="radio-group">
+              <label><input type="radio" name="climate" value="0" checked> Temperate</label>
+              <label><input type="radio" name="climate" value="0.5"> Hot/Humid</label>
+              <label><input type="radio" name="climate" value="0.25"> Dry/Arid</label>
+            </div>
+          </div>
+          <div class="form-row">
+            <label>Do you eat lots of fruits & vegetables?</label>
+            <div class="radio-group">
+              <label><input type="radio" name="diet" value="yes" checked> Yes (vegan/WFPB)</label>
+              <label><input type="radio" name="diet" value="no"> Not really</label>
+            </div>
+            <div class="hint">~20% of water intake comes from food. High fruit/veg diets contribute more.</div>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width:100%">Calculate Water Needs</button>
+        </form>
+
+        <div class="result-box" id="result">
+          <h3>Your Daily Water Target</h3>
+          <div style="text-align:center;margin:16px 0">
+            <span class="result-number" id="waterResult">—</span>
+            <span class="result-unit">liters/day</span>
+          </div>
+          <div class="result-grid">
+            <div class="result-item"><div class="num" id="cupsVal">—</div><div class="lbl">Cups (250ml)</div></div>
+            <div class="result-item"><div class="num" id="ozVal">—</div><div class="lbl">Fluid Ounces</div></div>
+            <div class="result-item"><div class="num" id="bottlesVal">—</div><div class="lbl">Water Bottles (500ml)</div></div>
+          </div>
+          <div class="glasses" id="glasses"></div>
+          <p id="explain" style="font-size:.9rem;color:var(--text-light)"></p>
+          <div class="tip-box">
+            <strong>🌱 Vegan Hydration Tip:</strong> Plant-based diets are naturally water-rich! Fruits, veggies, soups, and smoothies all count toward your water intake. Watermelon is 92% water, cucumbers 96%, and most fruits are 80-90% water.
+          </div>
+
+          <h3 style="margin-top:20px">Most Hydrating Vegan Foods</h3>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:.9rem">
+            <div>🍉 Watermelon — 92% water</div>
+            <div>🥒 Cucumber — 96% water</div>
+            <div>🍅 Tomato — 94% water</div>
+            <div>🫑 Bell Pepper — 94% water</div>
+            <div>🍓 Strawberry — 91% water</div>
+            <div>🥬 Lettuce — 96% water</div>
+            <div>🍊 Orange — 87% water</div>
+            <div>🥦 Broccoli — 89% water</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools for real life.</p></div><div><h4>Tools</h4><ul><li><a href="vegan-protein-calculator.html">Protein Calculator</a></li><li><a href="calorie-calculator.html">Calorie Calculator</a></li><li><a href="index.html">All Tools →</a></li></ul></div><div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../privacy.html">Privacy</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱 for a kinder plate.</p></div></footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open');this.setAttribute('aria-expanded',this.getAttribute('aria-expanded')==='true'?'false':'true')});
+    function calc(e){
+      e.preventDefault();
+      let w=parseFloat(document.getElementById('weight').value);
+      if(document.getElementById('wu').value==='lbs') w*=0.4536;
+      const act=parseFloat(document.querySelector('input[name="activity"]:checked').value);
+      const clim=parseFloat(document.querySelector('input[name="climate"]:checked').value);
+      const diet=document.querySelector('input[name="diet"]:checked').value;
+
+      // Base: 30-35ml per kg body weight
+      let mlPerKg=33;
+      let totalMl=w*mlPerKg;
+      // Activity: add 350-1000ml
+      totalMl+=act*1000;
+      // Climate
+      totalMl+=clim*1000;
+      // High fruit/veg diet provides ~20% more water from food
+      if(diet==='yes') totalMl*=0.9; // need 10% less drinking water
+
+      const liters=(totalMl/1000).toFixed(1);
+      const cups=Math.round(totalMl/250);
+      const oz=Math.round(totalMl*0.0338);
+      const bottles=Math.round(totalMl/500);
+
+      document.getElementById('waterResult').textContent=liters;
+      document.getElementById('cupsVal').textContent=cups;
+      document.getElementById('ozVal').textContent=oz;
+      document.getElementById('bottlesVal').textContent=bottles;
+
+      // Visual glasses
+      let glassHtml='';
+      for(let i=0;i<cups;i++) glassHtml+=`<span class="glass filled">🥤</span>`;
+      document.getElementById('glasses').innerHTML=glassHtml;
+
+      document.getElementById('explain').textContent=`Based on ${w.toFixed(0)}kg body weight at ~33ml/kg, adjusted for activity and climate. ${diet==='yes'?'Your plant-rich diet provides extra water from food, so your drinking target is slightly lower.':'Consider eating more water-rich fruits and vegetables to supplement your hydration.'}`;
+
+      document.getElementById('result').style.display='block';
+      document.getElementById('result').scrollIntoView({behavior:'smooth'});
+    }
+  </script>
+</body>
+</html>

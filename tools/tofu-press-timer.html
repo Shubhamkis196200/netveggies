@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tofu Press Timer — NetVeggies</title>
+  <meta name="description" content="Timer and tips for pressing tofu to different firmness levels.">
+  <link rel="canonical" href="https://netveggies.com/tools/tofu-press-timer.html">
+  <meta property="og:title" content="Tofu Press Timer — NetVeggies">
+  <meta property="og:description" content="Timer and tips for pressing tofu to different firmness levels.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://netveggies.com/tools/tofu-press-timer.html">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1542838132-92c53300491e?w=1200&h=630&fit=crop">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero { background: linear-gradient(135deg, var(--sage-light) 0%, #f0e8dc 100%); padding: 48px 20px; text-align: center; }
+    .tool-hero p { max-width: 600px; margin: 8px auto 0; color: var(--text-light); }
+    .tool-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+    .tool-card { background: var(--white); border-radius: var(--radius); padding: 32px; box-shadow: var(--shadow); border: 1px solid var(--border); }
+    .btn { display: inline-block; padding: 12px 24px; border-radius: 8px; font-weight: 600; transition: all var(--transition); border: none; cursor: pointer; font-size: 1rem; }
+    .btn-primary { background: var(--sage); color: white; }
+    .btn-primary:hover { background: var(--sage-dark); transform: translateY(-1px); }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; margin-bottom: 6px; font-weight: 600; font-size: 0.92rem; }
+    .form-group input, .form-group select, .form-group textarea { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 1rem; font-family: inherit; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--sage); }
+    .result-box { background: var(--sage-light); border: 2px solid var(--sage); border-radius: var(--radius); padding: 24px; margin-top: 24px; display: none; }
+    .result-box.show { display: block; }
+    .tip-box { background: var(--terracotta-light); border-radius: 8px; padding: 16px; margin-top: 16px; font-size: 0.9rem; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Tofu Press Timer",
+    "url": "https://netveggies.com/tools/tofu-press-timer.html",
+    "description": "Timer and tips for pressing tofu to different firmness levels.",
+    "applicationCategory": "UtilityApplication",
+    "operatingSystem": "Web",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Net<span>Veggies</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../recipes.html">Recipes</a></li>
+          <li><a href="index.html" class="active">Tools</a></li>
+          <li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li>
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>🧊 Tofu Press Timer</h1>
+      <p>Timer and tips for pressing tofu to different firmness levels.</p>
+    </section>
+
+    <div class="tool-container">
+      <div class="tool-card">
+        
+            <div id="timers"></div>
+            <form id="toolForm" style="margin-top:20px;">
+              <div class="form-group">
+                <label for="timerName">Timer Name</label>
+                <input type="text" id="timerName" placeholder="e.g. Rice, Beans" required>
+              </div>
+              <div class="form-group">
+                <label for="minutes">Minutes</label>
+                <input type="number" id="minutes" min="0" max="180" value="10" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Add Timer</button>
+            </form>
+        
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div>
+        <h4>NetVeggies</h4>
+        <p style="font-size:0.88rem;">Plant-based recipes and tools for real life.</p>
+      </div>
+      <div>
+        <h4>Recipes</h4>
+        <ul>
+          <li><a href="../recipes.html">All Recipes</a></li>
+          <li><a href="../vegan-recipes-for-beginners.html">Beginners</a></li>
+          <li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Tools</h4>
+        <ul>
+          <li><a href="vegan-protein-calculator.html">Protein Calculator</a></li>
+          <li><a href="recipe-scaler.html">Recipe Scaler</a></li>
+          <li><a href="unit-converter.html">Unit Converter</a></li>
+          <li><a href="index.html">All Tools →</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>About</h4>
+        <ul>
+          <li><a href="../about.html">About Us</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+          <li><a href="../privacy.html">Privacy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 NetVeggies. Made with 🌱 for a kinder plate.</p>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('.main-nav').classList.toggle('open');
+      this.setAttribute('aria-expanded', this.getAttribute('aria-expanded') === 'true' ? 'false' : 'true');
+    });
+    
+            let timers = [];
+            let timerIdCounter = 0;
+            
+            document.getElementById('toolForm').addEventListener('submit', function(e) {
+              e.preventDefault();
+              const name = document.getElementById('timerName').value;
+              const minutes = parseInt(document.getElementById('minutes').value);
+              const id = timerIdCounter++;
+              
+              const timer = {
+                id: id,
+                name: name,
+                seconds: minutes * 60,
+                interval: null
+              };
+              
+              timers.push(timer);
+              renderTimers();
+              startTimer(id);
+              
+              document.getElementById('timerName').value = '';
+            });
+            
+            function startTimer(id) {
+              const timer = timers.find(t => t.id === id);
+              if (!timer) return;
+              
+              timer.interval = setInterval(() => {
+                timer.seconds--;
+                if (timer.seconds <= 0) {
+                  clearInterval(timer.interval);
+                  alert(`⏰ Timer "${timer.name}" is done!`);
+                  timers = timers.filter(t => t.id !== id);
+                }
+                renderTimers();
+              }, 1000);
+            }
+            
+            function renderTimers() {
+              const container = document.getElementById('timers');
+              if (timers.length === 0) {
+                container.innerHTML = '<p style="color:var(--text-muted);">No active timers. Add one below!</p>';
+                return;
+              }
+              
+              container.innerHTML = timers.map(t => {
+                const mins = Math.floor(t.seconds / 60);
+                const secs = t.seconds % 60;
+                return `
+                  <div style="background:var(--sage-light);padding:16px;border-radius:8px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:center;">
+                    <div>
+                      <strong>${t.name}</strong><br>
+                      <span style="font-size:1.5rem;font-family:monospace;">${mins}:${secs.toString().padStart(2, '0')}</span>
+                    </div>
+                    <button onclick="timers = timers.filter(x => x.id !== ${t.id}); renderTimers();" class="btn" style="background:var(--terracotta);color:white;">Cancel</button>
+                  </div>
+                `;
+              }).join('');
+            }
+            
+            renderTimers();
+        
+  </script>
+</body>
+</html>

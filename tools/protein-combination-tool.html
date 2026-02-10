@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Complete Protein Combiner | NetVeggies</title>
+  <meta name="description" content="Combine plant foods to create complete proteins. See which amino acids each food provides and find perfect pairings.">
+  <link rel="canonical" href="https://netveggies.com/tools/protein-combination-tool.html">
+  <meta property="og:title" content="Complete Protein Combiner — NetVeggies">
+  <meta property="og:description" content="Combine plant foods to create complete proteins. See which amino acids each food provides and find perfect pairings.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}.form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;background:var(--white)}.form-row input:focus,.form-row select:focus{outline:none;border-color:var(--sage)}.result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:var(--radius);padding:24px;margin-top:24px;display:none}.result-box h3{color:var(--sage-dark);margin-bottom:12px}.result-number{font-size:3rem;font-weight:700;font-family:'Playfair Display',serif}.tip-box{background:var(--terracotta-light);border-radius:8px;padding:16px;margin-top:16px;font-size:.9rem}.tip-box strong{color:var(--terracotta)}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Complete Protein Combiner","url":"https://netveggies.com/tools/protein-combination-tool.html","description":"Combine plant foods to create complete proteins. See which amino acids each food provides and find perfect pairings.","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul></nav></div></header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>🧬 Complete Protein Combiner</h1>
+      <p>Combine plant foods to create complete proteins. See which amino acids each food provides and find perfect pairings.</p>
+    </section>
+    <div class="tool-container">
+      <div class="tool-card">
+<h2>Build Complete Proteins</h2>
+<p style="color:var(--text-muted);margin-bottom:16px">Select two or more foods to see if they form a complete protein:</p>
+<div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px" id="foodBtns"></div>
+<div class="result-box" id="result" style="display:block"><h3>Amino Acid Profile</h3><div id="profile"></div>
+<h3 style="margin-top:20px">Classic Complete Combinations</h3>
+<div style="font-size:.9rem"><div style="padding:8px 0;border-bottom:1px solid var(--border)">🌾 <strong>Rice + Beans</strong> — The world's most popular combo</div><div style="padding:8px 0;border-bottom:1px solid var(--border)">🫘 <strong>Hummus + Pita</strong> — Chickpeas + wheat</div><div style="padding:8px 0;border-bottom:1px solid var(--border)">🥜 <strong>PB + Whole Wheat Bread</strong> — Legumes + grains</div><div style="padding:8px 0;border-bottom:1px solid var(--border)">🌽 <strong>Corn Tortilla + Black Beans</strong></div><div style="padding:8px 0">🥗 <strong>Lentil Soup + Bread</strong></div></div></div></div>
+<script>
+const aa=["Lysine","Methionine","Threonine","Tryptophan","Isoleucine","Leucine","Valine","Phenylalanine","Histidine"];
+const foods=[{name:"Rice",scores:[3,7,6,5,7,8,7,8,5],cat:"grain"},{name:"Wheat/Bread",scores:[3,6,5,5,7,7,6,8,4],cat:"grain"},{name:"Corn",scores:[3,6,6,3,6,8,6,7,4],cat:"grain"},{name:"Oats",scores:[5,5,5,5,7,7,7,8,4],cat:"grain"},{name:"Black Beans",scores:[8,3,6,4,7,8,7,8,5],cat:"legume"},{name:"Lentils",scores:[8,3,6,4,6,7,7,7,5],cat:"legume"},{name:"Chickpeas",scores:[8,4,5,4,7,7,7,7,5],cat:"legume"},{name:"Peanuts",scores:[5,4,4,4,6,7,6,8,4],cat:"legume"},{name:"Tofu/Soy",scores:[8,5,6,5,7,8,7,8,5],cat:"legume"},{name:"Quinoa",scores:[7,6,5,5,6,7,6,6,5],cat:"complete"},{name:"Hemp Seeds",scores:[6,7,6,5,6,7,7,7,5],cat:"seed"},{name:"Pumpkin Seeds",scores:[5,7,5,5,6,7,7,6,4],cat:"seed"}];
+const d=document.getElementById("foodBtns");const colors={grain:"var(--sage-light)",legume:"var(--terracotta-light)",complete:"#d4edda",seed:"#fff3cd"};
+foods.forEach((f,i)=>{d.innerHTML+='<button onclick="toggle(this,'+i+')" data-sel="0" style="padding:8px 16px;border:2px solid var(--border);border-radius:20px;cursor:pointer;background:'+colors[f.cat]+';font-size:.9rem">'+f.name+'</button>'});
+const selected=new Set();function toggle(btn,i){if(selected.has(i)){selected.delete(i);btn.style.borderColor="var(--border)";btn.style.fontWeight="normal"}else{selected.add(i);btn.style.borderColor="var(--sage-dark)";btn.style.fontWeight="700"}render()}
+function render(){if(!selected.size){document.getElementById("profile").innerHTML="<p style='color:var(--text-muted)'>Select foods above to see their combined amino acid profile.</p>";return}
+const combined=aa.map((_,j)=>Math.max(...Array.from(selected).map(i=>foods[i].scores[j])));const complete=combined.every(s=>s>=5);
+document.getElementById("profile").innerHTML=(complete?"<div style='padding:12px;background:var(--sage-light);border-radius:8px;margin-bottom:16px;text-align:center;font-weight:600'>✅ Complete Protein!</div>":"<div style='padding:12px;background:#fff3cd;border-radius:8px;margin-bottom:16px;text-align:center;font-weight:600'>⚠️ Some amino acids are low — add more variety</div>")+aa.map((a,j)=>"<div style='margin:6px 0'><div style='display:flex;justify-content:space-between;font-size:.85rem'><span>"+a+"</span><span>"+combined[j]+"/10</span></div><div style='height:16px;background:var(--border);border-radius:8px;overflow:hidden'><div style='height:100%;width:"+(combined[j]*10)+"%;background:"+(combined[j]>=5?"var(--sage)":"var(--terracotta)")+";border-radius:8px'></div></div></div>").join("")}
+render();
+</script>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-grid"><div><h3>NetVeggies</h3><p>Making plant-based cooking simple, affordable, and delicious.</p></div><div><h4>Recipes</h4><ul><li><a href="../easy-vegan-dinner-ideas.html">Dinner Ideas</a></li><li><a href="../vegan-recipes-for-beginners.html">Beginner Recipes</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li></ul></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools</a></li><li><a href="vegan-protein-calculator.html">Protein Calculator</a></li><li><a href="substitution-finder.html">Substitution Finder</a></li></ul></div><div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../privacy.html">Privacy Policy</a></li></ul></div></div><p style="text-align:center;margin-top:32px;color:var(--text-muted);font-size:.85rem">&copy; 2025 NetVeggies. All rights reserved.</p></div></footer>
+  <script>document.querySelector(".nav-toggle").addEventListener("click",function(){const n=document.querySelector(".main-nav");const open=n.classList.toggle("open");this.setAttribute("aria-expanded",open)});</script>
+</body>
+</html>

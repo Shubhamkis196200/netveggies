@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food Cost Calculator — Cost Per Serving | NetVeggies</title>
+  <meta name="description" content="Calculate cost per serving for any recipe. Track ingredient prices and budget.">
+  <link rel="canonical" href="https://netveggies.com/tools/food-cost-calculator.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>.tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.ingredient-row{display:flex;gap:12px;margin-bottom:12px}.ingredient-row input{flex:1;padding:10px;border:1px solid var(--border);border-radius:8px}.result-box{background:var(--sage-light);padding:24px;border-radius:8px;margin-top:24px}.result-number{font-size:3rem;font-weight:700;color:var(--terracotta);font-family:'Playfair Display',serif}</style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Food Cost Calculator","url":"https://netveggies.com/tools/food-cost-calculator.html","description":"Calculate cost per serving for recipes.","applicationCategory":"UtilitiesApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="index.html" class="active">Tools</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero"><h1>💰 Food Cost Calculator</h1><p>Calculate how much your recipes really cost per serving.</p></section>
+    <div class="tool-container">
+      <div style="background:white;padding:32px;border-radius:8px;box-shadow:var(--shadow)">
+        <h3>Add Ingredients</h3>
+        <div id="ingredients"></div>
+        <button class="btn btn-outline" onclick="addRow()">+ Add Ingredient</button>
+        <div style="margin-top:24px"><label style="font-weight:600">Servings:</label> <input type="number" id="servings" value="4" min="1" style="padding:10px;border:1px solid var(--border);border-radius:8px;width:100px;margin-left:12px"></div>
+        <button class="btn btn-primary" style="width:100%;margin-top:16px" onclick="calculate()">Calculate</button>
+        <div class="result-box" id="result" style="display:none">
+          <div style="text-align:center"><div class="result-number">$<span id="perServing">—</span></div><div style="font-size:1.2rem">per serving</div></div>
+          <p id="details" style="margin-top:16px;font-size:0.9rem;color:var(--text-light);text-align:center"></p>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4></div></div><div class="footer-bottom"><p>© 2026 NetVeggies</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    let rows=1;
+    function addRow(){rows++;render();}
+    function render(){document.getElementById('ingredients').innerHTML=Array(rows).fill().map((_,i)=>`<div class="ingredient-row"><input type="text" placeholder="Ingredient name" id="name${i}"><input type="number" placeholder="Cost ($)" step="0.01" id="cost${i}"></div>`).join('');}
+    function calculate(){
+      let total=0;
+      for(let i=0;i<rows;i++){
+        const cost=parseFloat(document.getElementById(`cost${i}`).value)||0;
+        total+=cost;
+      }
+      const servings=parseInt(document.getElementById('servings').value);
+      const perServing=(total/servings).toFixed(2);
+      document.getElementById('perServing').textContent=perServing;
+      document.getElementById('details').textContent=`Total recipe cost: $${total.toFixed(2)} ÷ ${servings} servings = $${perServing} per serving`;
+      document.getElementById('result').style.display='block';
+    }
+    render();
+  </script>
+</body>
+</html>

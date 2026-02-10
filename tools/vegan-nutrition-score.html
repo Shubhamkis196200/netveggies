@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vegan Nutrition Score — Rate Your Daily Meals | NetVeggies</title>
+  <meta name="description" content="Rate your daily vegan meals for nutritional completeness. Get a score and personalized recommendations to improve your plant-based diet.">
+  <link rel="canonical" href="https://netveggies.com/tools/vegan-nutrition-score.html">
+  <meta property="og:title" content="Vegan Nutrition Score — NetVeggies">
+  <meta property="og:description" content="Rate your daily vegan meals for nutritional completeness.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}.form-row{margin-bottom:16px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.check-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.check-grid label{display:flex;align-items:center;gap:8px;font-weight:400;font-size:.9rem;padding:8px 12px;border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all var(--transition)}.check-grid label:has(input:checked){border-color:var(--sage);background:var(--sage-light)}.check-grid input{width:auto;margin:0;accent-color:var(--sage)}.result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:var(--radius);padding:24px;margin-top:24px;display:none}.result-box h3{color:var(--sage-dark);margin-bottom:12px}.score-circle{width:120px;height:120px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:16px auto;font-size:2.5rem;font-weight:700;font-family:'Playfair Display',serif;color:white}.score-label{text-align:center;font-size:1.1rem;font-weight:600;margin-bottom:16px}.tip-box{background:var(--terracotta-light);border-radius:8px;padding:16px;margin-top:12px;font-size:.9rem}.tip-box strong{color:var(--terracotta)}.rec-list{margin-top:16px}.rec-item{display:flex;gap:8px;padding:8px 0;border-bottom:1px solid var(--border);font-size:.9rem}.rec-icon{font-size:1.2rem;min-width:24px}.cat-label{font-family:'Playfair Display',serif;color:var(--sage-dark);font-size:1.05rem;margin:24px 0 8px;font-weight:600}@media(max-width:480px){.check-grid{grid-template-columns:1fr}}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Vegan Nutrition Score","url":"https://netveggies.com/tools/vegan-nutrition-score.html","description":"Rate your daily vegan meals for nutritional completeness.","applicationCategory":"HealthApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul></nav></div></header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>⭐ Vegan Nutrition Score</h1>
+      <p>Check off what you ate today and get a nutritional completeness score with personalized improvement tips.</p>
+    </section>
+    <div class="tool-container">
+      <div class="tool-card">
+        <p style="font-size:.9rem;color:var(--text-light);margin-bottom:20px">Check everything you ate <strong>today</strong>:</p>
+
+        <div class="cat-label">🫘 Protein Sources</div>
+        <div class="check-grid" id="protein">
+          <label><input type="checkbox" data-cat="protein" data-pts="2"> Legumes (beans, lentils, chickpeas)</label>
+          <label><input type="checkbox" data-cat="protein" data-pts="2"> Tofu or Tempeh</label>
+          <label><input type="checkbox" data-cat="protein" data-pts="1"> Nuts or Nut Butter</label>
+          <label><input type="checkbox" data-cat="protein" data-pts="1"> Seeds (chia, hemp, flax, pumpkin)</label>
+          <label><input type="checkbox" data-cat="protein" data-pts="1"> Seitan</label>
+          <label><input type="checkbox" data-cat="protein" data-pts="1"> Soy milk or Edamame</label>
+        </div>
+
+        <div class="cat-label">🌾 Whole Grains</div>
+        <div class="check-grid" id="grains">
+          <label><input type="checkbox" data-cat="grains" data-pts="2"> Oats, Brown Rice, or Quinoa</label>
+          <label><input type="checkbox" data-cat="grains" data-pts="1"> Whole Wheat Bread/Pasta</label>
+          <label><input type="checkbox" data-cat="grains" data-pts="1"> Other whole grains (barley, millet, etc)</label>
+        </div>
+
+        <div class="cat-label">🥬 Vegetables</div>
+        <div class="check-grid" id="vegs">
+          <label><input type="checkbox" data-cat="veg" data-pts="2"> Dark leafy greens (kale, spinach, chard)</label>
+          <label><input type="checkbox" data-cat="veg" data-pts="1"> Cruciferous (broccoli, cauliflower, cabbage)</label>
+          <label><input type="checkbox" data-cat="veg" data-pts="1"> Orange/red veg (carrots, peppers, sweet potato)</label>
+          <label><input type="checkbox" data-cat="veg" data-pts="1"> Alliums (onion, garlic)</label>
+          <label><input type="checkbox" data-cat="veg" data-pts="1"> Other vegetables</label>
+        </div>
+
+        <div class="cat-label">🍎 Fruits</div>
+        <div class="check-grid" id="fruits">
+          <label><input type="checkbox" data-cat="fruit" data-pts="2"> Berries</label>
+          <label><input type="checkbox" data-cat="fruit" data-pts="1"> Citrus (vitamin C source)</label>
+          <label><input type="checkbox" data-cat="fruit" data-pts="1"> Other fruits (banana, apple, etc)</label>
+        </div>
+
+        <div class="cat-label">🥑 Healthy Fats</div>
+        <div class="check-grid" id="fats">
+          <label><input type="checkbox" data-cat="fat" data-pts="2"> Flaxseed or Chia (omega-3)</label>
+          <label><input type="checkbox" data-cat="fat" data-pts="1"> Walnuts</label>
+          <label><input type="checkbox" data-cat="fat" data-pts="1"> Avocado</label>
+          <label><input type="checkbox" data-cat="fat" data-pts="1"> Olive oil or other healthy oil</label>
+        </div>
+
+        <div class="cat-label">💊 Key Supplements & Fortified Foods</div>
+        <div class="check-grid" id="supps">
+          <label><input type="checkbox" data-cat="supp" data-pts="3"> B12 supplement or fortified food</label>
+          <label><input type="checkbox" data-cat="supp" data-pts="2"> Vitamin D supplement</label>
+          <label><input type="checkbox" data-cat="supp" data-pts="2"> Fortified plant milk (calcium+D+B12)</label>
+          <label><input type="checkbox" data-cat="supp" data-pts="1"> Algae omega-3 (DHA/EPA)</label>
+          <label><input type="checkbox" data-cat="supp" data-pts="1"> Nutritional yeast</label>
+          <label><input type="checkbox" data-cat="supp" data-pts="1"> Iodized salt or seaweed</label>
+        </div>
+
+        <button class="btn btn-primary" style="width:100%;margin-top:24px" onclick="score()">Get My Score</button>
+
+        <div class="result-box" id="result">
+          <h3>Your Vegan Nutrition Score</h3>
+          <div class="score-circle" id="scoreCircle">—</div>
+          <div class="score-label" id="scoreLabel"></div>
+          <p id="explain" style="font-size:.9rem;color:var(--text-light)"></p>
+          <div class="rec-list" id="recs"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools for real life.</p></div><div><h4>Tools</h4><ul><li><a href="vegan-protein-calculator.html">Protein Calculator</a></li><li><a href="calorie-calculator.html">Calorie Calculator</a></li><li><a href="index.html">All Tools →</a></li></ul></div><div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../privacy.html">Privacy</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱 for a kinder plate.</p></div></footer>
+
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open');this.setAttribute('aria-expanded',this.getAttribute('aria-expanded')==='true'?'false':'true')});
+    function score(){
+      const checks=document.querySelectorAll('input[type="checkbox"]');
+      let total=0,maxPts=0;
+      const catScores={};
+      checks.forEach(c=>{
+        const pts=parseInt(c.dataset.pts);
+        const cat=c.dataset.cat;
+        maxPts+=pts;
+        if(!catScores[cat]) catScores[cat]={got:0,max:0};
+        catScores[cat].max+=pts;
+        if(c.checked){total+=pts;catScores[cat].got+=pts;}
+      });
+
+      const pct=Math.round((total/maxPts)*100);
+      const circle=document.getElementById('scoreCircle');
+      circle.textContent=pct;
+      if(pct>=80){circle.style.background='var(--sage)';document.getElementById('scoreLabel').textContent='🎉 Excellent! Your diet is well-balanced.';}
+      else if(pct>=60){circle.style.background='#e8b94b';document.getElementById('scoreLabel').textContent='👍 Good, but there\'s room for improvement.';}
+      else if(pct>=40){circle.style.background='var(--terracotta)';document.getElementById('scoreLabel').textContent='⚠️ Fair. Some important areas need attention.';}
+      else{circle.style.background='#cc3333';document.getElementById('scoreLabel').textContent='🔴 Needs work. See recommendations below.';}
+
+      document.getElementById('explain').textContent=`You scored ${total} of ${maxPts} possible points (${pct}%). This reflects the variety and nutritional density of your daily food choices.`;
+
+      // Generate recommendations
+      let recs='';
+      const tips={
+        protein:{icon:'🫘',low:'Add legumes (beans, lentils) and/or tofu to at least 2 meals today. They\'re your best protein sources.',ok:''},
+        grains:{icon:'🌾',low:'Include whole grains (oats, brown rice, quinoa) for sustained energy and B vitamins.',ok:''},
+        veg:{icon:'🥬',low:'Eat more vegetables! Aim for at least 3 different colors. Dark leafy greens are especially important for iron and calcium.',ok:''},
+        fruit:{icon:'🍎',low:'Add fruit, especially berries (antioxidants) and citrus (vitamin C for iron absorption).',ok:''},
+        fat:{icon:'🥑',low:'Include omega-3 rich foods: ground flaxseed, chia seeds, or walnuts daily. These are essential!',ok:''},
+        supp:{icon:'💊',low:'B12 supplementation is NON-NEGOTIABLE for vegans. Also consider vitamin D and an algae-based omega-3.',ok:''},
+      };
+      for(const[cat,data]of Object.entries(catScores)){
+        if(data.got<data.max*0.5&&tips[cat]){
+          recs+=`<div class="rec-item"><span class="rec-icon">${tips[cat].icon}</span><span>${tips[cat].low}</span></div>`;
+        }
+      }
+      if(!recs) recs='<div class="tip-box" style="background:var(--sage-light)"><strong>🌟 Amazing!</strong> You\'re hitting all the key food groups. Keep it up! Remember to vary your choices day to day for the broadest nutrient profile.</div>';
+      document.getElementById('recs').innerHTML=recs;
+
+      document.getElementById('result').style.display='block';
+      document.getElementById('result').scrollIntoView({behavior:'smooth'});
+    }
+  </script>
+</body>
+</html>

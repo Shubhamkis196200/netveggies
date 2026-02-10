@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vegan Travel Planner | NetVeggies</title>
+  <meta name="description" content="Plan vegan-friendly travel with tips, apps, phrases, and restaurant suggestions for popular destinations.">
+  <link rel="canonical" href="https://netveggies.com/tools/vegan-travel-planner.html">
+  <meta property="og:title" content="Vegan Travel Planner — NetVeggies">
+  <meta property="og:description" content="Plan vegan-friendly travel with tips, apps, phrases, and restaurant suggestions for popular destinations.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:700px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border)}.form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit;background:var(--white)}.form-row input:focus,.form-row select:focus{outline:none;border-color:var(--sage)}.result-box{background:var(--sage-light);border:2px solid var(--sage);border-radius:var(--radius);padding:24px;margin-top:24px;display:none}.result-box h3{color:var(--sage-dark);margin-bottom:12px}.result-number{font-size:3rem;font-weight:700;font-family:'Playfair Display',serif}.tip-box{background:var(--terracotta-light);border-radius:8px;padding:16px;margin-top:16px;font-size:.9rem}.tip-box strong{color:var(--terracotta)}
+  </style>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Vegan Travel Planner","url":"https://netveggies.com/tools/vegan-travel-planner.html","description":"Plan vegan-friendly travel with tips, apps, phrases, and restaurant suggestions for popular destinations.","applicationCategory":"UtilityApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}</script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><ul><li><a href="../index.html">Home</a></li><li><a href="../easy-vegan-dinner-ideas.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li><li><a href="../about.html">About</a></li><li><a href="../contact.html">Contact</a></li></ul></nav></div></header>
+
+  <main id="main">
+    <section class="tool-hero">
+      <h1>✈️ Vegan Travel Planner</h1>
+      <p>Plan vegan-friendly travel with tips, apps, phrases, and restaurant suggestions for popular destinations.</p>
+    </section>
+    <div class="tool-container">
+      <div class="tool-card">
+<h2>Vegan Travel Guide</h2>
+<div class="form-row"><label for="dest">Destination</label><select id="dest" onchange="show()"><option value="">Select a destination...</option></select></div>
+<div class="result-box" id="result" style="display:none"><h3 id="dName"></h3><div id="dInfo"></div></div>
+<div style="margin-top:24px;padding:20px;background:var(--sage-light);border-radius:var(--radius)"><h3>Essential Vegan Travel Apps</h3>
+<div style="font-size:.9rem;margin-top:8px">
+<div style="padding:8px 0;border-bottom:1px solid var(--border)">📱 <strong>HappyCow</strong> — #1 app for finding vegan/veg restaurants worldwide</div>
+<div style="padding:8px 0;border-bottom:1px solid var(--border)">📱 <strong>abillion</strong> — Reviews of vegan dishes at any restaurant</div>
+<div style="padding:8px 0;border-bottom:1px solid var(--border)">📱 <strong>Vanilla Bean</strong> — Vegan restaurant finder (strong in Europe)</div>
+<div style="padding:8px 0">📱 <strong>Google Translate</strong> — Download offline language packs for your destination</div></div></div></div>
+<script>
+const dests={thailand:{name:"Thailand 🇹🇭",rating:"⭐⭐⭐⭐⭐",tips:["Look for 'jay' (เจ) restaurants — strict vegetarian/vegan","Pad Thai without egg or fish sauce","Fresh fruit shakes are everywhere","Night markets have many vegan options","Vegetarian Festival in October is amazing"],avoid:["Fish sauce (nam pla) — in almost everything, ask without","Oyster sauce","Shrimp paste"],phrase:"ผมกินเจ (phom/chan gin jay) = I eat vegan food"},japan:{name:"Japan 🇯🇵",rating:"⭐⭐⭐",tips:["Shojin ryori (Buddhist temple cuisine) is vegan","Many ramen shops now offer vegan broths","Convenience stores have onigiri with kelp/plum fillings","T's TanTan in Tokyo Station is fully vegan"],avoid:["Dashi (fish broth) — very common","Katsuobushi (bonito flakes)","Many breads contain milk/butter"],phrase:"ビーガンです (biigan desu) = I am vegan"},india:{name:"India 🇮🇳",rating:"⭐⭐⭐⭐⭐",tips:["Vegetarian food is mainstream — look for 'pure veg' restaurants","Dal, sabzi, roti, and rice are staples","South Indian dosas and idli are often naturally vegan","Specify 'no ghee, no paneer, no curd'"],avoid:["Ghee (clarified butter) — used liberally","Paneer (cheese)","Curd/yogurt (dahi)","Honey in desserts"],phrase:"बिना घी, बिना दूध (bina ghee, bina doodh) = Without ghee, without milk"},italy:{name:"Italy 🇮🇹",rating:"⭐⭐⭐",tips:["Pasta with tomato-based sauces (marinara, arrabbiata)","Bruschetta and focaccia are often vegan","Pizza without cheese — 'pizza marinara'","Fresh vegetables, olive oil, and bread are abundant"],avoid:["Parmesan (in pesto, pasta, salads)","Egg in fresh pasta","Butter in risotto"],phrase:"Sono vegano/a. Senza formaggio e burro = I'm vegan. Without cheese and butter"},mexico:{name:"Mexico 🇲🇽",rating:"⭐⭐⭐⭐",tips:["Bean tacos and tostadas are everywhere","Guacamole, salsa, and corn tortillas are vegan","Ask for 'sin queso, sin crema'","Elote (corn) is vegan if you skip the mayo/cheese"],avoid:["Lard (manteca) in refried beans and tortillas","Queso fresco on everything","Crema (sour cream)"],phrase:"Sin carne, sin queso, sin crema = Without meat, cheese, cream"},germany:{name:"Germany 🇩🇪",rating:"⭐⭐⭐⭐",tips:["Berlin is a vegan paradise — hundreds of vegan restaurants","Most supermarkets have large vegan sections","Brezel (pretzels) are usually vegan","Look for 'vegan' label — very common on menus"],avoid:["Butter in baked goods","Schmalz (animal fat) on bread","Honey in some breads"],phrase:"Ich bin Veganer/in = I am vegan"}};
+const sel=document.getElementById("dest");Object.entries(dests).forEach(([k,v])=>{const o=document.createElement("option");o.value=k;o.textContent=v.name;sel.appendChild(o)});
+function show(){const d=dests[sel.value];if(!d)return;document.getElementById("dName").textContent=d.name+" "+d.rating;document.getElementById("dInfo").innerHTML="<h4 style='margin-top:16px'>✅ Tips</h4><ul style='padding-left:20px'>"+d.tips.map(t=>"<li style='padding:4px 0'>"+t+"</li>").join("")+"</ul><h4 style='margin-top:16px'>⚠️ Watch Out For</h4><ul style='padding-left:20px'>"+d.avoid.map(a=>"<li style='padding:4px 0'>"+a+"</li>").join("")+"</ul><div class='tip-box' style='margin-top:16px'><strong>🗣️ Key Phrase:</strong> "+d.phrase+"</div>";document.getElementById("result").style.display="block"}
+</script>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="footer-inner"><div class="footer-grid"><div><h3>NetVeggies</h3><p>Making plant-based cooking simple, affordable, and delicious.</p></div><div><h4>Recipes</h4><ul><li><a href="../easy-vegan-dinner-ideas.html">Dinner Ideas</a></li><li><a href="../vegan-recipes-for-beginners.html">Beginner Recipes</a></li><li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li></ul></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools</a></li><li><a href="vegan-protein-calculator.html">Protein Calculator</a></li><li><a href="substitution-finder.html">Substitution Finder</a></li></ul></div><div><h4>About</h4><ul><li><a href="../about.html">About Us</a></li><li><a href="../contact.html">Contact</a></li><li><a href="../privacy.html">Privacy Policy</a></li></ul></div></div><p style="text-align:center;margin-top:32px;color:var(--text-muted);font-size:.85rem">&copy; 2025 NetVeggies. All rights reserved.</p></div></footer>
+  <script>document.querySelector(".nav-toggle").addEventListener("click",function(){const n=document.querySelector(".main-nav");const open=n.classList.toggle("open");this.setAttribute("aria-expanded",open)});</script>
+</body>
+</html>
