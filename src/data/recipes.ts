@@ -403,63 +403,7 @@ export const recipes: Recipe[] = [
   },
 ];
 
-export const blogPosts: BlogPost[] = [
-  {
-    id: 1,
-    title: 'Complete Guide to Vegan Meal Prep',
-    slug: 'complete-guide-to-vegan-meal-prep',
-    description: 'Everything you need to know about vegan meal prepping — from planning and shopping to batch cooking and storage.',
-    image: 'https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=800&h=1200&fit=crop',
-    content: `## Why Meal Prep?\n\nMeal prepping saves time, money, and stress. When you have ready-made plant-based meals in the fridge, you're far less likely to reach for takeout or processed snacks.\n\n## Getting Started\n\n### Step 1: Plan Your Week\nChoose 3-4 recipes that share ingredients. This reduces waste and simplifies shopping. Focus on:\n- One grain (rice, quinoa, pasta)\n- One legume (chickpeas, lentils, black beans)\n- 3-4 vegetables\n- A versatile sauce or dressing\n\n### Step 2: Shop Smart\nBuy in bulk where possible: dried grains, canned beans, frozen vegetables. A typical week's groceries for vegan meal prep costs $25-35.\n\n### Step 3: Batch Cook\nDedicate 2-3 hours on Sunday to:\n1. Cook grains and legumes\n2. Roast a sheet pan of vegetables\n3. Prepare 1-2 sauces or dressings\n4. Assemble meals in containers\n\n### Step 4: Store Properly\n- **Fridge**: Most prepped meals last 4-5 days\n- **Freezer**: Soups, stews, and curries freeze for up to 3 months\n- **Separate wet and dry**: Keep dressings separate until serving\n\n## Sample Week\n\n| Day | Breakfast | Lunch | Dinner |\n|-----|-----------|-------|--------|\n| Mon | Overnight Oats | Buddha Bowl | Chickpea Curry |\n| Tue | Overnight Oats | Buddha Bowl | Lentil Soup |\n| Wed | Smoothie | Lentil Soup | Chickpea Curry |\n| Thu | Overnight Oats | Stuffed Peppers | Mushroom Pasta |\n| Fri | Smoothie | Stuffed Peppers | Leftovers |\n\n## Top Tips\n- Invest in good glass containers\n- Label everything with dates\n- Keep it simple — you don't need 7 different meals\n- Prep snacks too: hummus, cut veggies, energy balls`,
-    tags: ['meal-prep', 'guide', 'beginner'],
-    datePublished: '2026-02-01',
-    readTime: 8,
-  },
-  {
-    id: 2,
-    title: '10 Pantry Staples Every Vegan Kitchen Needs',
-    slug: '10-pantry-staples-every-vegan-kitchen-needs',
-    description: 'Stock your kitchen with these essential vegan pantry items and you\'ll always be able to whip up a delicious meal.',
-    image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&h=1200&fit=crop',
-    content: `## Build Your Vegan Pantry\n\nA well-stocked pantry is the foundation of easy vegan cooking. With these 10 staples, you can make dozens of meals without a special trip to the store.\n\n## The Essential 10\n\n### 1. Canned Chickpeas & Beans\nThe ultimate vegan protein. Keep black beans, chickpeas, and kidney beans on hand. Use in curries, salads, soups, and even desserts (black bean brownies!).\n\n### 2. Rice & Quinoa\nVersatile grains that pair with everything. Brown rice for nutrition, white for speed, quinoa for protein.\n\n### 3. Canned Tomatoes\nDiced, crushed, and paste. The base of countless sauces, soups, and stews.\n\n### 4. Coconut Milk\nFull-fat for curries and creamy sauces. Light for soups. Essential for Thai and Indian-inspired dishes.\n\n### 5. Nutritional Yeast\nThe "cheese" of the vegan world. Sprinkle on pasta, popcorn, or blend into sauces for a savory, umami flavor.\n\n### 6. Rolled Oats\nBreakfast, snacks, baking, and even homemade oat milk. The most versatile pantry item.\n\n### 7. Nuts & Seeds\nCashews (for cream sauces), walnuts, almonds, chia seeds, and flax seeds. Protein, healthy fats, and texture.\n\n### 8. Soy Sauce / Tamari\nInstant flavor boost for stir-fries, marinades, and dressings.\n\n### 9. Maple Syrup\nNatural sweetener for everything from oatmeal to salad dressings. Agave works too.\n\n### 10. Spices: Cumin, Paprika, Turmeric, Garlic Powder\nThese four spices cover most vegan recipes. Add chili flakes and cinnamon for extra range.\n\n## Shopping List\nPrint this out and take it to the store! Total cost: approximately $35-50 for everything.\n\n## What About Fresh?\nAlways keep on hand: onions, garlic, lemons, bananas, and one leafy green (spinach or kale).`,
-    tags: ['pantry', 'guide', 'beginner', 'budget'],
-    datePublished: '2026-02-03',
-    readTime: 6,
-  },
-  {
-    id: 3,
-    title: 'How to Get Enough Protein on a Plant-Based Diet',
-    slug: 'how-to-get-enough-protein-on-a-plant-based-diet',
-    description: 'The #1 question vegans get answered — with science-backed info, protein-rich foods, and a sample high-protein day.',
-    image: 'https://images.unsplash.com/photo-1511690743698-d9d18f7e20f1?w=800&h=1200&fit=crop',
-    content: `## The Protein Question\n\n"But where do you get your protein?" Every vegan has heard it. Let's settle this once and for all with facts, not opinions.\n\n## How Much Protein Do You Need?\n\nThe RDA is 0.8g per kg of body weight. For a 150lb (68kg) person, that's about **54g per day**. Most Americans eat 80-100g — more than necessary.\n\n## Top Vegan Protein Sources\n\n| Food | Protein (per serving) |\n|------|----------------------|\n| Tofu (½ block) | 20g |\n| Tempeh (1 cup) | 31g |\n| Lentils (1 cup cooked) | 18g |\n| Chickpeas (1 cup cooked) | 15g |\n| Black beans (1 cup) | 15g |\n| Edamame (1 cup) | 17g |\n| Seitan (3 oz) | 21g |\n| Quinoa (1 cup cooked) | 8g |\n| Peanut butter (2 tbsp) | 7g |\n| Oats (1 cup cooked) | 6g |\n\n## Sample High-Protein Day (80g+)\n\n- **Breakfast**: Tofu scramble with veggies (22g)\n- **Lunch**: Buddha bowl with quinoa, chickpeas, edamame (28g)\n- **Snack**: Peanut butter on toast (10g)\n- **Dinner**: Lentil curry with rice (22g)\n- **Total: ~82g protein**\n\n## Key Takeaways\n1. You do NOT need to combine proteins at every meal\n2. Eat a variety of whole plant foods and you'll easily meet your needs\n3. Athletes may need 1.2-1.6g per kg — still achievable on plants\n4. Soy, quinoa, and buckwheat are complete proteins`,
-    tags: ['nutrition', 'protein', 'guide', 'health'],
-    datePublished: '2026-02-05',
-    readTime: 7,
-  },
-  {
-    id: 4,
-    title: 'Budget Vegan: Eat Well for Under $5/Day',
-    slug: 'budget-vegan-eat-well-for-under-5-dollars-a-day',
-    description: 'Proof that eating vegan doesn\'t have to be expensive. A complete guide to plant-based eating on a tight budget.',
-    image: 'https://images.unsplash.com/photo-1506976785307-8732e854ad03?w=800&h=1200&fit=crop',
-    content: `## Vegan on a Budget\n\nContrary to popular belief, vegan eating can be the cheapest way to eat. Rice, beans, lentils, oats, and seasonal vegetables are among the most affordable foods on the planet.\n\n## The Math\n\nA week of meals for under $35:\n- Dried lentils (2 lbs): $2.50\n- Rice (5 lbs): $4.00\n- Canned beans (4 cans): $3.00\n- Oats (large container): $3.50\n- Frozen vegetables (3 bags): $4.50\n- Bananas, onions, garlic: $3.00\n- Canned tomatoes (3 cans): $3.00\n- Bread: $2.50\n- Peanut butter: $3.00\n- Plant milk: $3.00\n- **Total: ~$32.00 = $4.57/day**\n\n## Budget Tips\n\n1. **Buy dried beans** — 3x cheaper than canned\n2. **Shop seasonal produce** — it's always cheaper\n3. **Frozen > fresh** for out-of-season vegetables\n4. **Cook in bulk** — make a big pot of soup or curry\n5. **Avoid specialty items** — you don't need expensive vegan cheese\n6. **Ethnic grocery stores** — often 50% cheaper for spices, tofu, and produce\n7. **Grow herbs** — a $2 basil plant saves $20+ over time\n\n## Sample $5/Day Menu\n\n- **Breakfast**: Overnight oats with banana ($0.75)\n- **Lunch**: Rice and bean bowl with frozen veggies ($1.25)\n- **Dinner**: Lentil soup with bread ($1.50)\n- **Snack**: Peanut butter toast ($0.50)\n- **Total: $4.00**\n\n## The Bottom Line\nPlant-based eating is inherently budget-friendly. Skip the processed vegan alternatives and focus on whole foods.`,
-    tags: ['budget', 'guide', 'beginner', 'meal-planning'],
-    datePublished: '2026-02-07',
-    readTime: 6,
-  },
-  {
-    id: 5,
-    title: "Beginner's Guide to Going Vegan",
-    slug: 'beginners-guide-to-going-vegan',
-    description: 'Ready to try plant-based eating? This beginner-friendly guide covers everything from what to eat to how to handle social situations.',
-    image: 'https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&h=1200&fit=crop',
-    content: `## Welcome to Plant-Based Living!\n\nGoing vegan doesn't have to be overwhelming. This guide breaks it down into manageable steps.\n\n## Start Slow\n\nYou don't have to go vegan overnight. Try these approaches:\n1. **Meatless Mondays** — Start with one day a week\n2. **Veganize your favorites** — Swap ingredients in dishes you already love\n3. **Add before you subtract** — Add more plants before removing animal products\n\n## What Do Vegans Eat?\n\nEverything! Minus a few things. Here's what stays:\n- All fruits and vegetables\n- Grains: rice, pasta, bread, oats, quinoa\n- Legumes: beans, lentils, chickpeas, peanuts\n- Nuts and seeds\n- Tofu, tempeh, seitan\n- Plant milks and yogurts\n- All herbs and spices\n\n## Easy Swaps\n\n| Instead of... | Try... |\n|---------------|--------|\n| Cow's milk | Oat milk |\n| Butter | Olive oil or vegan butter |\n| Eggs (baking) | Flax egg or banana |\n| Cheese | Nutritional yeast |\n| Meat | Beans, lentils, tofu |\n| Honey | Maple syrup |\n\n## Common Concerns\n\n**"Will I get enough nutrients?"**\nYes — focus on variety. Consider a B12 supplement (the one nutrient vegans need to supplement).\n\n**"What about eating out?"**\nMost restaurants have vegan options. Asian, Indian, Mexican, and Mediterranean cuisines are naturally plant-forward.\n\n**"What about social situations?"**\nBring a dish to share. Most people are curious, not critical. Lead by example with delicious food.\n\n## Your First Week\n\n1. Stock your pantry with basics\n2. Try 3 new recipes\n3. Find your favorite plant milk\n4. Discover 2-3 restaurants with vegan options\n5. Join an online community for support\n\nRemember: progress, not perfection. Every plant-based meal makes a difference.`,
-    tags: ['beginner', 'guide', 'lifestyle', 'tips'],
-    datePublished: '2026-02-09',
-    readTime: 7,
-  },
-];
+export { blogPosts } from './blogData';
 
 export const mealPrepPlans = [
   {

@@ -1,8 +1,17 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Clock, ChefHat } from 'lucide-react';
+import { ArrowRight, Clock, ChefHat, Calculator, Scale, Ruler, Repeat, Timer, Leaf } from 'lucide-react';
 import { recipes, categories } from '@/data/recipes';
 import RecipeCard from '@/components/RecipeCard';
 import NewsletterSignup from '@/components/NewsletterSignup';
+
+const featuredTools = [
+  { slug: 'calorie-calculator', name: 'Calorie Calculator', desc: 'Calculate daily calorie needs', icon: Calculator },
+  { slug: 'recipe-scaler', name: 'Recipe Scaler', desc: 'Scale any recipe up or down', icon: Scale },
+  { slug: 'bmi-calculator', name: 'BMI Calculator', desc: 'Check your BMI instantly', icon: Ruler },
+  { slug: 'baking-substitutions', name: 'Baking Substitutions', desc: 'Find vegan ingredient swaps', icon: Repeat },
+  { slug: 'cooking-timer', name: 'Cooking Timer', desc: 'Multiple named timers', icon: Timer },
+  { slug: 'spice-pairing', name: 'Spice Pairing Guide', desc: 'Perfect spice combos', icon: Leaf },
+];
 
 export default function Home() {
   const featured = recipes.find(r => r.featured) || recipes[0];
@@ -65,6 +74,35 @@ export default function Home() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {latest.map(r => <RecipeCard key={r.id} recipe={r} />)}
+        </div>
+      </section>
+
+      {/* Free Tools */}
+      <section className="bg-cream">
+        <div className="max-w-6xl mx-auto px-4 py-16">
+          <div className="flex items-center justify-between mb-10">
+            <div>
+              <h2 className="font-heading text-3xl font-bold">Free Cooking & Nutrition Tools</h2>
+              <p className="text-muted mt-2">25 calculators and guides to help you cook smarter</p>
+            </div>
+            <Link to="/tools" className="text-primary font-semibold text-sm hover:underline flex items-center gap-1">
+              All 25 Tools <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {featuredTools.map(t => {
+              const Icon = t.icon;
+              return (
+                <Link key={t.slug} to={`/tools/${t.slug}`} className="group bg-white rounded-xl p-4 text-center border border-border hover:border-primary hover:shadow-md transition-all">
+                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-3 group-hover:bg-primary/20 transition-colors">
+                    <Icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <h3 className="font-heading text-sm font-semibold group-hover:text-primary transition-colors">{t.name}</h3>
+                  <p className="text-xs text-muted mt-1">{t.desc}</p>
+                </Link>
+              );
+            })}
+          </div>
         </div>
       </section>
 
