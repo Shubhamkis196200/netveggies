@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glycemic Index Lookup — Search Any Food | NetVeggies</title>
+  <meta name="description" content="Search the glycemic index and glycemic load of foods. Find low-GI options for blood sugar management.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:900px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:24px}.breadcrumb{max-width:900px;margin:0 auto;padding:12px 20px;font-size:.85rem;color:var(--text-muted)}.breadcrumb a{color:var(--sage-dark)}
+    .search-box{width:100%;padding:14px 20px;border:2px solid var(--border);border-radius:10px;font-size:1.05rem;font-family:inherit;margin-bottom:16px}.search-box:focus{border-color:var(--sage);outline:none}
+    .filter-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.filter-btn{padding:8px 16px;border-radius:20px;border:1px solid var(--border);background:var(--white);cursor:pointer;font-size:.85rem}.filter-btn.active{background:var(--sage);color:#fff;border-color:var(--sage)}
+    table.dt{width:100%;border-collapse:collapse}table.dt th,table.dt td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left;font-size:.88rem}table.dt th{background:var(--sage-light);font-weight:600;cursor:pointer}table.dt th:hover{background:var(--sage);color:#fff}table.dt tr:hover{background:var(--cream)}
+    .gi-low{color:#5c7e60;font-weight:700}.gi-med{color:#c49b3b;font-weight:700}.gi-high{color:#c4704b;font-weight:700}
+    .badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.75rem;font-weight:600}.badge-low{background:#e8f0e9;color:#5c7e60}.badge-med{background:#fef3cd;color:#856404}.badge-high{background:#f5e0d6;color:#c4704b}
+    .result-box{background:var(--sage-light);border-radius:var(--radius);padding:24px;margin-top:24px;border-left:4px solid var(--sage)}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="../recipes.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../about.html">About</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero"><h1>📊 Glycemic Index Lookup</h1><p>Search any food to find its GI value and glycemic load. Filter by low, medium, or high GI.</p></section>
+    <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Tools</a> › Glycemic Index Lookup</div>
+    <div class="tool-container">
+      <div class="tool-card">
+        <input type="text" class="search-box" id="search" placeholder="🔍 Search foods (e.g., banana, oats, rice...)">
+        <div class="filter-btns">
+          <button class="filter-btn active" onclick="filter('all',this)">All</button>
+          <button class="filter-btn" onclick="filter('low',this)">🟢 Low GI (≤55)</button>
+          <button class="filter-btn" onclick="filter('med',this)">🟡 Medium (56-69)</button>
+          <button class="filter-btn" onclick="filter('high',this)">🔴 High (70+)</button>
+        </div>
+        <div style="overflow-x:auto;max-height:500px;overflow-y:auto"><table class="dt"><thead><tr><th onclick="sortBy('name')">Food</th><th onclick="sortBy('gi')">GI</th><th>Rating</th><th onclick="sortBy('gl')">GL</th><th>Serving</th><th>Carbs (g)</th></tr></thead><tbody id="tbody"></tbody></table></div>
+      </div>
+      <div class="result-box">
+        <h3>📖 Understanding GI & GL</h3>
+        <p style="margin:8px 0"><strong>Glycemic Index (GI):</strong> How quickly a food raises blood sugar (0-100 scale). Low ≤55, Medium 56-69, High ≥70.</p>
+        <p style="margin:8px 0"><strong>Glycemic Load (GL):</strong> GI × carbs per serving ÷ 100. Accounts for portion size. Low ≤10, Medium 11-19, High ≥20.</p>
+        <p style="margin:8px 0;color:var(--sage-dark)">💡 <strong>Tip:</strong> Combine high-GI foods with protein, fat, or fiber to lower the overall glycemic response.</p>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools.</p></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools →</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    const foods=[
+      {name:'Apple',gi:36,gl:5,serving:'1 medium',carbs:14},
+      {name:'Banana (ripe)',gi:62,gl:16,serving:'1 medium',carbs:27},
+      {name:'Banana (green)',gi:42,gl:11,serving:'1 medium',carbs:27},
+      {name:'Orange',gi:43,gl:5,serving:'1 medium',carbs:12},
+      {name:'Watermelon',gi:76,gl:8,serving:'1 cup',carbs:11},
+      {name:'Grapes',gi:59,gl:11,serving:'1 cup',carbs:18},
+      {name:'Mango',gi:51,gl:8,serving:'½ cup',carbs:15},
+      {name:'Pineapple',gi:59,gl:7,serving:'1 cup',carbs:13},
+      {name:'Blueberries',gi:53,gl:5,serving:'1 cup',carbs:11},
+      {name:'Dates (dried)',gi:42,gl:18,serving:'60g (~3)',carbs:44},
+      {name:'White Rice',gi:73,gl:30,serving:'1 cup cooked',carbs:42},
+      {name:'Brown Rice',gi:50,gl:16,serving:'1 cup cooked',carbs:33},
+      {name:'Basmati Rice',gi:58,gl:22,serving:'1 cup cooked',carbs:38},
+      {name:'Oats (rolled)',gi:55,gl:13,serving:'1 cup cooked',carbs:24},
+      {name:'Steel-Cut Oats',gi:42,gl:9,serving:'1 cup cooked',carbs:22},
+      {name:'Quinoa',gi:53,gl:13,serving:'1 cup cooked',carbs:25},
+      {name:'White Bread',gi:75,gl:10,serving:'1 slice',carbs:14},
+      {name:'Whole Wheat Bread',gi:69,gl:9,serving:'1 slice',carbs:13},
+      {name:'Sourdough Bread',gi:54,gl:8,serving:'1 slice',carbs:15},
+      {name:'Sweet Potato',gi:63,gl:17,serving:'1 medium',carbs:27},
+      {name:'Russet Potato (baked)',gi:85,gl:26,serving:'1 medium',carbs:30},
+      {name:'Chickpeas',gi:28,gl:8,serving:'1 cup cooked',carbs:30},
+      {name:'Lentils',gi:29,gl:5,serving:'1 cup cooked',carbs:18},
+      {name:'Black Beans',gi:30,gl:7,serving:'1 cup cooked',carbs:24},
+      {name:'Kidney Beans',gi:24,gl:6,serving:'1 cup cooked',carbs:25},
+      {name:'Pasta (white)',gi:49,gl:24,serving:'1 cup cooked',carbs:48},
+      {name:'Pasta (whole wheat)',gi:42,gl:17,serving:'1 cup cooked',carbs:40},
+      {name:'Corn',gi:52,gl:9,serving:'1 ear',carbs:17},
+      {name:'Carrots (raw)',gi:16,gl:1,serving:'1 medium',carbs:6},
+      {name:'Carrots (cooked)',gi:39,gl:2,serving:'½ cup',carbs:6},
+      {name:'Pumpkin',gi:75,gl:3,serving:'½ cup',carbs:4},
+      {name:'Peanuts',gi:14,gl:1,serving:'1 oz',carbs:6},
+      {name:'Hummus',gi:6,gl:0,serving:'2 tbsp',carbs:3},
+      {name:'Popcorn',gi:65,gl:7,serving:'2 cups popped',carbs:11},
+      {name:'Dark Chocolate (70%+)',gi:23,gl:4,serving:'1 oz',carbs:17},
+      {name:'Agave Nectar',gi:15,gl:2,serving:'1 tbsp',carbs:16},
+      {name:'Maple Syrup',gi:54,gl:10,serving:'1 tbsp',carbs:13},
+      {name:'White Sugar',gi:65,gl:7,serving:'1 tbsp',carbs:12},
+      {name:'Honey',gi:61,gl:12,serving:'1 tbsp',carbs:17},
+      {name:'Coconut Sugar',gi:35,gl:4,serving:'1 tbsp',carbs:12},
+    ];
+    let currentFilter='all',sortField='name',sortDir=1;
+    function giClass(gi){return gi<=55?'low':gi<=69?'med':'high'}
+    function giBadge(gi){const c=giClass(gi);return `<span class="badge badge-${c}">${c==='low'?'Low':c==='med'?'Medium':'High'}</span>`}
+    function render(){
+      const q=document.getElementById('search').value.toLowerCase();
+      let data=foods.filter(f=>{
+        if(q&&!f.name.toLowerCase().includes(q))return false;
+        if(currentFilter==='low'&&f.gi>55)return false;
+        if(currentFilter==='med'&&(f.gi<=55||f.gi>69))return false;
+        if(currentFilter==='high'&&f.gi<70)return false;
+        return true;
+      });
+      data.sort((a,b)=>sortDir*(a[sortField]>b[sortField]?1:a[sortField]<b[sortField]?-1:0));
+      document.getElementById('tbody').innerHTML=data.map(f=>`<tr>
+        <td><strong>${f.name}</strong></td>
+        <td class="gi-${giClass(f.gi)}">${f.gi}</td>
+        <td>${giBadge(f.gi)}</td>
+        <td>${f.gl}</td>
+        <td>${f.serving}</td>
+        <td>${f.carbs}g</td>
+      </tr>`).join('');
+    }
+    function filter(cat,btn){currentFilter=cat;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render()}
+    function sortBy(field){if(sortField===field)sortDir*=-1;else{sortField=field;sortDir=1}render()}
+    render();
+    document.getElementById('search').addEventListener('input',render);
+  </script>
+</body>
+</html>

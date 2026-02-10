@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yeast Calculator — Active Dry, Instant & Fresh Yeast Conversions | NetVeggies</title>
+  <meta name="description" content="Convert between active dry yeast, instant yeast, and fresh yeast. Get exact measurements for any recipe.">
+  <link rel="canonical" href="https://netveggies.com/tools/yeast-calculator.html">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}
+    .tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}
+    .tool-container{max-width:800px;margin:0 auto;padding:40px 20px}
+    .tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:24px}
+    .form-row{margin-bottom:20px}
+    .form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}
+    .form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit}
+    .btn-calc{background:var(--terracotta);color:#fff;border:none;padding:14px 32px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .2s}
+    .btn-calc:hover{background:#b5613e;transform:translateY(-1px)}
+    .result-box{background:var(--sage-light);border-radius:var(--radius);padding:24px;margin-top:24px;border-left:4px solid var(--sage)}
+    .breadcrumb{max-width:800px;margin:0 auto;padding:12px 20px;font-size:.85rem;color:var(--text-muted)}
+    .breadcrumb a{color:var(--sage-dark)}
+    .conversion-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:20px}
+    .conv-card{background:var(--cream);border-radius:8px;padding:20px;text-align:center}
+    .conv-card h4{font-size:.85rem;color:var(--text-muted);margin-bottom:8px}
+    .conv-card .amount{font-size:1.8rem;font-weight:700;color:var(--sage-dark)}
+    .conv-card .unit{font-size:.85rem;color:var(--text-light);margin-top:4px}
+    @media(max-width:600px){.conversion-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="../index.html" class="logo">Net<span>Veggies</span></a>
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button>
+      <nav class="main-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="../index.html">Home</a></li>
+          <li><a href="../recipes.html">Recipes</a></li>
+          <li><a href="index.html" class="active">Tools</a></li>
+          <li><a href="../vegan-meal-prep-guide.html">Meal Prep</a></li>
+          <li><a href="../about.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main">
+    <section class="tool-hero">
+      <h1>🍞 Yeast Calculator</h1>
+      <p>Convert between active dry, instant, and fresh yeast. Get exact amounts for perfect baking every time.</p>
+    </section>
+    <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Tools</a> › Yeast Calculator</div>
+    <div class="tool-container">
+      <div class="tool-card">
+        <div class="form-row">
+          <label for="yeastType">I have this type of yeast:</label>
+          <select id="yeastType">
+            <option value="active">Active Dry Yeast</option>
+            <option value="instant">Instant Yeast (Rapid Rise)</option>
+            <option value="fresh">Fresh Yeast (Cake Yeast)</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="yeastAmount">Amount</label>
+          <input type="number" id="yeastAmount" value="7" min="0.1" step="0.1">
+        </div>
+        <div class="form-row">
+          <label for="yeastUnit">Unit</label>
+          <select id="yeastUnit">
+            <option value="g">grams</option>
+            <option value="tsp">teaspoons</option>
+            <option value="tbsp">tablespoons</option>
+            <option value="packet">packets (7g / ¼ oz)</option>
+          </select>
+        </div>
+        <button class="btn-calc" onclick="convert()">Convert</button>
+        <div id="results" style="display:none">
+          <div class="conversion-grid">
+            <div class="conv-card">
+              <h4>Active Dry Yeast</h4>
+              <div class="amount" id="activeDry">—</div>
+              <div class="unit" id="activeDryUnit">grams</div>
+            </div>
+            <div class="conv-card">
+              <h4>Instant Yeast</h4>
+              <div class="amount" id="instant">—</div>
+              <div class="unit" id="instantUnit">grams</div>
+            </div>
+            <div class="conv-card">
+              <h4>Fresh Yeast</h4>
+              <div class="amount" id="fresh">—</div>
+              <div class="unit" id="freshUnit">grams</div>
+            </div>
+          </div>
+          <div class="result-box" style="margin-top:20px">
+            <h3 style="margin-bottom:8px">💡 Tips</h3>
+            <ul id="tips" style="padding-left:20px;line-height:1.8"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer">
+    <div class="footer-grid">
+      <div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools for real life.</p></div>
+      <div><h4>Tools</h4><ul><li><a href="index.html">All Tools →</a></li></ul></div>
+    </div>
+    <div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱</p></div>
+  </footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open');this.setAttribute('aria-expanded',this.getAttribute('aria-expanded')==='true'?'false':'true')});
+
+    // 1 tsp active dry = ~3.1g, 1 tbsp = ~9.3g, 1 packet = 7g
+    const toGrams = {
+      active: { g: 1, tsp: 3.1, tbsp: 9.3, packet: 7 },
+      instant: { g: 1, tsp: 3.1, tbsp: 9.3, packet: 7 },
+      fresh: { g: 1, tsp: 6, tbsp: 18, packet: 7 }  // fresh is denser
+    };
+
+    // Ratios: active dry = 1x, instant = 0.75x of active dry, fresh = 2.5x to 3x of active dry
+    function convert() {
+      const type = document.getElementById('yeastType').value;
+      const amount = parseFloat(document.getElementById('yeastAmount').value);
+      const unit = document.getElementById('yeastUnit').value;
+      if (!amount || amount <= 0) return;
+
+      // Convert to grams of active dry as base
+      let grams;
+      if (unit === 'packet') {
+        // 1 packet = 7g of active dry or instant, ~21g of fresh
+        grams = type === 'fresh' ? amount * 21 : amount * 7;
+      } else {
+        grams = amount * toGrams[type][unit];
+      }
+      // Now grams is in the type specified
+      // Convert to active dry grams as baseline
+      let activeDryG;
+      if (type === 'active') activeDryG = grams;
+      else if (type === 'instant') activeDryG = grams / 0.75; // instant is more potent
+      else activeDryG = grams / 2.8; // fresh to active dry
+
+      const instantG = activeDryG * 0.75;
+      const freshG = activeDryG * 2.8;
+
+      const fmt = n => n < 1 ? n.toFixed(2) : n < 10 ? n.toFixed(1) : Math.round(n);
+      const tspFmt = n => '(' + fmt(n / 3.1) + ' tsp)';
+
+      document.getElementById('activeDry').textContent = fmt(activeDryG);
+      document.getElementById('activeDryUnit').textContent = 'grams ' + tspFmt(activeDryG);
+      document.getElementById('instant').textContent = fmt(instantG);
+      document.getElementById('instantUnit').textContent = 'grams ' + tspFmt(instantG);
+      document.getElementById('fresh').textContent = fmt(freshG);
+      document.getElementById('freshUnit').textContent = 'grams (' + fmt(freshG / 6) + ' tsp)';
+
+      const tips = [];
+      tips.push('Active dry yeast needs to be dissolved in warm water (105-110°F / 40-43°C) before use.');
+      tips.push('Instant yeast can be mixed directly into dry ingredients — no proofing needed.');
+      tips.push('Fresh yeast should be crumbled and dissolved in lukewarm liquid.');
+      if (activeDryG > 14) tips.push('⚠️ Large amount of yeast — recipe may over-proof. Consider reducing.');
+      document.getElementById('tips').innerHTML = tips.map(t => '<li>' + t + '</li>').join('');
+      document.getElementById('results').style.display = 'block';
+    }
+  </script>
+</body>
+</html>

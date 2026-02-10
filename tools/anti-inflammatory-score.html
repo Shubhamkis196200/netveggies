@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anti-Inflammatory Foods Score — Rate Your Diet | NetVeggies</title>
+  <meta name="description" content="Score your diet's anti-inflammatory potential. Check which foods fight inflammation and which promote it.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:800px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:24px}.breadcrumb{max-width:800px;margin:0 auto;padding:12px 20px;font-size:.85rem;color:var(--text-muted)}.breadcrumb a{color:var(--sage-dark)}
+    .btn-calc{background:var(--terracotta);color:#fff;border:none;padding:14px 32px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer}.btn-calc:hover{background:#b5613e}
+    .result-box{background:var(--sage-light);border-radius:var(--radius);padding:24px;margin-top:24px;border-left:4px solid var(--sage)}
+    .food-group{margin-bottom:24px}.food-group h3{font-size:1rem;margin-bottom:12px;color:var(--sage-dark)}
+    .food-item{display:inline-block;margin:4px;padding:8px 16px;border-radius:20px;border:2px solid var(--border);cursor:pointer;font-size:.88rem;transition:all .2s;user-select:none}
+    .food-item:hover{border-color:var(--sage)}.food-item.selected{background:var(--sage);color:#fff;border-color:var(--sage)}
+    .food-item.bad{border-color:#e8b44d}.food-item.bad.selected{background:#c4704b;border-color:#c4704b}
+    .score-display{text-align:center;padding:32px;margin:20px 0}
+    .score-num{font-size:4rem;font-weight:700}.score-label{font-size:1.2rem;margin-top:8px}
+    .score-bar{height:16px;background:#eee;border-radius:8px;overflow:hidden;margin:16px 0}.score-fill{height:100%;border-radius:8px;transition:width .5s}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="../recipes.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../about.html">About</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero"><h1>🛡️ Anti-Inflammatory Foods Score</h1><p>Select the foods you eat regularly and we'll rate your diet's anti-inflammatory potential.</p></section>
+    <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Tools</a> › Anti-Inflammatory Score</div>
+    <div class="tool-container">
+      <div class="tool-card">
+        <p style="margin-bottom:20px;color:var(--text-light)">Click foods you eat <strong>at least 2-3 times per week</strong>:</p>
+        <div id="foods"></div>
+        <button class="btn-calc" onclick="calculate()" style="margin-top:20px;width:100%">Calculate My Score</button>
+        <div id="results" style="display:none"></div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools.</p></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools →</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    const groups=[
+      {name:'🥬 Leafy Greens & Cruciferous',items:[
+        {n:'Kale',s:3},{n:'Spinach',s:3},{n:'Broccoli',s:3},{n:'Brussels Sprouts',s:2},{n:'Bok Choy',s:2},{n:'Collard Greens',s:2},{n:'Arugula',s:2},{n:'Cauliflower',s:2}
+      ]},
+      {name:'🫐 Berries & Fruits',items:[
+        {n:'Blueberries',s:3},{n:'Strawberries',s:2},{n:'Cherries',s:3},{n:'Pomegranate',s:2},{n:'Oranges',s:2},{n:'Avocado',s:3},{n:'Pineapple',s:2},{n:'Tomatoes',s:2}
+      ]},
+      {name:'🧄 Herbs, Spices & Aromatics',items:[
+        {n:'Turmeric',s:4},{n:'Ginger',s:3},{n:'Garlic',s:3},{n:'Cinnamon',s:2},{n:'Cayenne',s:2},{n:'Black Pepper',s:1},{n:'Rosemary',s:2},{n:'Green Tea',s:3}
+      ]},
+      {name:'🥜 Nuts, Seeds & Healthy Fats',items:[
+        {n:'Walnuts',s:3},{n:'Almonds',s:2},{n:'Flaxseed',s:3},{n:'Chia Seeds',s:3},{n:'Hemp Seeds',s:2},{n:'Extra Virgin Olive Oil',s:3},{n:'Coconut Oil',s:1}
+      ]},
+      {name:'🫘 Legumes & Whole Grains',items:[
+        {n:'Lentils',s:2},{n:'Chickpeas',s:2},{n:'Black Beans',s:2},{n:'Quinoa',s:2},{n:'Oats',s:2},{n:'Brown Rice',s:1},{n:'Sweet Potato',s:2},{n:'Beets',s:2}
+      ]},
+      {name:'⚠️ Pro-Inflammatory Foods (reduce these)',items:[
+        {n:'White Sugar',s:-3,bad:true},{n:'Refined Flour',s:-2,bad:true},{n:'Fried Foods',s:-3,bad:true},{n:'Soda/Sugary Drinks',s:-3,bad:true},{n:'Processed Snacks',s:-2,bad:true},{n:'Alcohol',s:-2,bad:true},{n:'Margarine',s:-1,bad:true},{n:'Excess Caffeine',s:-1,bad:true}
+      ]}
+    ];
+    const container=document.getElementById('foods');
+    groups.forEach(g=>{
+      let html=`<div class="food-group"><h3>${g.name}</h3>`;
+      g.items.forEach((item,i)=>{
+        html+=`<span class="food-item${item.bad?' bad':''}" data-score="${item.s}" onclick="this.classList.toggle('selected')">${item.n}</span>`;
+      });
+      html+='</div>';
+      container.innerHTML+=html;
+    });
+    function calculate(){
+      const selected=document.querySelectorAll('.food-item.selected');
+      let score=0,good=0,bad=0;
+      selected.forEach(el=>{
+        const s=parseInt(el.dataset.score);
+        score+=s;
+        if(s>0)good++;else bad++;
+      });
+      const maxScore=60;
+      const pct=Math.max(0,Math.min(100,Math.round((score+20)/(maxScore+20)*100)));
+      let rating,color,tips=[];
+      if(pct>=80){rating='🌟 Excellent';color='#5c7e60';tips=['Your diet is strongly anti-inflammatory!','Keep it up with turmeric, berries, and leafy greens.']}
+      else if(pct>=60){rating='✅ Good';color='#7a9e7e';tips=['Solid anti-inflammatory diet.','Try adding more turmeric, ginger, and berries.','Reduce any pro-inflammatory items you selected.']}
+      else if(pct>=40){rating='🟡 Moderate';color='#c49b3b';tips=['Room for improvement.','Add more leafy greens, berries, and omega-3 rich foods.','Cut back on processed foods and sugar.']}
+      else{rating='🔴 Needs Work';color='#c4704b';tips=['Your diet may be promoting inflammation.','Start by adding 1-2 anti-inflammatory foods daily.','Reduce fried foods, sugar, and processed snacks.','Try a daily turmeric + black pepper + ginger tea.']}
+      document.getElementById('results').innerHTML=`
+        <div class="score-display">
+          <div class="score-num" style="color:${color}">${score > 0 ? '+' : ''}${score}</div>
+          <div class="score-bar"><div class="score-fill" style="width:${pct}%;background:${color}"></div></div>
+          <div class="score-label">${rating}</div>
+          <p style="font-size:.9rem;color:var(--text-muted);margin-top:8px">${good} anti-inflammatory foods · ${bad} pro-inflammatory foods</p>
+        </div>
+        <div class="result-box"><h3>💡 Recommendations</h3><ul style="padding-left:20px;line-height:1.8">${tips.map(t=>'<li>'+t+'</li>').join('')}</ul></div>`;
+      document.getElementById('results').style.display='block';
+    }
+  </script>
+</body>
+</html>

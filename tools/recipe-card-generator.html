@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Card Generator — Create Printable Cards | NetVeggies</title>
+  <meta name="description" content="Generate beautiful printable recipe cards. Perfect for cookbooks, gifts, or your recipe box.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    @media print{.no-print{display:none}body{background:#fff}.recipe-card{box-shadow:none;page-break-after:always}}
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:900px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:24px}.breadcrumb{max-width:900px;margin:0 auto;padding:12px 20px;font-size:.85rem;color:var(--text-muted)}.breadcrumb a{color:var(--sage-dark)}
+    .form-row{margin-bottom:16px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.9rem}.form-row input,.form-row textarea{width:100%;padding:10px 14px;border:1px solid var(--border);border-radius:6px;font-size:.95rem;font-family:inherit}.form-row textarea{min-height:100px;resize:vertical}
+    .btn-gen{background:var(--terracotta);color:#fff;border:none;padding:12px 28px;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer}.btn-gen:hover{background:#b5613e}
+    .recipe-card{max-width:600px;margin:40px auto;padding:40px;background:#fff;border:2px solid var(--sage);border-radius:8px;box-shadow:var(--shadow-lg)}
+    .recipe-card .title{font-family:'Playfair Display',serif;font-size:2rem;color:var(--sage-dark);border-bottom:3px solid var(--sage);padding-bottom:12px;margin-bottom:20px}
+    .recipe-card .meta{display:flex;gap:20px;margin-bottom:24px;font-size:.9rem}.recipe-card .meta div{display:flex;align-items:center;gap:6px}
+    .recipe-card .section{margin-bottom:24px}.recipe-card .section h3{font-size:1.1rem;color:var(--sage-dark);margin-bottom:12px;border-left:4px solid var(--sage);padding-left:12px}
+    .recipe-card ul,.recipe-card ol{padding-left:24px;line-height:1.9}.recipe-card li{margin-bottom:6px}
+    .recipe-card .footer{text-align:center;margin-top:32px;padding-top:20px;border-top:2px solid var(--border);font-size:.85rem;color:var(--text-muted)}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header no-print"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="../recipes.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../about.html">About</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero no-print"><h1>📇 Recipe Card Generator</h1><p>Create beautiful printable recipe cards for your collection or as gifts.</p></section>
+    <div class="breadcrumb no-print"><a href="../index.html">Home</a> › <a href="index.html">Tools</a> › Recipe Card Generator</div>
+    <div class="tool-container">
+      <div class="tool-card no-print">
+        <div class="form-row"><label for="rTitle">Recipe Title</label><input type="text" id="rTitle" placeholder="e.g., Creamy Vegan Pasta"></div>
+        <div class="form-row"><label for="rTime">Total Time</label><input type="text" id="rTime" placeholder="e.g., 30 minutes"></div>
+        <div class="form-row"><label for="rServ">Servings</label><input type="text" id="rServ" placeholder="e.g., 4"></div>
+        <div class="form-row"><label for="rDiff">Difficulty</label><input type="text" id="rDiff" placeholder="e.g., Easy"></div>
+        <div class="form-row"><label for="rIng">Ingredients (one per line)</label><textarea id="rIng" placeholder="2 cups rice&#10;1 can chickpeas&#10;1 tbsp olive oil"></textarea></div>
+        <div class="form-row"><label for="rInst">Instructions (one step per line)</label><textarea id="rInst" placeholder="Cook rice according to package.&#10;Drain chickpeas and rinse.&#10;Heat oil in pan."></textarea></div>
+        <div class="form-row"><label for="rNotes">Notes (optional)</label><textarea id="rNotes" style="min-height:60px" placeholder="Storage tips, substitutions, etc."></textarea></div>
+        <button class="btn-gen" onclick="generate()">Generate Recipe Card</button>
+        <button class="btn-gen" onclick="window.print()" style="margin-left:12px;background:var(--sage)">Print Card</button>
+      </div>
+      <div id="output"></div>
+    </div>
+  </main>
+  <footer class="site-footer no-print"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools.</p></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools →</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    function generate(){
+      const title=document.getElementById('rTitle').value||'Recipe Title';
+      const time=document.getElementById('rTime').value||'—';
+      const serv=document.getElementById('rServ').value||'—';
+      const diff=document.getElementById('rDiff').value||'—';
+      const ing=document.getElementById('rIng').value.trim().split('\n').filter(l=>l).map(l=>'<li>'+l+'</li>').join('');
+      const inst=document.getElementById('rInst').value.trim().split('\n').filter(l=>l).map((l,i)=>'<li>'+l+'</li>').join('');
+      const notes=document.getElementById('rNotes').value.trim();
+      document.getElementById('output').innerHTML=`
+        <div class="recipe-card">
+          <div class="title">${title}</div>
+          <div class="meta">
+            <div>⏱️ ${time}</div>
+            <div>🍽️ ${serv} servings</div>
+            <div>📊 ${diff}</div>
+          </div>
+          <div class="section"><h3>Ingredients</h3><ul>${ing||'<li>Add ingredients above</li>'}</ul></div>
+          <div class="section"><h3>Instructions</h3><ol>${inst||'<li>Add instructions above</li>'}</ol></div>
+          ${notes?'<div class="section"><h3>Notes</h3><p style="line-height:1.7">'+notes+'</p></div>':''}
+          <div class="footer">Recipe from NetVeggies.com 🌱</div>
+        </div>`;
+      document.getElementById('output').scrollIntoView({behavior:'smooth'});
+    }
+  </script>
+</body>
+</html>

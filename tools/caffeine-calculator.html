@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caffeine Calculator — Track Daily Caffeine | NetVeggies</title>
+  <meta name="description" content="Track your daily caffeine intake from coffee, tea, energy drinks, and more. Stay within healthy limits.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:800px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:24px}.breadcrumb{max-width:800px;margin:0 auto;padding:12px 20px;font-size:.85rem;color:var(--text-muted)}.breadcrumb a{color:var(--sage-dark)}
+    .bev-row{display:flex;gap:8px;margin-bottom:8px;align-items:center}.bev-row select,.bev-row input{padding:10px;border:1px solid var(--border);border-radius:6px;font-size:.9rem}.bev-row select{flex:2}.bev-row input{flex:1}.bev-row button{padding:10px 14px;background:#ddd;border:none;border-radius:6px;cursor:pointer}.bev-row button:hover{background:#ccc}
+    .btn-calc{background:var(--terracotta);color:#fff;border:none;padding:14px 32px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer}.btn-calc:hover{background:#b5613e}
+    .result-box{background:var(--sage-light);border-radius:var(--radius);padding:24px;margin-top:24px;border-left:4px solid var(--sage)}
+    .caff-meter{height:40px;background:#eee;border-radius:20px;overflow:hidden;position:relative;margin:20px 0}.caff-fill{height:100%;border-radius:20px;transition:width .5s,background .5s}.caff-label{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-weight:700;z-index:2}
+    .big-num{font-size:3rem;font-weight:700;text-align:center;margin:20px 0}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="../recipes.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../about.html">About</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero"><h1>☕ Caffeine Calculator</h1><p>Track your daily caffeine intake and stay within healthy limits.</p></section>
+    <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Tools</a> › Caffeine Calculator</div>
+    <div class="tool-container">
+      <div class="tool-card">
+        <h3 style="margin-bottom:12px">Add Your Drinks</h3>
+        <div id="drinks">
+          <div class="bev-row">
+            <select class="drink-sel"></select>
+            <input type="number" class="qty" placeholder="Qty" min="1" value="1">
+            <button onclick="this.parentElement.remove()">✕</button>
+          </div>
+        </div>
+        <button onclick="addDrink()" style="background:var(--sage);color:#fff;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;margin-top:8px">+ Add Drink</button>
+        <button class="btn-calc" onclick="calculate()" style="width:100%;margin-top:16px">Calculate Total Caffeine</button>
+        <div id="results" style="display:none"></div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools.</p></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools →</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    const db={
+      'Coffee - Espresso (1 shot)':64,
+      'Coffee - Brewed (8 oz)':95,
+      'Coffee - Drip (12 oz)':140,
+      'Coffee - Cold Brew (12 oz)':200,
+      'Coffee - Instant (8 oz)':62,
+      'Coffee - Decaf (8 oz)':2,
+      'Black Tea (8 oz)':47,
+      'Green Tea (8 oz)':28,
+      'White Tea (8 oz)':15,
+      'Matcha (1 tsp powder)':70,
+      'Chai Latte (12 oz)':50,
+      'Yerba Mate (8 oz)':85,
+      'Energy Drink - Red Bull (8.4 oz)':80,
+      'Energy Drink - Monster (16 oz)':160,
+      'Energy Drink - Bang (16 oz)':300,
+      'Soda - Coca-Cola (12 oz)':34,
+      'Soda - Pepsi (12 oz)':38,
+      'Soda - Mountain Dew (12 oz)':54,
+      'Dark Chocolate (1 oz)':23,
+      'Milk Chocolate (1 oz)':9,
+      'Pre-Workout Supplement (1 scoop)':200,
+      'Caffeine Pill (1 tablet)':200
+    };
+    function populate(){
+      const opts=Object.keys(db).map(d=>`<option value="${d}">${d} — ${db[d]}mg</option>`).join('');
+      document.querySelectorAll('.drink-sel').forEach(sel=>sel.innerHTML=opts);
+    }
+    populate();
+    function addDrink(){
+      const div=document.createElement('div');
+      div.className='bev-row';
+      div.innerHTML=`<select class="drink-sel"></select><input type="number" class="qty" placeholder="Qty" min="1" value="1"><button onclick="this.parentElement.remove()">✕</button>`;
+      document.getElementById('drinks').appendChild(div);
+      populate();
+    }
+    function calculate(){
+      const rows=document.querySelectorAll('.bev-row');
+      let total=0;
+      rows.forEach(row=>{
+        const drink=row.querySelector('.drink-sel').value;
+        const qty=parseInt(row.querySelector('.qty').value)||1;
+        total+=db[drink]*qty;
+      });
+      const limit=400;
+      const pct=Math.min(100,Math.round(total/limit*100));
+      let color,msg,tips=[];
+      if(total>500){color='#c4704b';msg='⚠️ Way Too High!';tips=['You\'ve exceeded the safe limit significantly.','Cut back immediately — you may experience jitters, anxiety, heart palpitations.','Try decaf or herbal tea instead.']}
+      else if(total>400){color='#e8944d';msg='🔴 Over Limit';tips=['FDA recommends max 400mg/day for most adults.','Consider switching to decaf or green tea.','Spread caffeine intake throughout the day, not all at once.']}
+      else if(total>300){color='#c49b3b';msg='🟡 High but Safe';tips=['You\'re approaching the recommended limit.','Monitor for side effects like restlessness or trouble sleeping.','Avoid caffeine 6+ hours before bed.']}
+      else if(total>150){color='#7a9e7e';msg='✅ Moderate';tips=['Healthy caffeine intake!','Enjoy the energy boost without overdoing it.','Stay hydrated — caffeine is a mild diuretic.']}
+      else{color='#5c7e60';msg='🟢 Low';tips=['Very low caffeine intake.','Great if you\'re sensitive to caffeine or prefer less stimulation.','You can enjoy an extra cup if needed!']}
+      document.getElementById('results').innerHTML=`
+        <div class="big-num" style="color:${color}">${total}mg</div>
+        <div class="caff-meter">
+          <div class="caff-fill" style="width:${pct}%;background:${color}"></div>
+          <div class="caff-label">${pct}% of daily limit (400mg)</div>
+        </div>
+        <div class="result-box">
+          <h3 style="color:${color}">${msg}</h3>
+          <ul style="padding-left:20px;line-height:1.8;margin-top:12px">${tips.map(t=>'<li>'+t+'</li>').join('')}</ul>
+          <p style="margin-top:16px;font-size:.85rem;color:var(--text-muted)"><strong>Note:</strong> Pregnant women should limit to 200mg/day. Sensitivity varies by individual.</p>
+        </div>`;
+      document.getElementById('results').style.display='block';
+    }
+  </script>
+</body>
+</html>

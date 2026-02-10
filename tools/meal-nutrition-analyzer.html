@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meal Nutrition Analyzer — Calculate Full Nutrition | NetVeggies</title>
+  <meta name="description" content="Input ingredients and get complete nutrition facts: calories, protein, carbs, fat, fiber, vitamins, and minerals.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:900px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:24px}.breadcrumb{max-width:900px;margin:0 auto;padding:12px 20px;font-size:.85rem;color:var(--text-muted)}.breadcrumb a{color:var(--sage-dark)}
+    .form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row select,.form-row input,.form-row textarea{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit}
+    .btn-calc{background:var(--terracotta);color:#fff;border:none;padding:14px 32px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer}.btn-calc:hover{background:#b5613e}
+    .result-box{background:var(--sage-light);border-radius:var(--radius);padding:24px;margin-top:24px;border-left:4px solid var(--sage)}
+    .ing-row{display:flex;gap:8px;margin-bottom:8px;align-items:center}.ing-row input{flex:1}.ing-row button{padding:8px 12px;background:#ddd;border:none;border-radius:6px;cursor:pointer}.ing-row button:hover{background:#ccc}
+    .macro-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:16px;margin:20px 0}
+    .macro-card{background:var(--cream);border-radius:8px;padding:16px;text-align:center}.macro-card .val{font-size:1.8rem;font-weight:700;color:var(--sage-dark)}.macro-card .lbl{font-size:.8rem;color:var(--text-muted);margin-top:4px}
+    table.nut-table{width:100%;border-collapse:collapse;margin-top:16px}table.nut-table th,table.nut-table td{padding:8px 12px;border-bottom:1px solid var(--border);text-align:left;font-size:.88rem}table.nut-table th{background:var(--sage-light);font-weight:600}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="../recipes.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../about.html">About</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero"><h1>🥗 Meal Nutrition Analyzer</h1><p>Input your ingredients and get complete nutrition breakdown: calories, macros, vitamins, and minerals.</p></section>
+    <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Tools</a> › Meal Nutrition Analyzer</div>
+    <div class="tool-container">
+      <div class="tool-card">
+        <h3 style="margin-bottom:12px">Add Ingredients</h3>
+        <div id="ingredients">
+          <div class="ing-row">
+            <select class="food-sel"><option value="">Select food...</option></select>
+            <input type="number" class="amt" placeholder="Amount" min="0" step="0.1" value="100">
+            <select class="unit"><option value="g">g</option><option value="cup">cup</option><option value="oz">oz</option></select>
+            <button onclick="this.parentElement.remove()">✕</button>
+          </div>
+        </div>
+        <button onclick="addRow()" style="background:var(--sage);color:#fff;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;margin-top:8px">+ Add Ingredient</button>
+        <div class="form-row" style="margin-top:20px">
+          <label for="servings">Number of Servings</label>
+          <input type="number" id="servings" value="1" min="1" max="20">
+        </div>
+        <button class="btn-calc" onclick="calculate()" style="width:100%">Analyze Nutrition</button>
+        <div id="results" style="display:none"></div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools.</p></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools →</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    const db={
+      'Brown Rice (cooked)':{cal:112,pro:2.6,carb:23.5,fat:0.9,fiber:1.8,iron:0.4,calc:10,vitC:0},
+      'Chickpeas (cooked)':{cal:164,pro:8.9,carb:27.4,fat:2.6,fiber:7.6,iron:2.9,calc:49,vitC:1.3},
+      'Lentils (cooked)':{cal:116,pro:9,carb:20,fat:0.4,fiber:7.9,iron:3.3,calc:19,vitC:1.5},
+      'Black Beans (cooked)':{cal:132,pro:8.9,carb:23.7,fat:0.5,fiber:8.7,iron:2.1,calc:27,vitC:0},
+      'Tofu (firm)':{cal:144,pro:17.3,carb:3.5,fat:8.7,fiber:2.3,iron:2.7,calc:350,vitC:0},
+      'Broccoli (cooked)':{cal:55,pro:3.7,carb:11.2,fat:0.6,fiber:5.1,iron:1.4,calc:62,vitC:89},
+      'Spinach (cooked)':{cal:41,pro:5.3,carb:6.8,fat:0.5,fiber:4.3,iron:6.4,calc:245,vitC:17},
+      'Kale (cooked)':{cal:36,pro:2.5,carb:7.3,fat:0.5,fiber:2,iron:1.2,calc:177,vitC:21},
+      'Sweet Potato (baked)':{cal:90,pro:2,carb:20.7,fat:0.2,fiber:3.3,iron:0.7,calc:38,vitC:19},
+      'Avocado':{cal:160,pro:2,carb:8.5,fat:14.7,fiber:6.7,iron:0.6,calc:12,vitC:10},
+      'Almonds':{cal:579,pro:21.2,carb:21.6,fat:49.9,fiber:12.5,iron:3.7,calc:269,vitC:0},
+      'Walnuts':{cal:654,pro:15.2,carb:13.7,fat:65.2,fiber:6.7,iron:2.9,calc:98,vitC:1.3},
+      'Quinoa (cooked)':{cal:120,pro:4.4,carb:21.3,fat:1.9,fiber:2.8,iron:1.5,calc:17,vitC:0},
+      'Oats (cooked)':{cal:71,pro:2.5,carb:12,fat:1.5,fiber:1.7,iron:1.2,calc:9,vitC:0},
+      'Banana':{cal:89,pro:1.1,carb:22.8,fat:0.3,fiber:2.6,iron:0.3,calc:5,vitC:8.7},
+      'Blueberries':{cal:57,pro:0.7,carb:14.5,fat:0.3,fiber:2.4,iron:0.3,calc:6,vitC:9.7},
+      'Strawberries':{cal:32,pro:0.7,carb:7.7,fat:0.3,fiber:2,iron:0.4,calc:16,vitC:58.8},
+      'Orange':{cal:47,pro:0.9,carb:11.8,fat:0.1,fiber:2.4,iron:0.1,calc:40,vitC:53.2},
+      'Peanut Butter':{cal:588,pro:25.8,carb:20,fat:50,fiber:8,iron:1.9,calc:49,vitC:0},
+      'Olive Oil':{cal:884,pro:0,carb:0,fat:100,fiber:0,iron:0.4,calc:1,vitC:0},
+      'Coconut Milk':{cal:230,pro:2.3,carb:5.5,fat:23.8,fiber:0,iron:3.9,calc:16,vitC:1},
+      'Tahini':{cal:595,pro:17,carb:21.2,fat:53.8,fiber:9.3,iron:8.9,calc:426,vitC:0},
+      'Tempeh':{cal:193,pro:20.3,carb:7.6,fat:10.8,fiber:0,iron:2.7,calc:111,vitC:0},
+      'Nutritional Yeast':{cal:325,pro:50,carb:36,fat:7,fiber:20,iron:2.1,calc:23,vitC:0}
+    };
+    function populate(){
+      const opts=Object.keys(db).sort().map(f=>`<option value="${f}">${f}</option>`).join('');
+      document.querySelectorAll('.food-sel').forEach(sel=>sel.innerHTML='<option value="">Select food...</option>'+opts);
+    }
+    populate();
+    function addRow(){
+      const div=document.createElement('div');
+      div.className='ing-row';
+      div.innerHTML=`<select class="food-sel"></select><input type="number" class="amt" placeholder="Amount" min="0" step="0.1" value="100"><select class="unit"><option value="g">g</option><option value="cup">cup</option><option value="oz">oz</option></select><button onclick="this.parentElement.remove()">✕</button>`;
+      document.getElementById('ingredients').appendChild(div);
+      populate();
+    }
+    function calculate(){
+      const rows=document.querySelectorAll('.ing-row');
+      let total={cal:0,pro:0,carb:0,fat:0,fiber:0,iron:0,calc:0,vitC:0};
+      rows.forEach(row=>{
+        const food=row.querySelector('.food-sel').value;
+        let amt=parseFloat(row.querySelector('.amt').value)||0;
+        const unit=row.querySelector('.unit').value;
+        if(!food||!amt)return;
+        if(unit==='oz')amt*=28.35;
+        if(unit==='cup')amt*=240;
+        const ratio=amt/100;
+        const d=db[food];
+        total.cal+=d.cal*ratio;
+        total.pro+=d.pro*ratio;
+        total.carb+=d.carb*ratio;
+        total.fat+=d.fat*ratio;
+        total.fiber+=d.fiber*ratio;
+        total.iron+=d.iron*ratio;
+        total.calc+=d.calc*ratio;
+        total.vitC+=d.vitC*ratio;
+      });
+      const servings=parseInt(document.getElementById('servings').value)||1;
+      const r=n=>Math.round(n/servings*10)/10;
+      const macros=`
+        <div class="macro-grid">
+          <div class="macro-card"><div class="val">${r(total.cal)}</div><div class="lbl">Calories</div></div>
+          <div class="macro-card"><div class="val">${r(total.pro)}g</div><div class="lbl">Protein</div></div>
+          <div class="macro-card"><div class="val">${r(total.carb)}g</div><div class="lbl">Carbs</div></div>
+          <div class="macro-card"><div class="val">${r(total.fat)}g</div><div class="lbl">Fat</div></div>
+          <div class="macro-card"><div class="val">${r(total.fiber)}g</div><div class="lbl">Fiber</div></div>
+        </div>`;
+      const table=`<table class="nut-table">
+        <thead><tr><th>Nutrient</th><th>Per Serving</th><th>% Daily Value*</th></tr></thead>
+        <tbody>
+          <tr><td>Iron</td><td>${r(total.iron)}mg</td><td>${Math.round(r(total.iron)/18*100)}%</td></tr>
+          <tr><td>Calcium</td><td>${r(total.calc)}mg</td><td>${Math.round(r(total.calc)/1000*100)}%</td></tr>
+          <tr><td>Vitamin C</td><td>${r(total.vitC)}mg</td><td>${Math.round(r(total.vitC)/90*100)}%</td></tr>
+          <tr><td>Fiber</td><td>${r(total.fiber)}g</td><td>${Math.round(r(total.fiber)/28*100)}%</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:.8rem;color:var(--text-muted);margin-top:12px">*Based on 2,000 calorie diet. Daily values may vary.</p>`;
+      document.getElementById('results').innerHTML=`<div class="result-box"><h3>Nutrition per Serving (${servings} serving${servings>1?'s':''})</h3>${macros}${table}</div>`;
+      document.getElementById('results').style.display='block';
+    }
+  </script>
+</body>
+</html>

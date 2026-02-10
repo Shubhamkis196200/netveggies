@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dehydrating Guide — Temps & Times for Every Food | NetVeggies</title>
+  <meta name="description" content="Complete food dehydrating guide with temperatures, times, and tips for fruits, vegetables, herbs, and more.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:900px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:24px}.breadcrumb{max-width:900px;margin:0 auto;padding:12px 20px;font-size:.85rem;color:var(--text-muted)}.breadcrumb a{color:var(--sage-dark)}
+    .search-box{width:100%;padding:14px 20px;border:2px solid var(--border);border-radius:10px;font-size:1.05rem;font-family:inherit;margin-bottom:16px}.search-box:focus{border-color:var(--sage);outline:none}
+    .filter-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.filter-btn{padding:8px 16px;border-radius:20px;border:1px solid var(--border);background:var(--white);cursor:pointer;font-size:.85rem;font-weight:500}.filter-btn.active{background:var(--sage);color:#fff;border-color:var(--sage)}
+    table.dt{width:100%;border-collapse:collapse}table.dt th,table.dt td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left;font-size:.88rem}table.dt th{background:var(--sage-light);font-weight:600}table.dt tr:hover{background:var(--cream)}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="../recipes.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../about.html">About</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero"><h1>🌡️ Dehydrating Guide</h1><p>Complete temperature and time guide for dehydrating fruits, vegetables, herbs, and more.</p></section>
+    <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Tools</a> › Dehydrating Guide</div>
+    <div class="tool-container">
+      <div class="tool-card">
+        <input type="text" class="search-box" id="search" placeholder="🔍 Search foods (e.g., apple, tomato, kale...)">
+        <div class="filter-btns">
+          <button class="filter-btn active" onclick="filter('all',this)">All</button>
+          <button class="filter-btn" onclick="filter('Fruit',this)">Fruits</button>
+          <button class="filter-btn" onclick="filter('Vegetable',this)">Vegetables</button>
+          <button class="filter-btn" onclick="filter('Herb',this)">Herbs</button>
+          <button class="filter-btn" onclick="filter('Other',this)">Other</button>
+        </div>
+        <div style="overflow-x:auto"><table class="dt"><thead><tr><th>Food</th><th>Category</th><th>Temp °F</th><th>Temp °C</th><th>Time (hrs)</th><th>Prep</th><th>Doneness Test</th></tr></thead><tbody id="tbody"></tbody></table></div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools.</p></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools →</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    const items=[
+      {name:'Apples',cat:'Fruit',f:135,hrs:'6-12',prep:'Core, slice ¼" rings. Dip in lemon water.',test:'Pliable, no moisture when torn'},
+      {name:'Bananas',cat:'Fruit',f:135,hrs:'8-12',prep:'Peel, slice ¼" rounds.',test:'Crispy chips or leathery'},
+      {name:'Strawberries',cat:'Fruit',f:135,hrs:'8-14',prep:'Hull, halve or slice ¼".',test:'Crisp with no moisture'},
+      {name:'Blueberries',cat:'Fruit',f:135,hrs:'10-18',prep:'Poke each berry or blanch to crack skins.',test:'Raisin-like, no squish'},
+      {name:'Mangoes',cat:'Fruit',f:135,hrs:'8-14',prep:'Peel, slice ¼" strips.',test:'Leathery and pliable'},
+      {name:'Grapes (raisins)',cat:'Fruit',f:135,hrs:'24-48',prep:'Halve for faster drying.',test:'Wrinkled, no moisture'},
+      {name:'Peaches',cat:'Fruit',f:135,hrs:'8-14',prep:'Blanch, peel, slice ½".',test:'Pliable, leathery'},
+      {name:'Pineapple',cat:'Fruit',f:135,hrs:'12-18',prep:'Core, slice ¼" rings.',test:'Leathery, no stickiness'},
+      {name:'Tomatoes',cat:'Vegetable',f:135,hrs:'8-14',prep:'Halve or slice ¼". Remove seeds for faster drying.',test:'Leathery, slightly pliable'},
+      {name:'Kale',cat:'Vegetable',f:125,hrs:'4-8',prep:'Remove stems, tear into chip-size pieces.',test:'Crispy, crumbles easily'},
+      {name:'Bell Peppers',cat:'Vegetable',f:125,hrs:'8-12',prep:'Remove seeds, slice ¼" strips or dice.',test:'Brittle and crisp'},
+      {name:'Zucchini',cat:'Vegetable',f:125,hrs:'8-12',prep:'Slice ¼" rounds.',test:'Brittle chips'},
+      {name:'Sweet Potatoes',cat:'Vegetable',f:125,hrs:'8-14',prep:'Peel, slice ⅛" thin.',test:'Crispy chips'},
+      {name:'Mushrooms',cat:'Vegetable',f:125,hrs:'6-10',prep:'Clean, slice ¼".',test:'Dry and leathery'},
+      {name:'Onions',cat:'Vegetable',f:125,hrs:'8-12',prep:'Peel, slice ¼" rings.',test:'Papery and crisp'},
+      {name:'Corn',cat:'Vegetable',f:130,hrs:'8-14',prep:'Blanch, cut kernels from cob.',test:'Hard and dry'},
+      {name:'Green Beans',cat:'Vegetable',f:125,hrs:'8-14',prep:'Blanch 3-4 min, cut into pieces.',test:'Brittle, snap easily'},
+      {name:'Carrots',cat:'Vegetable',f:125,hrs:'8-12',prep:'Blanch 3 min, slice ⅛" coins.',test:'Hard, no flexibility'},
+      {name:'Basil',cat:'Herb',f:95,hrs:'4-8',prep:'Remove from stems, spread in single layer.',test:'Crumbles easily'},
+      {name:'Oregano',cat:'Herb',f:95,hrs:'4-6',prep:'Small bunches or individual leaves.',test:'Crumbles between fingers'},
+      {name:'Rosemary',cat:'Herb',f:95,hrs:'4-8',prep:'Strip needles from stem.',test:'Dry, falls off stem'},
+      {name:'Parsley',cat:'Herb',f:95,hrs:'3-5',prep:'Remove thick stems.',test:'Crumbles easily'},
+      {name:'Mint',cat:'Herb',f:95,hrs:'3-5',prep:'Remove from stems.',test:'Crumbles when rubbed'},
+      {name:'Thyme',cat:'Herb',f:95,hrs:'3-6',prep:'Dry on stems, strip after.',test:'Leaves fall off stem'},
+      {name:'Tofu (jerky)',cat:'Other',f:155,hrs:'6-8',prep:'Press, marinate, slice ¼" strips.',test:'Chewy like jerky'},
+      {name:'Fruit Leather',cat:'Other',f:135,hrs:'8-14',prep:'Puree fruit, spread ⅛" on lined trays.',test:'Peels off cleanly, no stickiness'}
+    ];
+    let currentFilter='all';
+    function render(){
+      const q=document.getElementById('search').value.toLowerCase();
+      const filtered=items.filter(i=>{
+        if(q&&!i.name.toLowerCase().includes(q))return false;
+        if(currentFilter!=='all'&&i.cat!==currentFilter)return false;
+        return true;
+      });
+      document.getElementById('tbody').innerHTML=filtered.map(i=>{
+        const c=Math.round((i.f-32)*5/9);
+        return `<tr><td><strong>${i.name}</strong></td><td>${i.cat}</td><td>${i.f}°F</td><td>${c}°C</td><td>${i.hrs}</td><td>${i.prep}</td><td>${i.test}</td></tr>`;
+      }).join('');
+    }
+    function filter(cat,btn){currentFilter=cat;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render()}
+    render();
+    document.getElementById('search').addEventListener('input',render);
+  </script>
+</body>
+</html>

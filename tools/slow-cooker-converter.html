@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slow Cooker Converter — Oven to Slow Cooker Times | NetVeggies</title>
+  <meta name="description" content="Convert any oven recipe to slow cooker times and temperatures. Get the perfect low and high settings.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:800px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:24px}
+    .form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit}
+    .btn-calc{background:var(--terracotta);color:#fff;border:none;padding:14px 32px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer}.btn-calc:hover{background:#b5613e}
+    .result-box{background:var(--sage-light);border-radius:var(--radius);padding:24px;margin-top:24px;border-left:4px solid var(--sage)}
+    .breadcrumb{max-width:800px;margin:0 auto;padding:12px 20px;font-size:.85rem;color:var(--text-muted)}.breadcrumb a{color:var(--sage-dark)}
+    .options{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+    .option{background:var(--cream);border-radius:var(--radius);padding:24px;text-align:center;border:2px solid transparent}
+    .option h3{font-size:1rem;margin-bottom:8px}.option .time{font-size:2rem;font-weight:700;color:var(--sage-dark)}.option .detail{font-size:.85rem;color:var(--text-light);margin-top:8px}
+    .option.recommended{border-color:var(--sage);background:#e8f0e9}
+    @media(max-width:500px){.options{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="../recipes.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../about.html">About</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero"><h1>🍲 Slow Cooker Converter</h1><p>Convert oven recipes to slow cooker times. Enter your oven time and temperature to get slow cooker equivalents.</p></section>
+    <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Tools</a> › Slow Cooker Converter</div>
+    <div class="tool-container">
+      <div class="tool-card">
+        <div class="form-row">
+          <label for="ovenTime">Oven Cooking Time (minutes)</label>
+          <input type="number" id="ovenTime" value="60" min="15" max="480" step="5">
+        </div>
+        <div class="form-row">
+          <label for="ovenTemp">Oven Temperature</label>
+          <select id="ovenTemp">
+            <option value="300">300°F / 150°C (Low)</option>
+            <option value="325">325°F / 163°C</option>
+            <option value="350" selected>350°F / 177°C (Standard)</option>
+            <option value="375">375°F / 190°C</option>
+            <option value="400">400°F / 204°C (High)</option>
+            <option value="425">425°F / 218°C</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="dishType">Type of Dish</label>
+          <select id="dishType">
+            <option value="stew">Stew / Soup / Chili</option>
+            <option value="braise">Braised Dish / Pot Roast</option>
+            <option value="casserole">Casserole / Bake</option>
+            <option value="beans">Beans / Lentils</option>
+            <option value="grain">Grains / Rice</option>
+          </select>
+        </div>
+        <button class="btn-calc" onclick="convert()">Convert to Slow Cooker</button>
+        <div id="results" style="display:none">
+          <div class="options">
+            <div class="option recommended" id="lowOpt">
+              <h3>🟢 LOW Setting</h3>
+              <div class="time" id="lowTime">—</div>
+              <div class="detail">~200°F / 93°C internal</div>
+              <div class="detail" style="color:var(--sage-dark);font-weight:600">Recommended — better flavor</div>
+            </div>
+            <div class="option" id="highOpt">
+              <h3>🔴 HIGH Setting</h3>
+              <div class="time" id="highTime">—</div>
+              <div class="detail">~300°F / 149°C internal</div>
+              <div class="detail">Faster, slightly less tender</div>
+            </div>
+          </div>
+          <div class="result-box">
+            <h3>💡 Tips</h3>
+            <ul id="tips" style="padding-left:20px;line-height:1.8"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools.</p></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools →</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    function convert(){
+      const ovenMin=parseInt(document.getElementById('ovenTime').value);
+      const ovenTemp=parseInt(document.getElementById('ovenTemp').value);
+      const dish=document.getElementById('dishType').value;
+      // Base conversion: 1 hr oven @ 350 ≈ 4-6 hrs low / 2-3 hrs high
+      let lowMultiplier=4.5, highMultiplier=2.25;
+      // Adjust for temp
+      if(ovenTemp>=400){lowMultiplier=5;highMultiplier=2.5}
+      else if(ovenTemp>=375){lowMultiplier=4.75;highMultiplier=2.5}
+      else if(ovenTemp<=300){lowMultiplier=3.5;highMultiplier=1.75}
+      // Adjust for dish type
+      const dishAdj={stew:1,braise:1.1,casserole:0.9,beans:1.2,grain:0.7};
+      lowMultiplier*=dishAdj[dish]||1;
+      highMultiplier*=dishAdj[dish]||1;
+      const ovenHrs=ovenMin/60;
+      let lowHrs=Math.round(ovenHrs*lowMultiplier*2)/2;
+      let highHrs=Math.round(ovenHrs*highMultiplier*2)/2;
+      // Clamp
+      lowHrs=Math.max(2,Math.min(12,lowHrs));
+      highHrs=Math.max(1,Math.min(6,highHrs));
+      const fmt=h=>{const hrs=Math.floor(h);const m=h%1===0.5?'½':'';return hrs+(m?' '+m:'')+(hrs===1&&!m?' hour':' hours')};
+      document.getElementById('lowTime').textContent=fmt(lowHrs);
+      document.getElementById('highTime').textContent=fmt(highHrs);
+      const tips=['Reduce liquid by about ⅓ — slow cookers don\'t evaporate moisture like ovens'];
+      if(dish==='casserole') tips.push('Add any cheese or breadcrumb toppings in the last 30 minutes');
+      if(dish==='beans') tips.push('Add acidic ingredients (tomatoes, vinegar) after beans are tender');
+      if(dish==='grain') tips.push('Check early — grains can get mushy if overcooked in slow cooker');
+      tips.push('Don\'t lift the lid! Each peek adds 15-20 minutes to cooking time');
+      tips.push('Add fresh herbs and leafy greens in the last 30 minutes');
+      tips.push('Dairy-free milks should be added in the last hour to prevent curdling');
+      document.getElementById('tips').innerHTML=tips.map(t=>'<li>'+t+'</li>').join('');
+      document.getElementById('results').style.display='block';
+    }
+  </script>
+</body>
+</html>

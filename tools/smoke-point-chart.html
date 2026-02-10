@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smoke Point Chart — Cooking Oils & Fats | NetVeggies</title>
+  <meta name="description" content="Complete smoke point chart for all cooking oils and fats. Know which oils are safe for frying, sautéing, and baking.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:900px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:24px}.breadcrumb{max-width:900px;margin:0 auto;padding:12px 20px;font-size:.85rem;color:var(--text-muted)}.breadcrumb a{color:var(--sage-dark)}
+    .search-box{width:100%;padding:14px 20px;border:2px solid var(--border);border-radius:10px;font-size:1.05rem;font-family:inherit;margin-bottom:16px}.search-box:focus{border-color:var(--sage);outline:none}
+    .filter-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.filter-btn{padding:8px 16px;border-radius:20px;border:1px solid var(--border);background:var(--white);cursor:pointer;font-size:.85rem;font-weight:500}.filter-btn.active{background:var(--sage);color:#fff;border-color:var(--sage)}
+    table.dt{width:100%;border-collapse:collapse}table.dt th,table.dt td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left;font-size:.88rem}table.dt th{background:var(--sage-light);font-weight:600;cursor:pointer}table.dt th:hover{background:var(--sage);color:#fff}table.dt tr:hover{background:var(--cream)}
+    .bar{height:6px;border-radius:3px;background:#eee;position:relative}.bar-fill{height:100%;border-radius:3px;position:absolute;left:0;top:0}
+    .vegan-badge{background:#e8f0e9;color:var(--sage-dark);padding:2px 8px;border-radius:10px;font-size:.75rem;font-weight:600}
+    .result-box{background:var(--sage-light);border-radius:var(--radius);padding:24px;margin-top:24px;border-left:4px solid var(--sage)}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="../recipes.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../about.html">About</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero"><h1>🔥 Smoke Point Chart</h1><p>Know which oil to use for every cooking method. All smoke points with best uses and vegan status.</p></section>
+    <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Tools</a> › Smoke Point Chart</div>
+    <div class="tool-container">
+      <div class="tool-card">
+        <input type="text" class="search-box" id="search" placeholder="🔍 Search oils (e.g., olive, coconut, avocado...)">
+        <div class="filter-btns">
+          <button class="filter-btn active" onclick="filter('all',this)">All</button>
+          <button class="filter-btn" onclick="filter('high',this)">High Heat (450°F+)</button>
+          <button class="filter-btn" onclick="filter('med',this)">Medium Heat</button>
+          <button class="filter-btn" onclick="filter('low',this)">Low Heat / No Heat</button>
+          <button class="filter-btn" onclick="filter('vegan',this)">Vegan Only</button>
+        </div>
+        <div style="overflow-x:auto">
+          <table class="dt" id="table">
+            <thead><tr><th onclick="sortBy('name')">Oil / Fat</th><th onclick="sortBy('f')">°F</th><th onclick="sortBy('f')">°C</th><th>Heat Level</th><th>Best For</th><th>Vegan</th></tr></thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools.</p></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools →</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    const oils=[
+      {name:'Avocado Oil (refined)',f:520,vegan:true,best:'Deep frying, searing, high-heat roasting'},
+      {name:'Safflower Oil (refined)',f:510,vegan:true,best:'Deep frying, stir-frying'},
+      {name:'Rice Bran Oil',f:490,vegan:true,best:'Deep frying, Asian cooking'},
+      {name:'Light/Refined Olive Oil',f:468,vegan:true,best:'Sautéing, frying, all-purpose'},
+      {name:'Soybean Oil',f:460,vegan:true,best:'Deep frying, baking'},
+      {name:'Peanut Oil',f:450,vegan:true,best:'Deep frying, stir-frying, Asian cuisine'},
+      {name:'Corn Oil',f:450,vegan:true,best:'Frying, baking'},
+      {name:'Sunflower Oil (refined)',f:450,vegan:true,best:'Frying, baking, all-purpose'},
+      {name:'Vegetable Oil (blend)',f:450,vegan:true,best:'All-purpose cooking'},
+      {name:'Sesame Oil (refined)',f:410,vegan:true,best:'Stir-frying, Asian cooking'},
+      {name:'Grapeseed Oil',f:420,vegan:true,best:'Sautéing, salad dressings, baking'},
+      {name:'Canola Oil',f:400,vegan:true,best:'Baking, sautéing, all-purpose'},
+      {name:'Coconut Oil (refined)',f:400,vegan:true,best:'Baking, sautéing, curries'},
+      {name:'Extra Virgin Olive Oil',f:375,vegan:true,best:'Low-medium sautéing, dressings, finishing'},
+      {name:'Coconut Oil (virgin)',f:350,vegan:true,best:'Baking, light sautéing'},
+      {name:'Walnut Oil',f:320,vegan:true,best:'Salad dressings, drizzling (no heat)'},
+      {name:'Flaxseed Oil',f:225,vegan:true,best:'Salad dressings only — never heat!'},
+      {name:'Hemp Seed Oil',f:330,vegan:true,best:'Dressings, smoothies, drizzling'},
+      {name:'Sesame Oil (toasted)',f:350,vegan:true,best:'Finishing, flavor (add at end)'},
+      {name:'Almond Oil',f:430,vegan:true,best:'Sautéing, baking, skin care'},
+      {name:'Macadamia Oil',f:410,vegan:true,best:'Sautéing, salad dressings'},
+      {name:'Ghee (clarified butter)',f:485,vegan:false,best:'High-heat frying, Indian cooking'},
+      {name:'Butter',f:350,vegan:false,best:'Baking, low-heat sautéing'},
+      {name:'Lard',f:370,vegan:false,best:'Frying, pastry'},
+    ].sort((a,b)=>b.f-a.f);
+    let currentFilter='all',sortField='f',sortDir=-1;
+    function getHeat(f){return f>=450?'🔴 High':f>=375?'🟠 Medium-High':f>=325?'🟡 Medium':'🟢 Low/No Heat'}
+    function getHeatCat(f){return f>=450?'high':f>=325?'med':'low'}
+    function render(){
+      const q=document.getElementById('search').value.toLowerCase();
+      let data=oils.filter(o=>{
+        if(q&&!o.name.toLowerCase().includes(q))return false;
+        if(currentFilter==='vegan'&&!o.vegan)return false;
+        if(currentFilter==='high'&&o.f<450)return false;
+        if(currentFilter==='med'&&(o.f>=450||o.f<325))return false;
+        if(currentFilter==='low'&&o.f>=325)return false;
+        return true;
+      });
+      data.sort((a,b)=>sortDir*(a[sortField]>b[sortField]?1:-1));
+      document.getElementById('tbody').innerHTML=data.map(o=>{
+        const c=Math.round((o.f-32)*5/9);
+        const pct=Math.round((o.f-200)/350*100);
+        const barColor=o.f>=450?'#e85d4d':o.f>=375?'#e8944d':o.f>=325?'#e8c84d':'#7a9e7e';
+        return `<tr>
+          <td><strong>${o.name}</strong></td>
+          <td>${o.f}°F</td><td>${c}°C</td>
+          <td>${getHeat(o.f)}<div class="bar"><div class="bar-fill" style="width:${pct}%;background:${barColor}"></div></div></td>
+          <td>${o.best}</td>
+          <td>${o.vegan?'<span class="vegan-badge">✅ Vegan</span>':'❌'}</td>
+        </tr>`;
+      }).join('');
+    }
+    function filter(cat,btn){
+      currentFilter=cat;
+      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      render();
+    }
+    function sortBy(field){sortField=field;sortDir*=-1;render()}
+    render();
+    document.getElementById('search').addEventListener('input',render);
+  </script>
+</body>
+</html>

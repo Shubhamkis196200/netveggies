@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nutrition Label Maker — FDA-Style Labels | NetVeggies</title>
+  <meta name="description" content="Generate FDA-style Nutrition Facts labels for your recipes. Perfect for food businesses and recipe developers.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    @media print{.no-print{display:none}body{background:#fff}}
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:1000px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:24px}.breadcrumb{max-width:1000px;margin:0 auto;padding:12px 20px;font-size:.85rem;color:var(--text-muted)}.breadcrumb a{color:var(--sage-dark)}
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+    .form-row{margin-bottom:14px}.form-row label{display:block;margin-bottom:4px;font-weight:600;font-size:.88rem}.form-row input{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:6px;font-size:.9rem}
+    .form-row small{font-size:.8rem;color:var(--text-muted)}
+    .btn-gen{background:var(--terracotta);color:#fff;border:none;padding:12px 28px;border-radius:8px;font-size:.95rem;font-weight:600;cursor:pointer;width:100%;margin-top:12px}.btn-gen:hover{background:#b5613e}
+    .nutrition-label{background:#fff;border:2px solid #000;padding:8px;font-family:Arial,Helvetica,sans-serif;width:280px;margin:0 auto}
+    .nutrition-label .title{font-size:32px;font-weight:900;line-height:1;margin-bottom:2px}
+    .nutrition-label .serv-size{font-size:11px;font-weight:700;padding:2px 0;border-bottom:8px solid #000}
+    .nutrition-label .serv-cont{font-size:11px;padding:2px 0 6px;border-bottom:1px solid #000}
+    .nutrition-label .cal-line{background:#000;color:#fff;padding:1px 4px;font-size:11px;font-weight:700;margin:2px 0}
+    .nutrition-label .amt-per{font-size:7px;font-weight:700;margin-top:2px}
+    .nutrition-label .big-cal{font-size:36px;font-weight:900;line-height:1;padding:4px 0;border-bottom:6px solid #000}
+    .nutrition-label .dv-note{font-size:7px;text-align:right;padding:2px 0;border-bottom:4px solid #000}
+    .nutrition-label .row{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px solid #000;font-size:11px}
+    .nutrition-label .row.thick{border-bottom-width:4px}.nutrition-label .row.indent{padding-left:16px;font-size:10px}
+    .nutrition-label .row.bold{font-weight:700}.nutrition-label .row.thin{border-bottom:none;font-size:10px}
+    .nutrition-label .footer{font-size:6px;padding-top:4px;border-top:4px solid #000;line-height:1.4}
+    @media(max-width:768px){.grid-2{grid-template-columns:1fr}}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header no-print"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="../recipes.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../about.html">About</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero no-print"><h1>🏷️ Nutrition Label Maker</h1><p>Generate FDA-compliant Nutrition Facts labels for your recipes and products.</p></section>
+    <div class="breadcrumb no-print"><a href="../index.html">Home</a> › <a href="index.html">Tools</a> › Nutrition Label Maker</div>
+    <div class="tool-container">
+      <div class="grid-2">
+        <div class="tool-card no-print">
+          <h3 style="margin-bottom:16px">Enter Nutrition Information</h3>
+          <div class="form-row"><label>Serving Size</label><input type="text" id="servSize" placeholder="1 cup (228g)"></div>
+          <div class="form-row"><label>Servings Per Container</label><input type="number" id="servCont" value="1"></div>
+          <div class="form-row"><label>Calories</label><input type="number" id="cal" placeholder="230"></div>
+          <div class="form-row"><label>Total Fat (g)</label><input type="number" id="fat" step="0.1" placeholder="8"></div>
+          <div class="form-row"><label>Saturated Fat (g)</label><input type="number" id="satFat" step="0.1" placeholder="1"></div>
+          <div class="form-row"><label>Trans Fat (g)</label><input type="number" id="transFat" step="0.1" placeholder="0"></div>
+          <div class="form-row"><label>Cholesterol (mg)</label><input type="number" id="chol" placeholder="0"></div>
+          <div class="form-row"><label>Sodium (mg)</label><input type="number" id="sod" placeholder="160"></div>
+          <div class="form-row"><label>Total Carbohydrate (g)</label><input type="number" id="carb" placeholder="37"></div>
+          <div class="form-row"><label>Dietary Fiber (g)</label><input type="number" id="fiber" step="0.1" placeholder="4"></div>
+          <div class="form-row"><label>Total Sugars (g)</label><input type="number" id="sugar" step="0.1" placeholder="12"></div>
+          <div class="form-row"><label>Added Sugars (g)</label><input type="number" id="addSugar" step="0.1" placeholder="0"></div>
+          <div class="form-row"><label>Protein (g)</label><input type="number" id="pro" step="0.1" placeholder="3"></div>
+          <button class="btn-gen" onclick="generate()">Generate Label</button>
+          <button class="btn-gen" onclick="window.print()" style="background:var(--sage);margin-top:8px">Print Label</button>
+        </div>
+        <div>
+          <div id="output"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer no-print"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools.</p></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools →</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    function dv(val,daily){return Math.round(val/daily*100)+'%'}
+    function generate(){
+      const servSize=document.getElementById('servSize').value||'1 serving';
+      const servCont=document.getElementById('servCont').value||'1';
+      const cal=document.getElementById('cal').value||'0';
+      const fat=parseFloat(document.getElementById('fat').value)||0;
+      const satFat=parseFloat(document.getElementById('satFat').value)||0;
+      const transFat=parseFloat(document.getElementById('transFat').value)||0;
+      const chol=parseFloat(document.getElementById('chol').value)||0;
+      const sod=parseFloat(document.getElementById('sod').value)||0;
+      const carb=parseFloat(document.getElementById('carb').value)||0;
+      const fiber=parseFloat(document.getElementById('fiber').value)||0;
+      const sugar=parseFloat(document.getElementById('sugar').value)||0;
+      const addSugar=parseFloat(document.getElementById('addSugar').value)||0;
+      const pro=parseFloat(document.getElementById('pro').value)||0;
+      document.getElementById('output').innerHTML=`
+        <div class="nutrition-label">
+          <div class="title">Nutrition Facts</div>
+          <div class="serv-size">${servCont} servings per container</div>
+          <div class="serv-cont"><strong>Serving size</strong> ${servSize}</div>
+          <div class="amt-per">Amount per serving</div>
+          <div style="display:flex;justify-content:space-between;align-items:baseline">
+            <div class="big-cal">Calories</div>
+            <div class="big-cal">${cal}</div>
+          </div>
+          <div class="dv-note">% Daily Value*</div>
+          <div class="row bold"><span><strong>Total Fat</strong> ${fat}g</span><span>${dv(fat,78)}</span></div>
+          <div class="row indent"><span>Saturated Fat ${satFat}g</span><span>${dv(satFat,20)}</span></div>
+          <div class="row indent"><span><em>Trans</em> Fat ${transFat}g</span><span></span></div>
+          <div class="row bold"><span><strong>Cholesterol</strong> ${chol}mg</span><span>${dv(chol,300)}</span></div>
+          <div class="row bold"><span><strong>Sodium</strong> ${sod}mg</span><span>${dv(sod,2300)}</span></div>
+          <div class="row bold"><span><strong>Total Carbohydrate</strong> ${carb}g</span><span>${dv(carb,275)}</span></div>
+          <div class="row indent"><span>Dietary Fiber ${fiber}g</span><span>${dv(fiber,28)}</span></div>
+          <div class="row indent thin"><span>Total Sugars ${sugar}g</span><span></span></div>
+          <div class="row indent" style="padding-left:28px;border-bottom:4px solid #000"><span>Includes ${addSugar}g Added Sugars</span><span>${dv(addSugar,50)}</span></div>
+          <div class="row bold"><span><strong>Protein</strong> ${pro}g</span><span></span></div>
+          <div class="footer">
+            *The % Daily Value (DV) tells you how much a nutrient in a serving of food contributes to a daily diet. 2,000 calories a day is used for general nutrition advice.
+          </div>
+        </div>`;
+    }
+    generate();
+  </script>
+</body>
+</html>

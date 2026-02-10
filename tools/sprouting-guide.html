@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sprouting Guide — Grow Sprouts at Home | NetVeggies</title>
+  <meta name="description" content="Complete sprouting guide for beans, grains, nuts, and seeds. Soak times, rinse schedules, and harvest timelines.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:900px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:24px}.breadcrumb{max-width:900px;margin:0 auto;padding:12px 20px;font-size:.85rem;color:var(--text-muted)}.breadcrumb a{color:var(--sage-dark)}
+    .form-row{margin-bottom:20px}.form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit}
+    .btn-calc{background:var(--terracotta);color:#fff;border:none;padding:14px 32px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer}.btn-calc:hover{background:#b5613e}
+    .result-box{background:var(--sage-light);border-radius:var(--radius);padding:24px;margin-top:24px;border-left:4px solid var(--sage)}
+    .timeline{margin:20px 0}.timeline .day{display:flex;gap:16px;padding:12px 0;border-bottom:1px solid var(--border)}.timeline .day-num{background:var(--sage);color:#fff;width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0}.timeline .day-info h4{margin-bottom:4px;font-size:.95rem}.timeline .day-info p{font-size:.85rem;color:var(--text-light)}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="../recipes.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../about.html">About</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero"><h1>🌱 Sprouting Guide</h1><p>Grow nutritious sprouts at home. Select a seed type for complete sprouting instructions and timeline.</p></section>
+    <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Tools</a> › Sprouting Guide</div>
+    <div class="tool-container">
+      <div class="tool-card">
+        <div class="form-row">
+          <label for="seed">Select Seed Type</label>
+          <select id="seed">
+            <option value="mung">Mung Beans</option>
+            <option value="lentil">Lentils (Green/Brown)</option>
+            <option value="chickpea">Chickpeas</option>
+            <option value="alfalfa">Alfalfa Seeds</option>
+            <option value="broccoli">Broccoli Seeds</option>
+            <option value="radish">Radish Seeds</option>
+            <option value="sunflower">Sunflower Seeds</option>
+            <option value="wheat">Wheat Berries (Wheatgrass)</option>
+            <option value="fenugreek">Fenugreek Seeds</option>
+            <option value="pea">Green Pea Shoots</option>
+          </select>
+        </div>
+        <button class="btn-calc" onclick="show()">Get Sprouting Instructions</button>
+        <div id="results" style="display:none"></div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools.</p></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools →</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    const seeds={
+      mung:{name:'Mung Beans',soakHrs:12,days:3,rinsePer:'2-3x/day',yield:'3x volume',nutrition:'High in vitamin C, folate, iron',steps:[
+        {day:'Day 0',title:'Soak',desc:'Rinse 1/4 cup mung beans. Soak in 2 cups water for 8-12 hours.'},
+        {day:'Day 1',title:'Drain & Rinse',desc:'Drain all water. Rinse well. Place in jar with mesh lid at 45° angle. Rinse 2-3x today.'},
+        {day:'Day 2',title:'Growing',desc:'Tiny tails appear! Keep rinsing 2-3x/day. Keep in indirect light at room temp (68-75°F).'},
+        {day:'Day 3',title:'Harvest!',desc:'Sprouts are 1-2 inches long. Give final rinse, drain well. Refrigerate and use within 5 days.'}
+      ]},
+      lentil:{name:'Lentils',soakHrs:8,days:3,rinsePer:'2x/day',yield:'2.5x volume',nutrition:'High in protein, iron, fiber',steps:[
+        {day:'Day 0',title:'Soak',desc:'Rinse 1/3 cup lentils. Soak in 2 cups water for 8 hours.'},
+        {day:'Day 1',title:'Drain & Rinse',desc:'Drain water. Rinse 2x. Keep in sprouting jar in dark, warm spot.'},
+        {day:'Day 2',title:'Growing',desc:'Small white tails visible. Continue rinsing 2x/day.'},
+        {day:'Day 3',title:'Harvest!',desc:'Sprouts are ½-1 inch. Ready to eat raw in salads or lightly cooked.'}
+      ]},
+      chickpea:{name:'Chickpeas',soakHrs:12,days:4,rinsePer:'2-3x/day',yield:'2x volume',nutrition:'High protein, excellent texture',steps:[
+        {day:'Day 0',title:'Soak',desc:'Soak 1/2 cup chickpeas in 3 cups water for 12 hours.'},
+        {day:'Day 1',title:'Drain & Begin',desc:'Drain, rinse. Place in jar. Rinse 3x today — chickpeas need lots of moisture.'},
+        {day:'Day 2',title:'Tails Appear',desc:'Small sprout tails emerge. Keep rinsing 2-3x/day.'},
+        {day:'Day 3-4',title:'Harvest',desc:'Sprouts are ½ inch. Eat raw or steam lightly. Very nutty flavor. Refrigerate up to 5 days.'}
+      ]},
+      alfalfa:{name:'Alfalfa Seeds',soakHrs:6,days:6,rinsePer:'2x/day',yield:'8x volume',nutrition:'Rich in vitamins K, C, and manganese',steps:[
+        {day:'Day 0',title:'Soak',desc:'Soak 2 tbsp seeds in 1 cup water for 4-6 hours.'},
+        {day:'Day 1-2',title:'Dark Phase',desc:'Drain. Rinse 2x/day. Keep jar in dark place with mesh lid.'},
+        {day:'Day 3-4',title:'Growing',desc:'Tiny white sprouts appear. Continue rinsing.'},
+        {day:'Day 5',title:'Green Up',desc:'Move jar to indirect sunlight. Leaves will turn green!'},
+        {day:'Day 6',title:'Harvest!',desc:'Fluffy green sprouts ~2 inches. Rinse, remove hulls, refrigerate.'}
+      ]},
+      broccoli:{name:'Broccoli Seeds',soakHrs:6,days:5,rinsePer:'2-3x/day',yield:'6x volume',nutrition:'Contains sulforaphane — potent antioxidant',steps:[
+        {day:'Day 0',title:'Soak',desc:'Soak 2 tbsp seeds for 6 hours.'},
+        {day:'Day 1-3',title:'Sprout',desc:'Drain, rinse 2-3x/day. Keep in dark, warm spot.'},
+        {day:'Day 4',title:'Green Up',desc:'Move to indirect light for green color.'},
+        {day:'Day 5',title:'Harvest!',desc:'1-2 inch sprouts with tiny green leaves. Refrigerate.'}
+      ]},
+      radish:{name:'Radish Seeds',soakHrs:6,days:5,rinsePer:'2x/day',yield:'6x volume',nutrition:'Spicy flavor, high in vitamin C',steps:[
+        {day:'Day 0',title:'Soak',desc:'Soak 2 tbsp seeds for 6 hours.'},
+        {day:'Day 1-3',title:'Sprout',desc:'Drain, rinse 2x daily. Keep dark.'},
+        {day:'Day 4',title:'Green Up',desc:'Move to light. Nice pink/purple stems appear.'},
+        {day:'Day 5',title:'Harvest!',desc:'Spicy, crunchy sprouts ready for sandwiches and salads.'}
+      ]},
+      sunflower:{name:'Sunflower Seeds',soakHrs:8,days:3,rinsePer:'2x/day',yield:'2x volume',nutrition:'High in vitamin E, healthy fats',steps:[
+        {day:'Day 0',title:'Soak',desc:'Soak 1 cup raw unhulled sunflower seeds for 8 hours.'},
+        {day:'Day 1',title:'Drain',desc:'Drain and rinse. Spread in sprouting tray or jar.'},
+        {day:'Day 2-3',title:'Harvest',desc:'Short tails appear. Eat when tails are ¼-½ inch. Nutty and crunchy.'}
+      ]},
+      wheat:{name:'Wheat Berries',soakHrs:10,days:7,rinsePer:'2x/day',yield:'Grows into grass',nutrition:'Wheatgrass is rich in chlorophyll, vitamins A, C, E',steps:[
+        {day:'Day 0',title:'Soak',desc:'Soak 1 cup wheat berries for 10-12 hours.'},
+        {day:'Day 1-2',title:'Sprout',desc:'Drain, rinse 2x/day until tiny roots appear.'},
+        {day:'Day 3',title:'Plant',desc:'Spread on 1 inch of moist soil in a tray. Cover with damp paper towel.'},
+        {day:'Day 4-6',title:'Grow',desc:'Remove cover. Water daily. Keep in indirect light.'},
+        {day:'Day 7-9',title:'Harvest!',desc:'Cut grass when 6-7 inches tall. Juice immediately for wheatgrass shots.'}
+      ]},
+      fenugreek:{name:'Fenugreek Seeds',soakHrs:8,days:4,rinsePer:'2x/day',yield:'5x volume',nutrition:'Supports digestion, rich in iron and manganese',steps:[
+        {day:'Day 0',title:'Soak',desc:'Soak 3 tbsp fenugreek seeds for 8 hours.'},
+        {day:'Day 1-2',title:'Sprout',desc:'Drain and rinse 2x daily. Slightly bitter smell is normal.'},
+        {day:'Day 3',title:'Green Up',desc:'Move to light for leaves to develop.'},
+        {day:'Day 4',title:'Harvest!',desc:'1-2 inch sprouts. Slightly bitter, great in Indian cuisine.'}
+      ]},
+      pea:{name:'Green Pea Shoots',soakHrs:8,days:5,rinsePer:'2x/day',yield:'4x volume',nutrition:'Sweet flavor, high in vitamin C and folate',steps:[
+        {day:'Day 0',title:'Soak',desc:'Soak 1 cup dried green peas for 8-12 hours.'},
+        {day:'Day 1-3',title:'Sprout',desc:'Drain, rinse 2x/day. Roots and shoots develop.'},
+        {day:'Day 4',title:'Light',desc:'Move to indirect light for greening.'},
+        {day:'Day 5',title:'Harvest!',desc:'Tender sweet shoots 2-3 inches. Great in stir-fries and salads.'}
+      ]}
+    };
+    function show(){
+      const s=seeds[document.getElementById('seed').value];
+      let html=`<div class="result-box">
+        <h3>${s.name} Sprouting Guide</h3>
+        <p style="margin:8px 0"><strong>Soak time:</strong> ${s.soakHrs} hours &nbsp;|&nbsp; <strong>Total days:</strong> ${s.days} &nbsp;|&nbsp; <strong>Rinse:</strong> ${s.rinsePer} &nbsp;|&nbsp; <strong>Yield:</strong> ${s.yield}</p>
+        <p style="color:var(--sage-dark);font-weight:600">${s.nutrition}</p>
+      </div>
+      <div class="timeline">`;
+      s.steps.forEach(st=>{
+        html+=`<div class="day"><div class="day-num">${st.day.replace('Day ','')}</div><div class="day-info"><h4>${st.title}</h4><p>${st.desc}</p></div></div>`;
+      });
+      html+=`</div><div class="result-box"><h3>💡 General Tips</h3><ul style="padding-left:20px;line-height:1.8">
+        <li>Always use clean jars and mesh lids to prevent mold</li>
+        <li>Room temperature (65-75°F / 18-24°C) is ideal</li>
+        <li>Drain thoroughly — standing water causes rot</li>
+        <li>If you smell anything off, discard and start fresh</li>
+        <li>Store harvested sprouts in fridge for up to 5-7 days</li>
+      </ul></div>`;
+      document.getElementById('results').innerHTML=html;
+      document.getElementById('results').style.display='block';
+    }
+  </script>
+</body>
+</html>

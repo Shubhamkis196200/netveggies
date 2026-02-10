@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pressure Cooker Time Chart — Every Food | NetVeggies</title>
+  <meta name="description" content="Instant Pot and pressure cooker time chart for beans, grains, vegetables, and more. PSI settings and release methods.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:900px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:24px}.breadcrumb{max-width:900px;margin:0 auto;padding:12px 20px;font-size:.85rem;color:var(--text-muted)}.breadcrumb a{color:var(--sage-dark)}
+    .search-box{width:100%;padding:14px 20px;border:2px solid var(--border);border-radius:10px;font-size:1.05rem;font-family:inherit;margin-bottom:16px}.search-box:focus{border-color:var(--sage);outline:none}
+    .filter-btns{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.filter-btn{padding:8px 16px;border-radius:20px;border:1px solid var(--border);background:var(--white);cursor:pointer;font-size:.85rem}.filter-btn.active{background:var(--sage);color:#fff;border-color:var(--sage)}
+    table.dt{width:100%;border-collapse:collapse}table.dt th,table.dt td{padding:10px 12px;border-bottom:1px solid var(--border);text-align:left;font-size:.88rem}table.dt th{background:var(--sage-light);font-weight:600}table.dt tr:hover{background:var(--cream)}
+    .tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:.75rem;font-weight:600}.tag-nr{background:#e8f0e9;color:#5c7e60}.tag-qr{background:#f5e0d6;color:#c4704b}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="../recipes.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../about.html">About</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero"><h1>⏲️ Pressure Cooker Time Chart</h1><p>Quick reference for Instant Pot and pressure cooker times. Beans, grains, vegetables, and more.</p></section>
+    <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Tools</a> › Pressure Cooker Time Chart</div>
+    <div class="tool-container">
+      <div class="tool-card">
+        <input type="text" class="search-box" id="search" placeholder="🔍 Search foods...">
+        <div class="filter-btns">
+          <button class="filter-btn active" onclick="filter('all',this)">All</button>
+          <button class="filter-btn" onclick="filter('Beans',this)">Beans & Legumes</button>
+          <button class="filter-btn" onclick="filter('Grains',this)">Grains</button>
+          <button class="filter-btn" onclick="filter('Vegetables',this)">Vegetables</button>
+        </div>
+        <div style="overflow-x:auto"><table class="dt"><thead><tr><th>Food</th><th>Category</th><th>Soaked</th><th>Unsoaked</th><th>Pressure</th><th>Water Ratio</th><th>Release</th></tr></thead><tbody id="tbody"></tbody></table></div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools.</p></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools →</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    const items=[
+      {name:'Black Beans',cat:'Beans',soaked:'6-8 min',unsoaked:'20-25 min',psi:'High',water:'1:3',release:'Natural 15 min'},
+      {name:'Chickpeas',cat:'Beans',soaked:'10-12 min',unsoaked:'35-40 min',psi:'High',water:'1:3',release:'Natural 15 min'},
+      {name:'Kidney Beans',cat:'Beans',soaked:'6-8 min',unsoaked:'20-25 min',psi:'High',water:'1:3',release:'Natural 15 min'},
+      {name:'Lentils (Brown/Green)',cat:'Beans',soaked:'N/A',unsoaked:'8-10 min',psi:'High',water:'1:2.5',release:'Quick'},
+      {name:'Red Lentils',cat:'Beans',soaked:'N/A',unsoaked:'1-2 min',psi:'High',water:'1:2',release:'Quick'},
+      {name:'Pinto Beans',cat:'Beans',soaked:'6-8 min',unsoaked:'25-30 min',psi:'High',water:'1:3',release:'Natural 15 min'},
+      {name:'Navy Beans',cat:'Beans',soaked:'5-7 min',unsoaked:'20-25 min',psi:'High',water:'1:3',release:'Natural 15 min'},
+      {name:'Cannellini Beans',cat:'Beans',soaked:'6-8 min',unsoaked:'25-30 min',psi:'High',water:'1:3',release:'Natural 15 min'},
+      {name:'Black-Eyed Peas',cat:'Beans',soaked:'4-5 min',unsoaked:'15-20 min',psi:'High',water:'1:3',release:'Natural 10 min'},
+      {name:'Soybeans',cat:'Beans',soaked:'15-18 min',unsoaked:'35-45 min',psi:'High',water:'1:3',release:'Natural 20 min'},
+      {name:'Split Peas',cat:'Beans',soaked:'N/A',unsoaked:'8-10 min',psi:'High',water:'1:3',release:'Natural 10 min'},
+      {name:'White Rice',cat:'Grains',soaked:'N/A',unsoaked:'3-4 min',psi:'High',water:'1:1.25',release:'Natural 10 min'},
+      {name:'Brown Rice',cat:'Grains',soaked:'N/A',unsoaked:'22-24 min',psi:'High',water:'1:1.25',release:'Natural 10 min'},
+      {name:'Quinoa',cat:'Grains',soaked:'N/A',unsoaked:'1-2 min',psi:'High',water:'1:1.5',release:'Natural 10 min'},
+      {name:'Steel-Cut Oats',cat:'Grains',soaked:'N/A',unsoaked:'3-4 min',psi:'High',water:'1:3',release:'Natural 10 min'},
+      {name:'Barley (Pearl)',cat:'Grains',soaked:'N/A',unsoaked:'18-20 min',psi:'High',water:'1:2.5',release:'Natural 10 min'},
+      {name:'Farro',cat:'Grains',soaked:'N/A',unsoaked:'10-12 min',psi:'High',water:'1:2',release:'Natural 10 min'},
+      {name:'Wild Rice',cat:'Grains',soaked:'N/A',unsoaked:'25-30 min',psi:'High',water:'1:3',release:'Natural 10 min'},
+      {name:'Potatoes (cubed)',cat:'Vegetables',soaked:'N/A',unsoaked:'3-5 min',psi:'High',water:'1 cup',release:'Quick'},
+      {name:'Sweet Potatoes (cubed)',cat:'Vegetables',soaked:'N/A',unsoaked:'3-5 min',psi:'High',water:'1 cup',release:'Quick'},
+      {name:'Beets (whole)',cat:'Vegetables',soaked:'N/A',unsoaked:'15-20 min',psi:'High',water:'1 cup',release:'Natural 10 min'},
+      {name:'Broccoli (florets)',cat:'Vegetables',soaked:'N/A',unsoaked:'1-2 min',psi:'Low',water:'1 cup',release:'Quick'},
+      {name:'Carrots (sliced)',cat:'Vegetables',soaked:'N/A',unsoaked:'2-3 min',psi:'High',water:'1 cup',release:'Quick'},
+      {name:'Corn on the Cob',cat:'Vegetables',soaked:'N/A',unsoaked:'2-3 min',psi:'High',water:'1 cup',release:'Quick'},
+      {name:'Butternut Squash',cat:'Vegetables',soaked:'N/A',unsoaked:'5-7 min',psi:'High',water:'1 cup',release:'Quick'},
+      {name:'Artichokes (whole)',cat:'Vegetables',soaked:'N/A',unsoaked:'9-11 min',psi:'High',water:'1 cup',release:'Quick'},
+    ];
+    let currentFilter='all';
+    function render(){
+      const q=document.getElementById('search').value.toLowerCase();
+      const filtered=items.filter(i=>{
+        if(q&&!i.name.toLowerCase().includes(q))return false;
+        if(currentFilter!=='all'&&i.cat!==currentFilter)return false;
+        return true;
+      });
+      document.getElementById('tbody').innerHTML=filtered.map(i=>{
+        const relTag=i.release.includes('Quick')?'<span class="tag tag-qr">Quick</span>':'<span class="tag tag-nr">Natural</span>';
+        return `<tr><td><strong>${i.name}</strong></td><td>${i.cat}</td><td>${i.soaked}</td><td>${i.unsoaked}</td><td>${i.psi}</td><td>${i.water}</td><td>${relTag} ${i.release}</td></tr>`;
+      }).join('');
+    }
+    function filter(cat,btn){currentFilter=cat;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');render()}
+    render();
+    document.getElementById('search').addEventListener('input',render);
+  </script>
+</body>
+</html>

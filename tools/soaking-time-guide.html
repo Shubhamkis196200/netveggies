@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soaking Time Guide — Beans, Grains & Nuts | NetVeggies</title>
+  <meta name="description" content="Complete soaking time guide for beans, grains, nuts, and seeds. Quick soak vs overnight methods.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:900px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:24px}.breadcrumb{max-width:900px;margin:0 auto;padding:12px 20px;font-size:.85rem;color:var(--text-muted)}.breadcrumb a{color:var(--sage-dark)}
+    .search-box{width:100%;padding:14px 20px;border:2px solid var(--border);border-radius:10px;font-size:1.05rem;font-family:inherit;margin-bottom:20px}.search-box:focus{border-color:var(--sage);outline:none}
+    table.dt{width:100%;border-collapse:collapse}table.dt th,table.dt td{padding:12px 14px;border-bottom:1px solid var(--border);text-align:left;font-size:.9rem}table.dt th{background:var(--sage-light);font-weight:600;position:sticky;top:0}table.dt tr:hover{background:var(--cream)}.cat-label{display:inline-block;background:var(--sage-light);color:var(--sage-dark);padding:3px 10px;border-radius:20px;font-size:.75rem;font-weight:600}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="../recipes.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../about.html">About</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero"><h1>💧 Soaking Time Guide</h1><p>Complete soaking times for beans, grains, nuts, and seeds. Find the right method for every ingredient.</p></section>
+    <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Tools</a> › Soaking Time Guide</div>
+    <div class="tool-container">
+      <div class="tool-card">
+        <input type="text" class="search-box" id="search" placeholder="🔍 Search for a food (e.g., chickpeas, almonds, quinoa...)">
+        <div style="max-height:600px;overflow-y:auto">
+          <table class="dt" id="table">
+            <thead><tr><th>Food</th><th>Category</th><th>Soak Time</th><th>Quick Soak</th><th>Tips</th></tr></thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools.</p></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools →</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    const items=[
+      {name:'Black Beans',cat:'Beans',soak:'8-12 hrs',quick:'1 hr boil method',tip:'Discard soak water to reduce gas-causing compounds'},
+      {name:'Chickpeas (Garbanzo)',cat:'Beans',soak:'8-12 hrs',quick:'1 hr boil method',tip:'Add baking soda to soak water for creamier texture'},
+      {name:'Kidney Beans',cat:'Beans',soak:'8-12 hrs',quick:'1 hr boil method',tip:'Must be fully cooked — raw contain lectins'},
+      {name:'Lentils (Brown/Green)',cat:'Beans',soak:'Not required',quick:'N/A',tip:'Just rinse and cook — 25-30 min'},
+      {name:'Red Lentils',cat:'Beans',soak:'Not required',quick:'N/A',tip:'Cook in 15-20 min, break down into creamy texture'},
+      {name:'Navy Beans',cat:'Beans',soak:'8-12 hrs',quick:'1 hr boil method',tip:'Great for soups — absorb flavors well'},
+      {name:'Pinto Beans',cat:'Beans',soak:'8-12 hrs',quick:'1 hr boil method',tip:'Classic refried bean base'},
+      {name:'Lima Beans',cat:'Beans',soak:'8-12 hrs',quick:'1 hr boil method',tip:'Large limas need longer soaking'},
+      {name:'Cannellini Beans',cat:'Beans',soak:'8-12 hrs',quick:'1 hr boil method',tip:'Creamy white beans, great in Italian dishes'},
+      {name:'Black-Eyed Peas',cat:'Beans',soak:'4-6 hrs',quick:'30 min boil',tip:'Shorter soak than most beans'},
+      {name:'Mung Beans',cat:'Beans',soak:'4-6 hrs',quick:'Not needed if split',tip:'Can also sprout these easily'},
+      {name:'Soybeans',cat:'Beans',soak:'12-24 hrs',quick:'2 hr boil method',tip:'Longest soak time — change water halfway'},
+      {name:'Split Peas',cat:'Beans',soak:'Not required',quick:'N/A',tip:'Cook 45-60 min, no soaking needed'},
+      {name:'Quinoa',cat:'Grains',soak:'2-4 hrs (optional)',quick:'N/A',tip:'Rinse well to remove bitter saponins'},
+      {name:'Brown Rice',cat:'Grains',soak:'6-8 hrs (optional)',quick:'N/A',tip:'Soaking reduces cooking time by ~15 min'},
+      {name:'Wild Rice',cat:'Grains',soak:'6-8 hrs (optional)',quick:'N/A',tip:'Soaking improves texture and reduces cook time'},
+      {name:'Oat Groats',cat:'Grains',soak:'6-8 hrs',quick:'N/A',tip:'Soaking makes them creamy for porridge'},
+      {name:'Barley (Hulled)',cat:'Grains',soak:'8-12 hrs',quick:'N/A',tip:'Pearl barley does not need soaking'},
+      {name:'Farro',cat:'Grains',soak:'8-12 hrs (optional)',quick:'N/A',tip:'Semi-pearled farro cooks without soaking'},
+      {name:'Wheat Berries',cat:'Grains',soak:'8-12 hrs',quick:'N/A',tip:'Soaking cuts cook time from 60 to 40 min'},
+      {name:'Almonds',cat:'Nuts',soak:'8-12 hrs',quick:'2 hrs warm water',tip:'Soak to make almond milk or remove skins'},
+      {name:'Cashews',cat:'Nuts',soak:'2-4 hrs',quick:'15 min boiling water',tip:'Quick soak for creamy sauces and cheese'},
+      {name:'Walnuts',cat:'Nuts',soak:'4-8 hrs',quick:'N/A',tip:'Reduces bitterness and improves digestibility'},
+      {name:'Pecans',cat:'Nuts',soak:'4-8 hrs',quick:'N/A',tip:'Drain and dehydrate for crispy texture'},
+      {name:'Macadamia',cat:'Nuts',soak:'2-4 hrs',quick:'N/A',tip:'Great base for vegan cream cheese'},
+      {name:'Brazil Nuts',cat:'Nuts',soak:'3-4 hrs',quick:'N/A',tip:'Don\'t over-soak — they get slimy'},
+      {name:'Sunflower Seeds',cat:'Seeds',soak:'2-4 hrs',quick:'N/A',tip:'Good nut-free alternative for sauces'},
+      {name:'Pumpkin Seeds',cat:'Seeds',soak:'4-6 hrs',quick:'N/A',tip:'Soak and dehydrate for enhanced crunch'},
+      {name:'Chia Seeds',cat:'Seeds',soak:'15-30 min',quick:'5 min',tip:'Form gel — great for puddings and egg replacer'},
+      {name:'Flax Seeds',cat:'Seeds',soak:'10-20 min',quick:'5 min',tip:'Form gel — use as egg replacer (1 tbsp + 3 tbsp water)'},
+      {name:'Hemp Seeds',cat:'Seeds',soak:'Not required',quick:'N/A',tip:'Eat raw — no soaking needed'},
+      {name:'Sesame Seeds',cat:'Seeds',soak:'4-8 hrs',quick:'N/A',tip:'Soak before making tahini for smoother result'}
+    ];
+    function render(filter=''){
+      const f=filter.toLowerCase();
+      const filtered=items.filter(i=>!f||i.name.toLowerCase().includes(f)||i.cat.toLowerCase().includes(f));
+      document.getElementById('tbody').innerHTML=filtered.map(i=>`<tr><td><strong>${i.name}</strong></td><td><span class="cat-label">${i.cat}</span></td><td>${i.soak}</td><td>${i.quick}</td><td>${i.tip}</td></tr>`).join('');
+    }
+    render();
+    document.getElementById('search').addEventListener('input',e=>render(e.target.value));
+  </script>
+</body>
+</html>

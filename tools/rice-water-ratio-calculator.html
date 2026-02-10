@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rice Water Ratio Calculator — Perfect Rice Every Time | NetVeggies</title>
+  <meta name="description" content="Get the exact water ratio and cooking time for any type of rice. White, brown, basmati, jasmine, wild rice and more.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}
+    .tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}
+    .tool-container{max-width:800px;margin:0 auto;padding:40px 20px}
+    .tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:24px}
+    .form-row{margin-bottom:20px}
+    .form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}
+    .form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit}
+    .btn-calc{background:var(--terracotta);color:#fff;border:none;padding:14px 32px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .2s}
+    .btn-calc:hover{background:#b5613e}
+    .result-box{background:var(--sage-light);border-radius:var(--radius);padding:24px;margin-top:24px;border-left:4px solid var(--sage)}
+    .breadcrumb{max-width:800px;margin:0 auto;padding:12px 20px;font-size:.85rem;color:var(--text-muted)}
+    .breadcrumb a{color:var(--sage-dark)}
+    .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-top:16px}
+    .stat{background:var(--cream);border-radius:8px;padding:16px;text-align:center}
+    .stat .val{font-size:1.5rem;font-weight:700;color:var(--sage-dark)}
+    .stat .lbl{font-size:.8rem;color:var(--text-muted);margin-top:4px}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="../recipes.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../about.html">About</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero"><h1>🍚 Rice Water Ratio Calculator</h1><p>Get perfect rice every time with the exact water ratio and cooking time for any rice variety.</p></section>
+    <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Tools</a> › Rice Water Ratio Calculator</div>
+    <div class="tool-container">
+      <div class="tool-card">
+        <div class="form-row">
+          <label for="riceType">Rice Type</label>
+          <select id="riceType">
+            <option value="white-long">White Long Grain</option>
+            <option value="white-short">White Short Grain (Sushi)</option>
+            <option value="basmati">Basmati</option>
+            <option value="jasmine">Jasmine</option>
+            <option value="brown-long">Brown Long Grain</option>
+            <option value="brown-short">Brown Short Grain</option>
+            <option value="wild">Wild Rice</option>
+            <option value="arborio">Arborio (Risotto)</option>
+            <option value="black">Black / Forbidden Rice</option>
+            <option value="red">Red Rice</option>
+            <option value="sticky">Sticky / Glutinous Rice</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="cups">Cups of Dry Rice</label>
+          <input type="number" id="cups" value="1" min="0.5" max="10" step="0.5">
+        </div>
+        <div class="form-row">
+          <label for="method">Cooking Method</label>
+          <select id="method">
+            <option value="stovetop">Stovetop</option>
+            <option value="rice-cooker">Rice Cooker</option>
+            <option value="instant-pot">Instant Pot</option>
+          </select>
+        </div>
+        <button class="btn-calc" onclick="calculate()">Calculate</button>
+        <div id="results" style="display:none">
+          <div class="stat-grid">
+            <div class="stat"><div class="val" id="rRice">—</div><div class="lbl">Dry Rice</div></div>
+            <div class="stat"><div class="val" id="rWater">—</div><div class="lbl">Water</div></div>
+            <div class="stat"><div class="val" id="rRatio">—</div><div class="lbl">Rice : Water</div></div>
+            <div class="stat"><div class="val" id="rTime">—</div><div class="lbl">Cook Time</div></div>
+            <div class="stat"><div class="val" id="rYield">—</div><div class="lbl">Cooked Yield</div></div>
+            <div class="stat"><div class="val" id="rServe">—</div><div class="lbl">Servings (~¾ cup)</div></div>
+          </div>
+          <div class="result-box" style="margin-top:20px">
+            <h3>📋 Instructions</h3>
+            <ol id="steps" style="padding-left:20px;line-height:2"></ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools.</p></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools →</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    const rice={
+      'white-long':  {ratio:1.75,time:15,ipTime:3, yield:3,  rinse:true, soak:false,rest:5},
+      'white-short': {ratio:1.25,time:15,ipTime:3, yield:2.5,rinse:true, soak:true, rest:10},
+      'basmati':     {ratio:1.5, time:15,ipTime:4, yield:3,  rinse:true, soak:true, rest:5},
+      'jasmine':     {ratio:1.5, time:12,ipTime:3, yield:3,  rinse:true, soak:false,rest:10},
+      'brown-long':  {ratio:2.25,time:45,ipTime:22,yield:3,  rinse:true, soak:false,rest:10},
+      'brown-short': {ratio:2,   time:50,ipTime:22,yield:2.5,rinse:true, soak:false,rest:10},
+      'wild':        {ratio:3,   time:50,ipTime:25,yield:3.5,rinse:true, soak:false,rest:10},
+      'arborio':     {ratio:4,   time:20,ipTime:6, yield:2.5,rinse:false,soak:false,rest:0},
+      'black':       {ratio:2,   time:35,ipTime:20,yield:3,  rinse:true, soak:false,rest:10},
+      'red':         {ratio:2.5, time:45,ipTime:22,yield:3,  rinse:true, soak:false,rest:10},
+      'sticky':      {ratio:1.25,time:20,ipTime:12,yield:2,  rinse:true, soak:true, rest:10}
+    };
+    function calculate(){
+      const type=document.getElementById('riceType').value;
+      const cups=parseFloat(document.getElementById('cups').value)||1;
+      const method=document.getElementById('method').value;
+      const d=rice[type];
+      const water=Math.round(cups*d.ratio*100)/100;
+      const time=method==='instant-pot'?d.ipTime:d.time;
+      const cooked=Math.round(cups*d.yield*10)/10;
+      const servings=Math.round(cooked/0.75);
+      document.getElementById('rRice').textContent=cups+' cup'+(cups>1?'s':'');
+      document.getElementById('rWater').textContent=water+' cup'+(water>1?'s':'');
+      document.getElementById('rRatio').textContent='1 : '+d.ratio;
+      document.getElementById('rTime').textContent=time+' min';
+      document.getElementById('rYield').textContent=cooked+' cups';
+      document.getElementById('rServe').textContent=servings;
+      const steps=[];
+      if(d.rinse) steps.push('Rinse rice under cold water until water runs clear (2-3 times)');
+      if(d.soak) steps.push('Soak rice for 20-30 minutes, then drain');
+      if(method==='stovetop'){
+        steps.push(`Add ${cups} cup${cups>1?'s':''} rice and ${water} cup${water>1?'s':''} water to a pot`);
+        steps.push('Bring to a boil over high heat');
+        steps.push(`Reduce to low, cover tightly, and simmer for ${time} minutes`);
+        steps.push('Do NOT lift the lid while cooking');
+        if(d.rest) steps.push(`Remove from heat and let rest ${d.rest} minutes, still covered`);
+      } else if(method==='rice-cooker'){
+        steps.push(`Add ${cups} cup${cups>1?'s':''} rice and ${water} cup${water>1?'s':''} water to rice cooker`);
+        steps.push('Close lid and press Cook');
+        steps.push('Let it switch to Warm mode automatically');
+        if(d.rest) steps.push(`Wait ${d.rest} minutes before opening`);
+      } else {
+        steps.push(`Add ${cups} cup${cups>1?'s':''} rice and ${water} cup${water>1?'s':''} water to Instant Pot`);
+        steps.push(`Pressure cook on HIGH for ${time} minutes`);
+        steps.push('Natural release for 10 minutes, then quick release');
+      }
+      steps.push('Fluff with a fork and serve!');
+      document.getElementById('steps').innerHTML=steps.map(s=>'<li>'+s+'</li>').join('');
+      document.getElementById('results').style.display='block';
+    }
+  </script>
+</body>
+</html>

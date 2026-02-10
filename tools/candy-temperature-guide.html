@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candy Temperature Guide — Sugar Stages for Perfect Candy | NetVeggies</title>
+  <meta name="description" content="Complete candy temperature guide with all sugar stages from thread to caramel. Fahrenheit, Celsius, and cold water test descriptions.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}.tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}.tool-container{max-width:900px;margin:0 auto;padding:40px 20px}.tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:24px}.breadcrumb{max-width:900px;margin:0 auto;padding:12px 20px;font-size:.85rem;color:var(--text-muted)}.breadcrumb a{color:var(--sage-dark)}
+    table.dt{width:100%;border-collapse:collapse}table.dt th,table.dt td{padding:12px 14px;border-bottom:1px solid var(--border);text-align:left;font-size:.9rem}table.dt th{background:var(--sage-light);font-weight:600}table.dt tr:hover{background:var(--cream)}
+    .stage-bar{height:8px;border-radius:4px;margin-top:4px}
+    .result-box{background:var(--sage-light);border-radius:var(--radius);padding:24px;margin-top:24px;border-left:4px solid var(--sage)}
+    .temp-input{display:flex;gap:12px;align-items:center;margin-bottom:24px;flex-wrap:wrap}
+    .temp-input input{padding:12px;border:1px solid var(--border);border-radius:8px;font-size:1.1rem;width:120px;text-align:center}
+    .temp-input select{padding:12px;border:1px solid var(--border);border-radius:8px;font-size:1rem}
+    #stageResult{font-size:1.1rem;padding:16px;background:var(--cream);border-radius:8px;margin-bottom:24px;display:none}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav"><ul><li><a href="../index.html">Home</a></li><li><a href="../recipes.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../about.html">About</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero"><h1>🍬 Candy Temperature Guide</h1><p>Know exactly what stage your sugar is at. Enter a temperature or browse the complete chart.</p></section>
+    <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Tools</a> › Candy Temperature Guide</div>
+    <div class="tool-container">
+      <div class="tool-card">
+        <h3 style="margin-bottom:12px">What stage is my sugar at?</h3>
+        <div class="temp-input">
+          <input type="number" id="tempIn" placeholder="250" min="200" max="400">
+          <select id="tempUnit"><option value="F">°F</option><option value="C">°C</option></select>
+          <button onclick="checkStage()" style="background:var(--terracotta);color:#fff;border:none;padding:12px 24px;border-radius:8px;font-weight:600;cursor:pointer">Check Stage</button>
+        </div>
+        <div id="stageResult"></div>
+        <h3 style="margin-bottom:12px">Complete Sugar Stages Chart</h3>
+        <table class="dt">
+          <thead><tr><th>Stage</th><th>°F</th><th>°C</th><th>Cold Water Test</th><th>Used For</th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+      <div class="result-box">
+        <h3>💡 Tips for Candy Making</h3>
+        <ul style="padding-left:20px;line-height:1.8">
+          <li>Always use a candy thermometer — even a few degrees matter</li>
+          <li>Don't stir once boiling starts (unless recipe says otherwise)</li>
+          <li>At high altitude, subtract ~2°F per 1,000 feet above sea level</li>
+          <li>Humidity affects candy — avoid making candy on rainy days</li>
+          <li>Brush down sugar crystals on pot sides with a wet pastry brush</li>
+          <li>For vegan candy, use plant-based butter and avoid gelatin</li>
+        </ul>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools.</p></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools →</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    const stages=[
+      {name:'Thread',fLow:230,fHigh:235,desc:'Syrup drips from spoon in thin thread',uses:'Syrup, glacé fruits',color:'#e8d44d'},
+      {name:'Soft Ball',fLow:235,fHigh:240,desc:'Ball flattens when removed from water',uses:'Fudge, pralines, fondant',color:'#e8b44d'},
+      {name:'Firm Ball',fLow:245,fHigh:250,desc:'Ball holds shape but is pliable',uses:'Caramels, marshmallows',color:'#e8944d'},
+      {name:'Hard Ball',fLow:250,fHigh:265,desc:'Ball is firm and holds shape',uses:'Divinity, nougat, gummies, rock candy',color:'#e87a4d'},
+      {name:'Soft Crack',fLow:270,fHigh:290,desc:'Threads are firm but bend before breaking',uses:'Taffy, butterscotch, firm nougat',color:'#e86040'},
+      {name:'Hard Crack',fLow:300,fHigh:310,desc:'Threads are brittle and snap cleanly',uses:'Toffee, brittles, hard candy, lollipops',color:'#d84040'},
+      {name:'Light Caramel',fLow:320,fHigh:338,desc:'Sugar turns golden amber',uses:'Caramel sauce, spun sugar, flan',color:'#c83030'},
+      {name:'Dark Caramel',fLow:350,fHigh:360,desc:'Sugar is deep amber/brown',uses:'Color and flavor for sauces',color:'#882020'}
+    ];
+    function fToC(f){return Math.round((f-32)*5/9)}
+    document.getElementById('tbody').innerHTML=stages.map(s=>`<tr>
+      <td><strong>${s.name}</strong><div class="stage-bar" style="background:${s.color}"></div></td>
+      <td>${s.fLow}–${s.fHigh}°F</td>
+      <td>${fToC(s.fLow)}–${fToC(s.fHigh)}°C</td>
+      <td>${s.desc}</td>
+      <td>${s.uses}</td>
+    </tr>`).join('');
+    function checkStage(){
+      let temp=parseFloat(document.getElementById('tempIn').value);
+      const unit=document.getElementById('tempUnit').value;
+      if(!temp)return;
+      const fTemp=unit==='C'?temp*9/5+32:temp;
+      let found=null;
+      for(const s of stages){if(fTemp>=s.fLow&&fTemp<=s.fHigh){found=s;break}}
+      const el=document.getElementById('stageResult');
+      if(fTemp<230){el.innerHTML='⬇️ <strong>Below Thread stage</strong> — sugar is still dissolving. Keep heating!';el.style.display='block';return}
+      if(fTemp>360){el.innerHTML='🔥 <strong>Above Dark Caramel</strong> — sugar is burning! Remove from heat immediately.';el.style.display='block';return}
+      if(!found){
+        // Between stages
+        const next=stages.find(s=>s.fLow>fTemp);
+        el.innerHTML=`🔥 <strong>${Math.round(fTemp)}°F / ${fToC(fTemp)}°C</strong> — Between stages. ${next?'Approaching <strong>'+next.name+'</strong> ('+next.fLow+'°F)':''}`;
+      } else {
+        el.innerHTML=`✅ <strong>${found.name} Stage</strong> (${found.fLow}–${found.fHigh}°F / ${fToC(found.fLow)}–${fToC(found.fHigh)}°C)<br>${found.desc}<br><em>Used for: ${found.uses}</em>`;
+      }
+      el.style.display='block';
+    }
+  </script>
+</body>
+</html>

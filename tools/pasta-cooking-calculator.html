@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pasta Cooking Calculator — Perfect Pasta Every Time | NetVeggies</title>
+  <meta name="description" content="Calculate exact water, salt, and cooking time for any pasta type and serving size.">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌱</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    .tool-hero{background:linear-gradient(135deg,var(--sage-light) 0%,#f0e8dc 100%);padding:48px 20px;text-align:center}
+    .tool-hero p{max-width:600px;margin:8px auto 0;color:var(--text-light)}
+    .tool-container{max-width:800px;margin:0 auto;padding:40px 20px}
+    .tool-card{background:var(--white);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);border:1px solid var(--border);margin-bottom:24px}
+    .form-row{margin-bottom:20px}
+    .form-row label{display:block;margin-bottom:6px;font-weight:600;font-size:.92rem}
+    .form-row input,.form-row select{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:8px;font-size:1rem;font-family:inherit}
+    .btn-calc{background:var(--terracotta);color:#fff;border:none;padding:14px 32px;border-radius:8px;font-size:1rem;font-weight:600;cursor:pointer;transition:all .2s}
+    .btn-calc:hover{background:#b5613e}
+    .result-box{background:var(--sage-light);border-radius:var(--radius);padding:24px;margin-top:24px;border-left:4px solid var(--sage)}
+    .breadcrumb{max-width:800px;margin:0 auto;padding:12px 20px;font-size:.85rem;color:var(--text-muted)}
+    .breadcrumb a{color:var(--sage-dark)}
+    .stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin-top:16px}
+    .stat{background:var(--cream);border-radius:8px;padding:16px;text-align:center}
+    .stat .val{font-size:1.6rem;font-weight:700;color:var(--sage-dark)}
+    .stat .lbl{font-size:.8rem;color:var(--text-muted);margin-top:4px}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to content</a>
+  <header class="site-header"><div class="header-inner"><a href="../index.html" class="logo">Net<span>Veggies</span></a><button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span></span><span></span><span></span></button><nav class="main-nav" aria-label="Main navigation"><ul><li><a href="../index.html">Home</a></li><li><a href="../recipes.html">Recipes</a></li><li><a href="index.html" class="active">Tools</a></li><li><a href="../about.html">About</a></li></ul></nav></div></header>
+  <main id="main">
+    <section class="tool-hero"><h1>🍝 Pasta Cooking Calculator</h1><p>Get the perfect water amount, salt, and cooking time for any pasta type and serving size.</p></section>
+    <div class="breadcrumb"><a href="../index.html">Home</a> › <a href="index.html">Tools</a> › Pasta Cooking Calculator</div>
+    <div class="tool-container">
+      <div class="tool-card">
+        <div class="form-row">
+          <label for="pastaType">Pasta Type</label>
+          <select id="pastaType">
+            <option value="spaghetti">Spaghetti</option>
+            <option value="penne">Penne</option>
+            <option value="fusilli">Fusilli</option>
+            <option value="farfalle">Farfalle (Bow Tie)</option>
+            <option value="rigatoni">Rigatoni</option>
+            <option value="linguine">Linguine</option>
+            <option value="fettuccine">Fettuccine</option>
+            <option value="angel-hair">Angel Hair</option>
+            <option value="orzo">Orzo</option>
+            <option value="macaroni">Macaroni (Elbow)</option>
+            <option value="lasagna">Lasagna Sheets</option>
+            <option value="gnocchi">Gnocchi</option>
+            <option value="whole-wheat">Whole Wheat Pasta</option>
+            <option value="gluten-free">Gluten-Free Pasta</option>
+          </select>
+        </div>
+        <div class="form-row">
+          <label for="servings">Number of Servings</label>
+          <input type="number" id="servings" value="2" min="1" max="20">
+        </div>
+        <div class="form-row">
+          <label for="doneness">Doneness</label>
+          <select id="doneness">
+            <option value="al-dente" selected>Al Dente (recommended)</option>
+            <option value="soft">Soft / Well Done</option>
+          </select>
+        </div>
+        <button class="btn-calc" onclick="calculate()">Calculate</button>
+        <div id="results" style="display:none">
+          <div class="stat-grid">
+            <div class="stat"><div class="val" id="rPasta">—</div><div class="lbl">Dry Pasta (g)</div></div>
+            <div class="stat"><div class="val" id="rWater">—</div><div class="lbl">Water (liters)</div></div>
+            <div class="stat"><div class="val" id="rSalt">—</div><div class="lbl">Salt (tsp)</div></div>
+            <div class="stat"><div class="val" id="rTime">—</div><div class="lbl">Cook Time (min)</div></div>
+          </div>
+          <div class="result-box" style="margin-top:20px">
+            <h3>📋 Instructions</h3>
+            <ol id="instructions" style="padding-left:20px;line-height:2"></ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <footer class="site-footer"><div class="footer-grid"><div><h4>NetVeggies</h4><p style="font-size:.88rem">Plant-based recipes and tools.</p></div><div><h4>Tools</h4><ul><li><a href="index.html">All Tools →</a></li></ul></div></div><div class="footer-bottom"><p>© 2026 NetVeggies. Made with 🌱</p></div></footer>
+  <script>
+    document.querySelector('.nav-toggle').addEventListener('click',function(){document.querySelector('.main-nav').classList.toggle('open')});
+    const data = {
+      'spaghetti':     {perServing:100,timeAl:8, timeSoft:10},
+      'penne':         {perServing:100,timeAl:11,timeSoft:13},
+      'fusilli':       {perServing:100,timeAl:10,timeSoft:12},
+      'farfalle':      {perServing:100,timeAl:11,timeSoft:13},
+      'rigatoni':      {perServing:100,timeAl:12,timeSoft:14},
+      'linguine':      {perServing:100,timeAl:9, timeSoft:11},
+      'fettuccine':    {perServing:100,timeAl:10,timeSoft:12},
+      'angel-hair':    {perServing:85, timeAl:3, timeSoft:5},
+      'orzo':          {perServing:75, timeAl:8, timeSoft:10},
+      'macaroni':      {perServing:100,timeAl:8, timeSoft:10},
+      'lasagna':       {perServing:100,timeAl:8, timeSoft:10},
+      'gnocchi':       {perServing:150,timeAl:2, timeSoft:3},
+      'whole-wheat':   {perServing:100,timeAl:10,timeSoft:13},
+      'gluten-free':   {perServing:100,timeAl:9, timeSoft:12}
+    };
+    function calculate(){
+      const type=document.getElementById('pastaType').value;
+      const servings=parseInt(document.getElementById('servings').value)||2;
+      const done=document.getElementById('doneness').value;
+      const d=data[type];
+      const pastaG=d.perServing*servings;
+      const waterL=Math.max(1,Math.round(pastaG/100)*1);
+      const saltTsp=Math.round(waterL*1.5*10)/10;
+      const time=done==='al-dente'?d.timeAl:d.timeSoft;
+      document.getElementById('rPasta').textContent=pastaG+'g';
+      document.getElementById('rWater').textContent=waterL+'L';
+      document.getElementById('rSalt').textContent=saltTsp;
+      document.getElementById('rTime').textContent=time+'min';
+      const oz=Math.round(pastaG/28.35*10)/10;
+      document.getElementById('instructions').innerHTML=`
+        <li>Bring <strong>${waterL} liter${waterL>1?'s':''}</strong> of water to a rolling boil</li>
+        <li>Add <strong>${saltTsp} tsp</strong> salt to the boiling water</li>
+        <li>Add <strong>${pastaG}g (${oz} oz)</strong> of ${type.replace('-',' ')} pasta</li>
+        <li>Cook for <strong>${time} minutes</strong>, stirring occasionally</li>
+        <li>Test a piece — it should be ${done==='al-dente'?'firm to the bite with a tiny white dot in center':'tender throughout'}</li>
+        <li>Reserve 1 cup of pasta water before draining (great for sauces!)</li>
+        <li>Drain and toss with your sauce immediately</li>
+      `;
+      document.getElementById('results').style.display='block';
+    }
+  </script>
+</body>
+</html>
