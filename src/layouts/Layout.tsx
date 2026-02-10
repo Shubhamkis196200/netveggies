@@ -4,6 +4,7 @@ import { Menu, X, Search, Leaf } from 'lucide-react';
 
 const navLinks = [
   { label: 'Recipes', href: '/category/dinner' },
+  { label: 'Tools', href: '/tools' },
   { label: 'Meal Prep', href: '/meal-prep' },
   { label: 'Blog', href: '/blog' },
   { label: 'About', href: '/about' },
@@ -73,6 +74,7 @@ export default function Layout() {
               <Link to="/category/dinner" className="hover:text-primary transition-colors">Recipes</Link>
               <Link to="/meal-prep" className="hover:text-primary transition-colors">Meal Prep</Link>
               <Link to="/blog" className="hover:text-primary transition-colors">Blog</Link>
+              <Link to="/tools" className="hover:text-primary transition-colors">Tools</Link>
               <Link to="/search" className="hover:text-primary transition-colors">Search</Link>
             </div>
           </div>
